@@ -1,0 +1,7 @@
+<div class="btn-group">
+    <button class="btn btn-default btn-xs image_action_btn" data-id="<?php echo $id ?>" data-grouptype="0" data-groupid="<?php echo $groupid ?>" data-actiontype="0" type="button" title="Send Top"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+    <button class="btn btn-default btn-xs image_action_btn" data-id="<?php echo $id ?>" data-grouptype="0" data-groupid="<?php echo $groupid ?>" data-actiontype="2" type="button" title="Up One"><i class="fa fa-angle-up" aria-hidden="true"></i></button>
+    <button class="btn btn-default btn-xs image_action_btn" data-id="<?php echo $id ?>" data-grouptype="0" data-groupid="<?php echo $groupid ?>" data-actiontype="3" type="button" title="Down One"><i class="fa fa-angle-down" aria-hidden="true"></i></button>
+    <button class="btn btn-danger btn-xs image_action_delete_btn delete_areatypeareatopic_photo_btn" data-id="<?php echo $id ?>" data-grouptype="0" data-groupid="<?php echo $groupid ?>" data-actiontype="10" type="button" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+    <button class="btn btn-default btn-xs image_action_btn" data-id="<?php echo $id ?>" data-grouptype="0" data-groupid="<?php echo $groupid ?>" data-actiontype="1" type="button" title="Send Bottom"><i class="fa fa-angle-double-down" aria-hidden="true"></i></button>
+</div>

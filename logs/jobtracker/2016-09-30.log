@@ -1,0 +1,22 @@
+2016-09-30 04:33:23 - Log File Created.
+
+2016-09-30 04:33:23 - jobtracker - AdminClass -  - (57edcee9c4a9d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'settings/changepassword'
+AND `isactive` = 1
+
+2016-09-30 04:33:24 - jobtracker - SharedClass -  - (57edcee9c1bbc) 
+ - Get Announcement : SELECT * FROM cp_message WHERE isactive=1 AND browser='' AND activationdate <= NOW() AND id NOT IN (SELECT messageid FROM cp_messagecontact WHERE contactid = 26564)
+
+2016-09-30 04:33:24 - jobtracker - SharedClass -  - (57edcee9c1bbc) 
+ - Get Announcement : SELECT * FROM cp_message WHERE isactive=1 AND browser='Chrome' AND activationdate <= NOW() AND id NOT IN (SELECT messageid FROM cp_messagecontact WHERE contactid = 26564) ORDER BY browser_version
+
+2016-09-30 04:33:24 - jobtracker - CustomerClass -  - (57edcee9c3715) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`

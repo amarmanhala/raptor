@@ -1,0 +1,31 @@
+2016-09-15 06:31:28 - Log File Created.
+
+2016-09-15 06:31:28 - jobtracker - DocumentClass -  - (57da2420674a0) 
+ - Get document Data Query : SELECT *
+FROM `document`
+WHERE `documentid` = '177130'
+
+2016-09-15 06:31:50 - jobtracker - DocumentClass -  - (57da243660841) 
+ - Get document Data Query : SELECT *
+FROM `document`
+WHERE `documentid` = '177685'
+
+2016-09-15 06:31:53 - jobtracker - DocumentClass -  - (57da24390f411) 
+ - Get document Data Query : SELECT *
+FROM `document`
+WHERE `documentid` = '177685'
+
+2016-09-15 06:37:14 - jobtracker - DocumentClass -  - (57da257a3cffc) 
+ - Get document Data Query : SELECT *
+FROM `document`
+WHERE `documentid` =0
+
+2016-09-15 06:37:15 - jobtracker - DocumentClass -  - (57da257b314b2) 
+ - Get document Data Query : SELECT *
+FROM `document`
+WHERE `documentid` =0
+
+2016-09-15 06:37:20 - jobtracker - DocumentClass -  - (57da25809150f) 
+ - Get document Data Query : SELECT *
+FROM `document`
+WHERE `documentid` =0

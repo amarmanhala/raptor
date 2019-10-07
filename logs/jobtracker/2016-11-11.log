@@ -1,0 +1,52 @@
+2016-11-11 10:08:10 - Log File Created.
+
+2016-11-11 10:08:10 - jobtracker - AdminClass -  - (58258a799747a) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'settings/changepassword'
+AND `isactive` = 1
+
+2016-11-11 10:08:10 - jobtracker - SharedClass -  - (58258a7994599) 
+ - Get Announcement : SELECT * FROM cp_message WHERE isactive=1 AND browser='' AND activationdate <= NOW() AND id NOT IN (SELECT messageid FROM cp_messagecontact WHERE contactid = 26564)
+
+2016-11-11 10:08:10 - jobtracker - SharedClass -  - (58258a7994599) 
+ - Get Announcement : SELECT * FROM cp_message WHERE isactive=1 AND browser='Chrome' AND activationdate <= NOW() AND id NOT IN (SELECT messageid FROM cp_messagecontact WHERE contactid = 26564) ORDER BY browser_version
+
+2016-11-11 10:08:10 - jobtracker - CustomerClass -  - (58258a79968c2) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-11-11 10:10:02 - jobtracker - AdminClass -  - (58258aea1e08f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'settings/changepassword'
+AND `isactive` = 1
+
+2016-11-11 10:10:02 - jobtracker - CustomerClass -  - (58258aea1d0ef) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-11-11 10:22:25 - jobtracker - AdminClass -  - (58258dd165f55) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'settings/changepassword'
+AND `isactive` = 1
+
+2016-11-11 10:22:25 - jobtracker - CustomerClass -  - (58258dd16539d) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`

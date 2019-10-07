@@ -1,0 +1,1909 @@
+2016-09-29 05:01:09 - Log File Created.
+
+2016-09-29 05:01:09 - jobtracker - AdminClass -  - (57ec83f46d509) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'settings/changepassword'
+AND `isactive` = 1
+
+2016-09-29 05:01:09 - jobtracker - SharedClass -  - (57ec83f46a240) 
+ - Get Announcement : SELECT * FROM cp_message WHERE isactive=1 AND browser='' AND activationdate <= NOW() AND id NOT IN (SELECT messageid FROM cp_messagecontact WHERE contactid = 26564)
+
+2016-09-29 05:01:09 - jobtracker - SharedClass -  - (57ec83f46a240) 
+ - Get Announcement : SELECT * FROM cp_message WHERE isactive=1 AND browser='Chrome' AND activationdate <= NOW() AND id NOT IN (SELECT messageid FROM cp_messagecontact WHERE contactid = 26564) ORDER BY browser_version
+
+2016-09-29 05:01:10 - jobtracker - CustomerClass -  - (57ec83f46c568) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 05:01:21 - jobtracker - AdminClass -  - (57ec84014849f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techmap'
+AND `isactive` = 1
+
+2016-09-29 05:01:21 - jobtracker - CustomerClass -  - (57ec8401474ff) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 05:01:21 - jobtracker - JobClass -  - (57ec8401b1c38) 
+ - Get Tech Map Jobs Query : SELECT `j`.`jobid`, `j`.`jobstage`, CASE
+                    WHEN LCASE(j.jobstage) = 'client_notified' AND jcompletedate>0 THEN jcompletedate
+                    WHEN LCASE(j.jobstage) = 'client_notified' AND jcompletedate=0 AND d.dte IS NOT NULL THEN d.dte
+                    WHEN LCASE(j.jobstage) IN ('external_incomplete', 'waiting_jrq_response') THEN IFNULL(jrespdate, internalduedate)
+                    WHEN LCASE(j.jobstage) = 'internal_incomplete' THEN d.dte 
+                    WHEN LCASE(j.jobstage) = 'next_allocate' AND d.apptid IS NULL THEN leaddate
+                    WHEN  d.apptid IS NOT NULL THEN d.dte
+                    END AS attenddate, `jcompletedate` AS `completiondate`, `duedate`, `duetime`, `d`.`dte`, `j`.`internalduedate`, CASE 
+                    WHEN LCASE(j.jobstage) = 'cancelled' THEN 'Cancelled' 
+                    WHEN LCASE(j.jobstage) = 'client_notified' THEN 'Completed'
+                    WHEN LCASE(j.jobstage) NOT IN ('cancelled', 'declined', 'hold', 'client_notified') AND duedate < NOW() THEN 'Overdue' 
+                    WHEN LCASE(j.jobstage) IN ('internal_incomplete', 'external_incomplete') THEN 'In Progress' 
+                    WHEN LCASE(j.jobstage) = 'next_allocate' AND d.apptid IS NULL THEN 'Unsheduled'
+                    WHEN LCASE(j.jobstage) = 'next_allocate' AND d.apptid IS NOT NULL THEN 'Scheduled'  
+                    END AS STATUS, `j`.`siteline2` AS `address`, `j`.`siteline1`, `j`.`sitesuburb` AS `suburb`, `j`.`sitestate` AS `state`, `j`.`sitepostcode` AS `postcode`, `a`.`latitude_decimal`, `a`.`longitude_decimal`, `j`.`userid`, `j`.`custordref`, `j`.`jobdescription`
+FROM `jobs` `j`
+INNER JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `diary` `d` ON `j`.`jobid`=`d`.`jobid`
+WHERE `j`.`customerid` = '7781'
+AND a.latitude_decimal is NOT NULL
+AND `a`.`latitude_decimal` !=0
+GROUP BY `j`.`jobid`
+
+2016-09-29 05:01:25 - jobtracker - AdminClass -  - (57ec8404ca187) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 05:01:25 - jobtracker - CustomerClass -  - (57ec8404c91e7) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 05:01:25 - falcon - ScheduleClass -  - (57ec840566401) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 05:01:26 - jobtracker - AdminClass -  - (57ec84063d008) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 05:01:26 - jobtracker - CustomerClass -  - (57ec84063c068) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 05:01:26 - falcon - ScheduleClass -  - (57ec84069ac15) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 05:01:26 - falcon - ScheduleClass -  - (57ec84069ac15) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 11:29:18 - jobtracker - AdminClass -  - (57ecdeee1891f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'settings/changepassword'
+AND `isactive` = 1
+
+2016-09-29 11:29:18 - jobtracker - SharedClass -  - (57ecdeee1620f) 
+ - Get Announcement : SELECT * FROM cp_message WHERE isactive=1 AND browser='' AND activationdate <= NOW() AND id NOT IN (SELECT messageid FROM cp_messagecontact WHERE contactid = 26564)
+
+2016-09-29 11:29:18 - jobtracker - SharedClass -  - (57ecdeee1620f) 
+ - Get Announcement : SELECT * FROM cp_message WHERE isactive=1 AND browser='Chrome' AND activationdate <= NOW() AND id NOT IN (SELECT messageid FROM cp_messagecontact WHERE contactid = 26564) ORDER BY browser_version
+
+2016-09-29 11:29:18 - jobtracker - CustomerClass -  - (57ecdeee17d67) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 11:29:37 - jobtracker - AdminClass -  - (57ecdf012cac2) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 11:29:37 - jobtracker - CustomerClass -  - (57ecdf012c2f2) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 11:29:37 - falcon - ScheduleClass -  - (57ecdf0188b7f) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 11:29:38 - jobtracker - AdminClass -  - (57ecdf023e43f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 11:29:38 - jobtracker - CustomerClass -  - (57ecdf023d49f) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 11:29:38 - falcon - ScheduleClass -  - (57ecdf028be7a) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 11:29:38 - falcon - ScheduleClass -  - (57ecdf028be7a) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 11:34:13 - jobtracker - AdminClass -  - (57ece014b134e) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-29 11:34:13 - jobtracker - CustomerClass -  - (57ece014b0796) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 11:34:14 - jobtracker - AdminClass -  - (57ece015d8879) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-29 11:34:14 - jobtracker - CustomerClass -  - (57ece015d7cc1) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 11:34:15 - jobtracker - AdminClass -  - (57ece016923a1) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-29 11:34:15 - jobtracker - CustomerClass -  - (57ece01691401) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 11:34:15 - jobtracker - ContractorClass -  - (57ece01713c4d) 
+ - Get Labour Dashboard Grid Data Query : SELECT d.apptid, j.contractid, j.iscontract, d.jobid, COUNT(d.jobid) AS jobs, a.labelid, a.siteline2, a.siteref, a.sitestate AS state, c.firstname AS fm, CONCAT(s.companyname,' (',d.userid,')') AS technician, d.duration AS hours, te.lm_te_bill_rate AS rate, d.duration*te.lm_te_bill_rate AS billamt, j.materialcosts
+FROM `diary` `d`
+INNER JOIN `jobs` `j` ON `d`.`jobid`=`j`.`jobid`
+INNER JOIN `lm_timeentry` `te` ON `d`.`apptid`=`te`.`lm_te_apptid`
+INNER JOIN `users` `u` ON `d`.`userid`=`u`.`userid`
+INNER JOIN `customer` `s` ON `u`.`email`=`s`.`customerid`
+LEFT JOIN `con_technician` `t` ON `d`.`userid`=`t`.`userid`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `j`.`contactid`=`c`.`contactid`
+WHERE `d`.`dte` >= '2016-09-01'
+AND `d`.`dte` <= '2016-09-29'
+GROUP BY `a`.`labelid`
+ LIMIT 25
+
+2016-09-29 11:34:34 - jobtracker - AdminClass -  - (57ece02a2fa80) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 11:34:34 - jobtracker - CustomerClass -  - (57ece02a2f2b0) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 11:34:34 - falcon - ScheduleClass -  - (57ece02a8af86) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 11:34:35 - jobtracker - AdminClass -  - (57ece02b350ab) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 11:34:35 - jobtracker - CustomerClass -  - (57ece02b3410b) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 11:34:35 - falcon - ScheduleClass -  - (57ece02b701fd) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 11:34:35 - falcon - ScheduleClass -  - (57ece02b701fd) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 11:46:12 - jobtracker - AdminClass -  - (57ece2e44bbb7) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 11:46:12 - jobtracker - CustomerClass -  - (57ece2e44b3e7) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 11:46:12 - falcon - ScheduleClass -  - (57ece2e4a8444) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 11:46:13 - jobtracker - AdminClass -  - (57ece2e58b39f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 11:46:13 - jobtracker - CustomerClass -  - (57ece2e58a7e7) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 11:46:13 - falcon - ScheduleClass -  - (57ece2e5e6899) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 11:46:13 - falcon - ScheduleClass -  - (57ece2e5e6899) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 11:49:17 - jobtracker - AdminClass -  - (57ece39d72597) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 11:49:17 - jobtracker - CustomerClass -  - (57ece39d719df) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 11:49:17 - falcon - ScheduleClass -  - (57ece39dd097d) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 11:49:18 - jobtracker - AdminClass -  - (57ece39e879ad) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 11:49:18 - jobtracker - CustomerClass -  - (57ece39e86df5) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 11:49:18 - falcon - ScheduleClass -  - (57ece39eee265) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 11:49:18 - falcon - ScheduleClass -  - (57ece39eee265) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 11:51:54 - jobtracker - AdminClass -  - (57ece439a6898) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 11:51:54 - jobtracker - CustomerClass -  - (57ece439a5ce0) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 11:51:54 - falcon - ScheduleClass -  - (57ece43a115f6) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 11:51:54 - jobtracker - AdminClass -  - (57ece43aa2a50) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 11:51:54 - jobtracker - CustomerClass -  - (57ece43aa1e98) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 11:51:54 - falcon - ScheduleClass -  - (57ece43adc432) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 11:51:54 - falcon - ScheduleClass -  - (57ece43adc432) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 12:04:37 - jobtracker - AdminClass -  - (57ece73529270) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 12:04:37 - jobtracker - CustomerClass -  - (57ece735286b8) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 12:04:37 - falcon - ScheduleClass -  - (57ece73576ca6) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 12:04:37 - falcon - ScheduleClass -  - (57ece73576ca6) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 12:04:39 - jobtracker - AdminClass -  - (57ece7372485f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 12:04:39 - jobtracker - CustomerClass -  - (57ece73723ca7) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 12:04:39 - falcon - ScheduleClass -  - (57ece73784b7a) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 12:04:39 - falcon - ScheduleClass -  - (57ece73784b7a) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 12:04:41 - jobtracker - AdminClass -  - (57ece739a282d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 12:04:41 - jobtracker - CustomerClass -  - (57ece739a1c75) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 12:04:41 - falcon - ScheduleClass -  - (57ece739ebffc) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 12:04:41 - falcon - ScheduleClass -  - (57ece739ebffc) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 12:04:43 - jobtracker - AdminClass -  - (57ece73b4fffc) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 12:04:43 - jobtracker - CustomerClass -  - (57ece73b4f444) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 12:04:43 - falcon - ScheduleClass -  - (57ece73b96118) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 12:04:43 - falcon - ScheduleClass -  - (57ece73b96118) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 12:29:54 - jobtracker - AdminClass -  - (57eced225ebb1) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-29 12:29:54 - jobtracker - CustomerClass -  - (57eced225dff8) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 12:29:56 - jobtracker - AdminClass -  - (57eced23a492a) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-29 12:29:56 - jobtracker - CustomerClass -  - (57eced23a3d72) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 12:29:56 - jobtracker - AdminClass -  - (57eced246171c) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-29 12:29:56 - jobtracker - CustomerClass -  - (57eced2460b63) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 12:29:56 - jobtracker - ContractorClass -  - (57eced24e6c0b) 
+ - Get Labour Dashboard Grid Data Query : SELECT d.apptid, j.contractid, j.iscontract, d.jobid, COUNT(d.jobid) AS jobs, a.labelid, a.siteline2, a.siteref, a.sitestate AS state, c.firstname AS fm, CONCAT(s.companyname,' (',d.userid,')') AS technician, d.duration AS hours, te.lm_te_bill_rate AS rate, d.duration*te.lm_te_bill_rate AS billamt, j.materialcosts
+FROM `diary` `d`
+INNER JOIN `jobs` `j` ON `d`.`jobid`=`j`.`jobid`
+INNER JOIN `lm_timeentry` `te` ON `d`.`apptid`=`te`.`lm_te_apptid`
+INNER JOIN `users` `u` ON `d`.`userid`=`u`.`userid`
+INNER JOIN `customer` `s` ON `u`.`email`=`s`.`customerid`
+LEFT JOIN `con_technician` `t` ON `d`.`userid`=`t`.`userid`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `j`.`contactid`=`c`.`contactid`
+WHERE `d`.`dte` >= '2016-09-01'
+AND `d`.`dte` <= '2016-09-29'
+GROUP BY `a`.`labelid`
+ LIMIT 25
+
+2016-09-29 12:55:23 - jobtracker - AdminClass -  - (57ecf31b39d87) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard'
+AND `isactive` = 1
+
+2016-09-29 12:55:23 - jobtracker - CustomerClass -  - (57ecf31b391cf) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 12:55:24 - jobtracker - AdminClass -  - (57ecf31c36ee0) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard/loadjobdashboardchart'
+AND `isactive` = 1
+
+2016-09-29 12:55:24 - jobtracker - CustomerClass -  - (57ecf31c34f9f) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 12:55:25 - jobtracker - AdminClass -  - (57ecf31d088de) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard2'
+AND `isactive` = 1
+
+2016-09-29 12:55:25 - jobtracker - CustomerClass -  - (57ecf31d0793e) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 12:55:27 - jobtracker - AdminClass -  - (57ecf31ebb0b9) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard2/loadmonthlyspendytd'
+AND `isactive` = 1
+
+2016-09-29 12:55:27 - jobtracker - CustomerClass -  - (57ecf31eba119) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 12:55:28 - jobtracker - AdminClass -  - (57ecf31fa9f7e) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard2/loadbudgetvsactualytdbyfm'
+AND `isactive` = 1
+
+2016-09-29 12:55:28 - jobtracker - CustomerClass -  - (57ecf31fa8fde) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 12:55:29 - jobtracker - AdminClass -  - (57ecf32084def) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard2/loadspendbyfm'
+AND `isactive` = 1
+
+2016-09-29 12:55:29 - jobtracker - CustomerClass -  - (57ecf32083e4e) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 12:55:29 - jobtracker - AdminClass -  - (57ecf32140470) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard2/loadbudgetbyfm'
+AND `isactive` = 1
+
+2016-09-29 12:55:29 - jobtracker - CustomerClass -  - (57ecf3213f4d0) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 12:55:30 - jobtracker - AdminClass -  - (57ecf321cf1b9) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard2/loadbudgetvsactualytd'
+AND `isactive` = 1
+
+2016-09-29 12:55:30 - jobtracker - CustomerClass -  - (57ecf321ce219) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 12:55:30 - jobtracker - AdminClass -  - (57ecf32270e0c) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard2/loadsitespend'
+AND `isactive` = 1
+
+2016-09-29 12:55:30 - jobtracker - CustomerClass -  - (57ecf3226fe6c) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 12:55:31 - jobtracker - AdminClass -  - (57ecf3231e5e2) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard2/loadbudgetbysites'
+AND `isactive` = 1
+
+2016-09-29 12:55:31 - jobtracker - CustomerClass -  - (57ecf3231da2a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 12:55:32 - jobtracker - AdminClass -  - (57ecf323b05f4) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard2/loadspendbysites'
+AND `isactive` = 1
+
+2016-09-29 12:55:32 - jobtracker - CustomerClass -  - (57ecf323af654) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:06:38 - jobtracker - AdminClass -  - (57ecf5be834f9) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-29 13:06:38 - jobtracker - CustomerClass -  - (57ecf5be82d29) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:06:40 - jobtracker - AdminClass -  - (57ecf5bf9796f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-29 13:06:40 - jobtracker - CustomerClass -  - (57ecf5bf969cf) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:06:40 - jobtracker - AdminClass -  - (57ecf5c052050) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-29 13:06:40 - jobtracker - CustomerClass -  - (57ecf5c051498) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:06:40 - jobtracker - ContractorClass -  - (57ecf5c0b98a8) 
+ - Get Labour Dashboard Grid Data Query : SELECT d.apptid, j.contractid, j.iscontract, d.jobid, COUNT(d.jobid) AS jobs, a.labelid, a.siteline2, a.siteref, a.sitestate AS state, c.firstname AS fm, CONCAT(s.companyname,' (',d.userid,')') AS technician, d.duration AS hours, te.lm_te_bill_rate AS rate, d.duration*te.lm_te_bill_rate AS billamt, j.materialcosts
+FROM `diary` `d`
+INNER JOIN `jobs` `j` ON `d`.`jobid`=`j`.`jobid`
+INNER JOIN `lm_timeentry` `te` ON `d`.`apptid`=`te`.`lm_te_apptid`
+INNER JOIN `users` `u` ON `d`.`userid`=`u`.`userid`
+INNER JOIN `customer` `s` ON `u`.`email`=`s`.`customerid`
+LEFT JOIN `con_technician` `t` ON `d`.`userid`=`t`.`userid`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `j`.`contactid`=`c`.`contactid`
+WHERE `d`.`dte` >= '2016-09-01'
+AND `d`.`dte` <= '2016-09-29'
+GROUP BY `a`.`labelid`
+ LIMIT 25
+
+2016-09-29 13:06:42 - jobtracker - AdminClass -  - (57ecf5c29acab) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 13:06:42 - jobtracker - CustomerClass -  - (57ecf5c29a4db) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:06:43 - falcon - ScheduleClass -  - (57ecf5c3036e1) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:09:35 - jobtracker - AdminClass -  - (57ecf66ec124d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-29 13:09:35 - jobtracker - CustomerClass -  - (57ecf66ec0695) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:09:36 - jobtracker - AdminClass -  - (57ecf66fd1c2a) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-29 13:09:36 - jobtracker - CustomerClass -  - (57ecf66fd0c8a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:09:36 - jobtracker - AdminClass -  - (57ecf6708de64) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-29 13:09:36 - jobtracker - CustomerClass -  - (57ecf6708d2ab) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:09:36 - jobtracker - ContractorClass -  - (57ecf670ec24a) 
+ - Get Labour Dashboard Grid Data Query : SELECT d.apptid, j.contractid, j.iscontract, d.jobid, COUNT(d.jobid) AS jobs, a.labelid, a.siteline2, a.siteref, a.sitestate AS state, c.firstname AS fm, CONCAT(s.companyname,' (',d.userid,')') AS technician, d.duration AS hours, te.lm_te_bill_rate AS rate, d.duration*te.lm_te_bill_rate AS billamt, j.materialcosts
+FROM `diary` `d`
+INNER JOIN `jobs` `j` ON `d`.`jobid`=`j`.`jobid`
+INNER JOIN `lm_timeentry` `te` ON `d`.`apptid`=`te`.`lm_te_apptid`
+INNER JOIN `users` `u` ON `d`.`userid`=`u`.`userid`
+INNER JOIN `customer` `s` ON `u`.`email`=`s`.`customerid`
+LEFT JOIN `con_technician` `t` ON `d`.`userid`=`t`.`userid`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `j`.`contactid`=`c`.`contactid`
+WHERE `d`.`dte` >= '2016-09-01'
+AND `d`.`dte` <= '2016-09-29'
+GROUP BY `a`.`labelid`
+ LIMIT 25
+
+2016-09-29 13:09:40 - jobtracker - AdminClass -  - (57ecf6739a9f2) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 13:09:40 - jobtracker - CustomerClass -  - (57ecf67399e3a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:09:40 - falcon - ScheduleClass -  - (57ecf6741f566) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:09:41 - jobtracker - AdminClass -  - (57ecf674eda5f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 13:09:41 - jobtracker - CustomerClass -  - (57ecf674ecea6) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:09:41 - falcon - ScheduleClass -  - (57ecf6754dbcc) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:09:41 - falcon - ScheduleClass -  - (57ecf6754dbcc) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 13:10:06 - jobtracker - AdminClass -  - (57ecf68e90aac) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 13:10:06 - jobtracker - CustomerClass -  - (57ecf68e902dc) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:10:06 - falcon - ScheduleClass -  - (57ecf68ee7191) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:10:08 - jobtracker - AdminClass -  - (57ecf68fd4ccd) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 13:10:08 - jobtracker - CustomerClass -  - (57ecf68fd3d2d) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:10:08 - falcon - ScheduleClass -  - (57ecf6901fe4a) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:10:08 - falcon - ScheduleClass -  - (57ecf6901fe4a) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 13:10:23 - jobtracker - AdminClass -  - (57ecf69f8f7a5) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 13:10:23 - jobtracker - CustomerClass -  - (57ecf69f8ebed) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:10:23 - falcon - ScheduleClass -  - (57ecf69fee744) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:10:25 - jobtracker - AdminClass -  - (57ecf6a0b93e0) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 13:10:25 - jobtracker - CustomerClass -  - (57ecf6a0b8828) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:10:25 - falcon - ScheduleClass -  - (57ecf6a126c2e) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:10:25 - falcon - ScheduleClass -  - (57ecf6a126c2e) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 13:10:43 - jobtracker - AdminClass -  - (57ecf6b34125f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 13:10:43 - jobtracker - CustomerClass -  - (57ecf6b3406a7) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:10:43 - falcon - ScheduleClass -  - (57ecf6b39daed) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:10:44 - jobtracker - AdminClass -  - (57ecf6b4579fe) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 13:10:44 - jobtracker - CustomerClass -  - (57ecf6b456a5d) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:10:44 - falcon - ScheduleClass -  - (57ecf6b4913e1) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:10:44 - falcon - ScheduleClass -  - (57ecf6b4913e1) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 13:10:57 - jobtracker - AdminClass -  - (57ecf6c12de51) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 13:10:57 - jobtracker - CustomerClass -  - (57ecf6c12d680) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:10:57 - falcon - ScheduleClass -  - (57ecf6c198589) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:10:58 - jobtracker - AdminClass -  - (57ecf6c258e14) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 13:10:58 - jobtracker - CustomerClass -  - (57ecf6c257e74) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:10:58 - falcon - ScheduleClass -  - (57ecf6c29b49a) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:10:58 - falcon - ScheduleClass -  - (57ecf6c29b49a) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 13:21:43 - jobtracker - AdminClass -  - (57ecf9478e616) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 13:21:43 - jobtracker - CustomerClass -  - (57ecf9478de46) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:21:44 - falcon - ScheduleClass -  - (57ecf947f181e) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:21:44 - jobtracker - AdminClass -  - (57ecf948b8639) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 13:21:45 - jobtracker - CustomerClass -  - (57ecf948b7a81) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:21:45 - falcon - ScheduleClass -  - (57ecf949037b3) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:21:45 - falcon - ScheduleClass -  - (57ecf949037b3) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 13:22:28 - jobtracker - AdminClass -  - (57ecf97427a89) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 13:22:28 - jobtracker - CustomerClass -  - (57ecf974272b9) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:22:28 - falcon - ScheduleClass -  - (57ecf97483f2e) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:22:29 - jobtracker - AdminClass -  - (57ecf975731dc) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 13:22:29 - jobtracker - CustomerClass -  - (57ecf97572624) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:22:29 - falcon - ScheduleClass -  - (57ecf975bba0a) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:22:29 - falcon - ScheduleClass -  - (57ecf975bba0a) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 13:25:44 - jobtracker - AdminClass -  - (57ecfa3877664) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 13:25:44 - jobtracker - CustomerClass -  - (57ecfa38766c4) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:25:44 - falcon - ScheduleClass -  - (57ecfa38d8543) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:26:08 - jobtracker - AdminClass -  - (57ecfa50140eb) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 13:26:08 - jobtracker - CustomerClass -  - (57ecfa5013533) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:26:08 - falcon - ScheduleClass -  - (57ecfa506ea38) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:26:44 - jobtracker - AdminClass -  - (57ecfa7479a6c) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 13:26:44 - jobtracker - CustomerClass -  - (57ecfa7478eb4) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:26:44 - falcon - ScheduleClass -  - (57ecfa74d2861) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:26:46 - jobtracker - AdminClass -  - (57ecfa75a6d58) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 13:26:46 - jobtracker - CustomerClass -  - (57ecfa75a5db8) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:26:46 - falcon - ScheduleClass -  - (57ecfa760c4bd) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:26:46 - falcon - ScheduleClass -  - (57ecfa760c4bd) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 13:28:21 - jobtracker - AdminClass -  - (57ecfad4e7380) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 13:28:21 - jobtracker - CustomerClass -  - (57ecfad4e63e0) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:28:21 - falcon - ScheduleClass -  - (57ecfad568073) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:28:22 - jobtracker - AdminClass -  - (57ecfad651947) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 13:28:22 - jobtracker - CustomerClass -  - (57ecfad650d8f) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:28:22 - falcon - ScheduleClass -  - (57ecfad6b1c64) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:28:22 - falcon - ScheduleClass -  - (57ecfad6b1c64) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 13:29:01 - jobtracker - AdminClass -  - (57ecfafd3e87b) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 13:29:01 - jobtracker - CustomerClass -  - (57ecfafd3d8db) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:29:01 - falcon - ScheduleClass -  - (57ecfafd9f75a) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:29:02 - jobtracker - AdminClass -  - (57ecfafe7f7d3) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 13:29:02 - jobtracker - CustomerClass -  - (57ecfafe7ec1b) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:29:02 - falcon - ScheduleClass -  - (57ecfafec12a2) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:29:02 - falcon - ScheduleClass -  - (57ecfafec12a2) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 13:29:23 - jobtracker - AdminClass -  - (57ecfb137ac92) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 13:29:23 - jobtracker - CustomerClass -  - (57ecfb137a4c2) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:29:23 - falcon - ScheduleClass -  - (57ecfb13ed89d) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:29:24 - jobtracker - AdminClass -  - (57ecfb14af6a3) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 13:29:24 - jobtracker - CustomerClass -  - (57ecfb14af6a3) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:29:24 - falcon - ScheduleClass -  - (57ecfb14eb795) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:29:24 - falcon - ScheduleClass -  - (57ecfb14eb795) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 13:30:15 - jobtracker - AdminClass -  - (57ecfb46cc132) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-29 13:30:15 - jobtracker - CustomerClass -  - (57ecfb46cb579) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:30:16 - jobtracker - AdminClass -  - (57ecfb47e8691) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-29 13:30:16 - jobtracker - CustomerClass -  - (57ecfb47e7ad9) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:30:17 - jobtracker - AdminClass -  - (57ecfb489d399) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-29 13:30:17 - jobtracker - CustomerClass -  - (57ecfb489c3f9) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:30:17 - jobtracker - ContractorClass -  - (57ecfb490c748) 
+ - Get Labour Dashboard Grid Data Query : SELECT d.apptid, j.contractid, j.iscontract, d.jobid, COUNT(d.jobid) AS jobs, a.labelid, a.siteline2, a.siteref, a.sitestate AS state, c.firstname AS fm, CONCAT(s.companyname,' (',d.userid,')') AS technician, d.duration AS hours, te.lm_te_bill_rate AS rate, d.duration*te.lm_te_bill_rate AS billamt, j.materialcosts
+FROM `diary` `d`
+INNER JOIN `jobs` `j` ON `d`.`jobid`=`j`.`jobid`
+INNER JOIN `lm_timeentry` `te` ON `d`.`apptid`=`te`.`lm_te_apptid`
+INNER JOIN `users` `u` ON `d`.`userid`=`u`.`userid`
+INNER JOIN `customer` `s` ON `u`.`email`=`s`.`customerid`
+LEFT JOIN `con_technician` `t` ON `d`.`userid`=`t`.`userid`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `j`.`contactid`=`c`.`contactid`
+WHERE `d`.`dte` >= '2016-09-01'
+AND `d`.`dte` <= '2016-09-29'
+GROUP BY `a`.`labelid`
+ LIMIT 25
+
+2016-09-29 13:30:17 - jobtracker - AdminClass -  - (57ecfb491d0ec) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 13:30:17 - jobtracker - CustomerClass -  - (57ecfb491c14c) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:30:17 - falcon - ScheduleClass -  - (57ecfb4988bad) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:30:18 - jobtracker - AdminClass -  - (57ecfb4a48498) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 13:30:18 - jobtracker - CustomerClass -  - (57ecfb4a474f7) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:30:18 - falcon - ScheduleClass -  - (57ecfb4a8c670) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:30:18 - falcon - ScheduleClass -  - (57ecfb4a8c670) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 13:31:00 - jobtracker - AdminClass -  - (57ecfb74296ec) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 13:31:00 - jobtracker - CustomerClass -  - (57ecfb7428f1c) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:31:00 - falcon - ScheduleClass -  - (57ecfb748868a) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:31:01 - jobtracker - AdminClass -  - (57ecfb759b389) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 13:31:01 - jobtracker - CustomerClass -  - (57ecfb759b389) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:31:01 - falcon - ScheduleClass -  - (57ecfb75e4f40) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:31:01 - falcon - ScheduleClass -  - (57ecfb75e4f40) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 13:31:27 - jobtracker - AdminClass -  - (57ecfb8f36f7c) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 13:31:27 - jobtracker - CustomerClass -  - (57ecfb8f363c4) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:31:27 - falcon - ScheduleClass -  - (57ecfb8f720cd) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:31:27 - falcon - ScheduleClass -  - (57ecfb8f720cd) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 13:32:56 - jobtracker - AdminClass -  - (57ecfbe81a21f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 13:32:56 - jobtracker - CustomerClass -  - (57ecfbe81927e) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:32:56 - falcon - ScheduleClass -  - (57ecfbe87dfde) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:32:57 - jobtracker - AdminClass -  - (57ecfbe95c117) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 13:32:57 - jobtracker - CustomerClass -  - (57ecfbe95b177) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:32:57 - falcon - ScheduleClass -  - (57ecfbe9a6c71) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:32:57 - falcon - ScheduleClass -  - (57ecfbe9a6c71) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-09-29 13:45:08 - jobtracker - AdminClass -  - (57ecfec3ac3ec) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-09-29 13:45:08 - jobtracker - CustomerClass -  - (57ecfec3ab834) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:45:08 - falcon - ScheduleClass -  - (57ecfec4188bb) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:45:09 - jobtracker - AdminClass -  - (57ecfec5230ef) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-09-29 13:45:09 - jobtracker - CustomerClass -  - (57ecfec52214e) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-29 13:45:09 - falcon - ScheduleClass -  - (57ecfec581c97) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-09-29 13:45:09 - falcon - ScheduleClass -  - (57ecfec581c97) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-08-28'
+AND `d`.`dte` < '2016-10-09'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'

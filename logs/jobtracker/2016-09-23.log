@@ -1,0 +1,3705 @@
+2016-09-23 05:06:25 - Log File Created.
+
+2016-09-23 05:06:25 - jobtracker - AdminClass -  - (57e49c30a7c53) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'settings/changepassword'
+AND `isactive` = 1
+
+2016-09-23 05:06:25 - jobtracker - SharedClass -  - (57e49c30a592b) 
+ - Get Announcement : SELECT * FROM cp_message WHERE isactive=1 AND browser='' AND activationdate <= NOW() AND id NOT IN (SELECT messageid FROM cp_messagecontact WHERE contactid = 26564)
+
+2016-09-23 05:06:25 - jobtracker - SharedClass -  - (57e49c30a592b) 
+ - Get Announcement : SELECT * FROM cp_message WHERE isactive=1 AND browser='Chrome' AND activationdate <= NOW() AND id NOT IN (SELECT messageid FROM cp_messagecontact WHERE contactid = 26564) ORDER BY browser_version
+
+2016-09-23 05:06:25 - jobtracker - CustomerClass -  - (57e49c30a7483) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:06:37 - jobtracker - AdminClass -  - (57e49c3d13a52) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 05:06:37 - jobtracker - CustomerClass -  - (57e49c3d12ab2) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:06:38 - jobtracker - AdminClass -  - (57e49c3e07350) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'reports/loadreports'
+AND `isactive` = 1
+
+2016-09-23 05:06:38 - jobtracker - CustomerClass -  - (57e49c3e06798) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:06:38 - jobtracker - ReportClass -  - (57e49c3e7ab13) 
+ - Get Reports Data Query : SELECT `r`.`id`, `r`.`name`, `description`, `rf`.`route_url` AS `familyroute`, `r`.`route_url` AS `reportroute`, `rf`.`name` AS `familyname`
+FROM `report` `r`
+LEFT JOIN `reportfamily` `rf` ON `r`.`familyid`=`rf`.`id`
+WHERE `rf`.`isactive` = 1
+AND `r`.`isactive` = 1
+AND `r`.`inclientportal` = 1
+ORDER BY `r`.`sortorder`, `r`.`name`
+ LIMIT 25
+
+2016-09-23 05:06:38 - jobtracker - AdminClass -  - (57e49c3ea5a9d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard/loadjobdashboardchart'
+AND `isactive` = 1
+
+2016-09-23 05:06:38 - jobtracker - CustomerClass -  - (57e49c3ea4ee5) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:07:16 - jobtracker - AdminClass -  - (57e49c63c3fe4) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard/loadjobdashboardchart'
+AND `isactive` = 1
+
+2016-09-23 05:07:16 - jobtracker - CustomerClass -  - (57e49c63c3fe4) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:07:16 - jobtracker - AdminClass -  - (57e49c64bcea4) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard/loadjobdashboardchart'
+AND `isactive` = 1
+
+2016-09-23 05:07:16 - jobtracker - CustomerClass -  - (57e49c64bcea4) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:07:34 - jobtracker - AdminClass -  - (57e49c765c457) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 05:07:34 - jobtracker - CustomerClass -  - (57e49c765b4b7) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:07:36 - jobtracker - AdminClass -  - (57e49c780f640) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard/loadjobdashboardchart'
+AND `isactive` = 1
+
+2016-09-23 05:07:36 - jobtracker - CustomerClass -  - (57e49c780ea88) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:32:01 - jobtracker - AdminClass -  - (57e4a2317b98e) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 05:32:01 - jobtracker - CustomerClass -  - (57e4a2317a9ee) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:32:03 - jobtracker - AdminClass -  - (57e4a23312268) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard/loadjobdashboardchart'
+AND `isactive` = 1
+
+2016-09-23 05:32:03 - jobtracker - CustomerClass -  - (57e4a233116af) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:32:12 - jobtracker - AdminClass -  - (57e4a23c418cb) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard/loadjobdashboardchart'
+AND `isactive` = 1
+
+2016-09-23 05:32:12 - jobtracker - CustomerClass -  - (57e4a23c418cb) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:36:36 - jobtracker - AdminClass -  - (57e4a344144fd) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 05:36:36 - jobtracker - CustomerClass -  - (57e4a3441355c) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:36:37 - jobtracker - AdminClass -  - (57e4a34589469) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard/loadjobdashboardchart'
+AND `isactive` = 1
+
+2016-09-23 05:36:37 - jobtracker - CustomerClass -  - (57e4a345884c9) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:36:42 - jobtracker - AdminClass -  - (57e4a34a8a868) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard/loadjobdashboardchart'
+AND `isactive` = 1
+
+2016-09-23 05:36:42 - jobtracker - CustomerClass -  - (57e4a34a88158) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:36:58 - jobtracker - AdminClass -  - (57e4a359e7977) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 05:36:58 - jobtracker - CustomerClass -  - (57e4a359e71a6) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:36:59 - jobtracker - AdminClass -  - (57e4a35b438c2) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 05:36:59 - jobtracker - CustomerClass -  - (57e4a35b42d0a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:37:00 - jobtracker - AdminClass -  - (57e4a35bcc84b) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard/loadjobdashboardchart'
+AND `isactive` = 1
+
+2016-09-23 05:37:00 - jobtracker - CustomerClass -  - (57e4a35bcbc92) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:39:05 - jobtracker - AdminClass -  - (57e4a3d8a483d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 05:39:05 - jobtracker - CustomerClass -  - (57e4a3d8a3c85) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:39:06 - jobtracker - AdminClass -  - (57e4a3da0942b) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 05:39:06 - jobtracker - CustomerClass -  - (57e4a3da0848b) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:44:25 - jobtracker - AdminClass -  - (57e4a518b5809) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 05:44:25 - jobtracker - CustomerClass -  - (57e4a518b4480) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:44:36 - jobtracker - AdminClass -  - (57e4a523ee4cb) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 05:44:36 - jobtracker - CustomerClass -  - (57e4a523ed913) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:45:11 - jobtracker - AdminClass -  - (57e4a546af4ee) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 05:45:11 - jobtracker - CustomerClass -  - (57e4a546ae54e) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:45:12 - jobtracker - AdminClass -  - (57e4a547dac82) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 05:45:12 - jobtracker - CustomerClass -  - (57e4a547d9ce1) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:46:54 - jobtracker - AdminClass -  - (57e4a5ae96c06) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard/loadjobdashboardchart'
+AND `isactive` = 1
+
+2016-09-23 05:46:54 - jobtracker - CustomerClass -  - (57e4a5ae96c06) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:47:03 - jobtracker - AdminClass -  - (57e4a5b73f9f8) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard/loadjobdashboardchart'
+AND `isactive` = 1
+
+2016-09-23 05:47:03 - jobtracker - CustomerClass -  - (57e4a5b73d2e8) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:47:17 - jobtracker - AdminClass -  - (57e4a5c4b848a) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 05:47:17 - jobtracker - CustomerClass -  - (57e4a5c4b78d2) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:47:18 - jobtracker - AdminClass -  - (57e4a5c5c636f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 05:47:18 - jobtracker - CustomerClass -  - (57e4a5c5c53cf) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:47:22 - jobtracker - AdminClass -  - (57e4a5ca0231d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 05:47:22 - jobtracker - CustomerClass -  - (57e4a5ca01765) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:47:23 - jobtracker - AdminClass -  - (57e4a5cacae3c) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 05:47:23 - jobtracker - CustomerClass -  - (57e4a5cac9e9c) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:51:44 - jobtracker - AdminClass -  - (57e4a6cfc2bca) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 05:51:44 - jobtracker - CustomerClass -  - (57e4a6cfc1842) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:51:45 - jobtracker - AdminClass -  - (57e4a6d0ef2fe) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 05:51:45 - jobtracker - CustomerClass -  - (57e4a6d0ee35e) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:53:01 - jobtracker - AdminClass -  - (57e4a71d6e70c) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 05:53:01 - jobtracker - CustomerClass -  - (57e4a71d6db54) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:53:03 - jobtracker - AdminClass -  - (57e4a71ea2f2a) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 05:53:03 - jobtracker - CustomerClass -  - (57e4a71ea1f8a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:53:11 - jobtracker - AdminClass -  - (57e4a726bbe45) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 05:53:11 - jobtracker - CustomerClass -  - (57e4a726baea5) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:54:52 - jobtracker - AdminClass -  - (57e4a78bb67a1) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 05:54:52 - jobtracker - CustomerClass -  - (57e4a78bb5fd0) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:54:53 - jobtracker - AdminClass -  - (57e4a78ccfe20) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 05:54:53 - jobtracker - CustomerClass -  - (57e4a78ccee7f) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:55:06 - jobtracker - AdminClass -  - (57e4a79a67aea) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 05:55:06 - jobtracker - CustomerClass -  - (57e4a79a66f31) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:55:40 - jobtracker - AdminClass -  - (57e4a7bc1bd84) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 05:55:40 - jobtracker - CustomerClass -  - (57e4a7bc1b1cc) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:55:41 - jobtracker - AdminClass -  - (57e4a7bd309ca) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 05:55:41 - jobtracker - CustomerClass -  - (57e4a7bd2fa2a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:55:50 - jobtracker - AdminClass -  - (57e4a7c65c5b8) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 05:55:50 - jobtracker - CustomerClass -  - (57e4a7c65ba00) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:59:06 - jobtracker - AdminClass -  - (57e4a88a5094d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 05:59:06 - jobtracker - CustomerClass -  - (57e4a88a4f9ad) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:59:07 - jobtracker - AdminClass -  - (57e4a88b720b6) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 05:59:07 - jobtracker - CustomerClass -  - (57e4a88b71116) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:59:17 - jobtracker - AdminClass -  - (57e4a894af357) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 05:59:17 - jobtracker - CustomerClass -  - (57e4a894ae3b7) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:59:41 - jobtracker - AdminClass -  - (57e4a8ad9cc21) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 05:59:42 - jobtracker - CustomerClass -  - (57e4a8ad9c068) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:59:43 - jobtracker - AdminClass -  - (57e4a8aecb67d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 05:59:43 - jobtracker - CustomerClass -  - (57e4a8aeca6dc) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 05:59:52 - jobtracker - AdminClass -  - (57e4a8b8778e5) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 05:59:52 - jobtracker - CustomerClass -  - (57e4a8b876945) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:01:15 - jobtracker - AdminClass -  - (57e4a90aadf57) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 06:01:15 - jobtracker - CustomerClass -  - (57e4a90aacfb6) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:01:16 - jobtracker - AdminClass -  - (57e4a90bcc00f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:01:16 - jobtracker - CustomerClass -  - (57e4a90bcb06f) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:01:26 - jobtracker - AdminClass -  - (57e4a91680b6a) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:01:26 - jobtracker - CustomerClass -  - (57e4a9167ffb2) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:01:56 - jobtracker - AdminClass -  - (57e4a93466c38) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 06:01:56 - jobtracker - CustomerClass -  - (57e4a93465c98) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:01:57 - jobtracker - AdminClass -  - (57e4a93589b12) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:01:57 - jobtracker - CustomerClass -  - (57e4a93588b71) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:02:13 - jobtracker - AdminClass -  - (57e4a944d519d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:02:13 - jobtracker - CustomerClass -  - (57e4a944d41fd) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:08:05 - jobtracker - AdminClass -  - (57e4aaa5177ef) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'suppliers/edit'
+AND `isactive` = 1
+
+2016-09-23 06:08:05 - jobtracker - CustomerClass -  - (57e4aaa516c37) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:08:05 - jobtracker - CustomerClass -  - (57e4aaa516c37) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '11011'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:08:07 - jobtracker - AdminClass -  - (57e4aaa6ba1df) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'suppliers/loadsites'
+AND `isactive` = 1
+
+2016-09-23 06:08:07 - jobtracker - CustomerClass -  - (57e4aaa6b923e) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:08:07 - jobtracker - CustomerClass -  - (57e4aaa6b923e) 
+ - Get Supplier Sites Data Query : SELECT sa.*, a.labelid, a.siteref, a.siteline2 ,a.sitesuburb, a.sitestate, a.sitepostcode, TRIM(CONCAT(cfm.firstname,' ',cfm.surname)) AS sitefm, TRIM(CONCAT(csite.firstname,' ',csite.surname)) AS sitecontact, a.latitude_decimal, a.longitude_decimal, CONCAT(IFNULL(a.siteline1,''),'<br>', IFNULL(a.siteline2,''),'<br>',IFNULL(a.sitesuburb,''),' ',IFNULL(a.sitestate,''),' ',IFNULL(a.sitepostcode,'')) as site
+FROM `cp_supplier_address` `sa`
+INNER JOIN `addresslabel` `a` ON `sa`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `cfm` ON `a`.`contactid` = `cfm`.`contactid`
+LEFT JOIN `contact` `csite` ON `a`.`contactid` = `csite`.`contactid`
+WHERE `a`.`customerid` = '7781'
+AND `sa`.`supplierid` = '11011'
+ORDER BY `sitesuburb` DESC
+ LIMIT 25
+
+2016-09-23 06:08:07 - jobtracker - AdminClass -  - (57e4aaa7558a0) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'suppliers/loadsuppliercontacts'
+AND `isactive` = 1
+
+2016-09-23 06:08:07 - jobtracker - CustomerClass -  - (57e4aaa754ce8) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:08:07 - jobtracker - CustomerClass -  - (57e4aaa754ce8) 
+ - Get Contact Data Query : SELECT c.*, TRIM(CONCAT(c.firstname,' ',c.surname)) as contactname, TRIM(CONCAT(c2.firstname,' ',c2.surname)) AS reportsto, IF(c.active=1,'Active',IF(c.cp_invitesendtime IS NULL, 'Inactive','Invited')) AS status, t.se_trade_name AS trade
+FROM `contact` `c`
+LEFT JOIN `contact` `c2` ON `c`.`bossid`=`c2`.`contactid`
+LEFT JOIN `se_trade` `t` ON `c`.`tradeid`=`t`.`id`
+WHERE `c`.`customerid` = '11011'
+ORDER BY `contactname` ASC
+ LIMIT 25
+
+2016-09-23 06:08:09 - jobtracker - AdminClass -  - (57e4aaa8c7544) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 06:08:09 - jobtracker - CustomerClass -  - (57e4aaa8c65a4) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:08:10 - jobtracker - AdminClass -  - (57e4aaa9e1393) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:08:10 - jobtracker - CustomerClass -  - (57e4aaa9e03f3) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:08:20 - jobtracker - AdminClass -  - (57e4aab413f44) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:08:20 - jobtracker - CustomerClass -  - (57e4aab41338c) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:09:31 - jobtracker - AdminClass -  - (57e4aafaa747e) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 06:09:31 - jobtracker - CustomerClass -  - (57e4aafaa68c6) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:09:32 - jobtracker - AdminClass -  - (57e4aafbc497e) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:09:32 - jobtracker - CustomerClass -  - (57e4aafbc3dc6) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:09:42 - jobtracker - AdminClass -  - (57e4ab05b7366) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:09:42 - jobtracker - CustomerClass -  - (57e4ab05b67ae) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:10:14 - jobtracker - AdminClass -  - (57e4ab265a5bf) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 06:10:14 - jobtracker - CustomerClass -  - (57e4ab2659a07) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:10:15 - jobtracker - AdminClass -  - (57e4ab276b76c) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:10:15 - jobtracker - CustomerClass -  - (57e4ab276a7cc) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:10:23 - jobtracker - AdminClass -  - (57e4ab2f75479) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:10:23 - jobtracker - CustomerClass -  - (57e4ab2f748c1) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:24:52 - jobtracker - AdminClass -  - (57e4ae940fba5) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 06:24:52 - jobtracker - CustomerClass -  - (57e4ae940efed) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:24:53 - jobtracker - AdminClass -  - (57e4ae95374b7) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:24:53 - jobtracker - CustomerClass -  - (57e4ae9535d47) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:25:12 - jobtracker - AdminClass -  - (57e4aea84aa5d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:25:12 - jobtracker - CustomerClass -  - (57e4aea849ea5) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:44:43 - jobtracker - AdminClass -  - (57e4b33ae8a8f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 06:44:43 - jobtracker - CustomerClass -  - (57e4b33ae7ed7) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:44:44 - jobtracker - AdminClass -  - (57e4b33c06d84) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:44:44 - jobtracker - CustomerClass -  - (57e4b33c05de4) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:50:00 - jobtracker - AdminClass -  - (57e4b47860e21) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 06:50:00 - jobtracker - CustomerClass -  - (57e4b4785fe81) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:50:02 - jobtracker - AdminClass -  - (57e4b4799469e) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:50:02 - jobtracker - CustomerClass -  - (57e4b479936fe) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:53:57 - jobtracker - AdminClass -  - (57e4b56581fac) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 06:53:57 - jobtracker - CustomerClass -  - (57e4b5658100c) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:53:59 - jobtracker - AdminClass -  - (57e4b566b6f9a) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:53:59 - jobtracker - CustomerClass -  - (57e4b566b5ffa) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:55:13 - jobtracker - AdminClass -  - (57e4b5b0a0d05) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 06:55:13 - jobtracker - CustomerClass -  - (57e4b5b09f97d) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:55:14 - jobtracker - AdminClass -  - (57e4b5b20262b) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:55:14 - jobtracker - CustomerClass -  - (57e4b5b20168a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:55:22 - jobtracker - AdminClass -  - (57e4b5ba32988) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 06:55:22 - jobtracker - CustomerClass -  - (57e4b5ba31dcf) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:55:24 - jobtracker - AdminClass -  - (57e4b5bbda968) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:55:24 - jobtracker - CustomerClass -  - (57e4b5bbd99c8) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:57:37 - jobtracker - AdminClass -  - (57e4b6414b2ff) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 06:57:37 - jobtracker - CustomerClass -  - (57e4b6414a35f) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:57:39 - jobtracker - AdminClass -  - (57e4b642a606d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:57:39 - jobtracker - CustomerClass -  - (57e4b642a54b5) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:59:08 - jobtracker - AdminClass -  - (57e4b69c61361) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 06:59:08 - jobtracker - CustomerClass -  - (57e4b69c607a9) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:59:10 - jobtracker - AdminClass -  - (57e4b69da2a89) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:59:10 - jobtracker - CustomerClass -  - (57e4b69da1ae9) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:59:42 - jobtracker - AdminClass -  - (57e4b6be04177) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 06:59:42 - jobtracker - CustomerClass -  - (57e4b6be031d7) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 06:59:43 - jobtracker - AdminClass -  - (57e4b6bf35ab4) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 06:59:43 - jobtracker - CustomerClass -  - (57e4b6bf34b14) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:21:48 - jobtracker - AdminClass -  - (57e4bbec1c8ee) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 07:21:48 - jobtracker - CustomerClass -  - (57e4bbec1b94d) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:21:49 - jobtracker - AdminClass -  - (57e4bbed39dee) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:21:49 - jobtracker - CustomerClass -  - (57e4bbed38e4d) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:21:52 - jobtracker - AdminClass -  - (57e4bbf02ee64) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:21:52 - jobtracker - CustomerClass -  - (57e4bbf02dec4) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:21:59 - jobtracker - AdminClass -  - (57e4bbf6d56aa) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:21:59 - jobtracker - CustomerClass -  - (57e4bbf6d4af2) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:23:02 - jobtracker - AdminClass -  - (57e4bc368041a) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 07:23:02 - jobtracker - CustomerClass -  - (57e4bc367f861) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:23:04 - jobtracker - AdminClass -  - (57e4bc37ad31d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:23:04 - jobtracker - CustomerClass -  - (57e4bc37ac37d) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:23:12 - jobtracker - AdminClass -  - (57e4bc404fba9) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:23:12 - jobtracker - CustomerClass -  - (57e4bc404eff1) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:23:15 - jobtracker - AdminClass -  - (57e4bc42a89ba) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:23:15 - jobtracker - CustomerClass -  - (57e4bc42a7e02) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:26:26 - jobtracker - AdminClass -  - (57e4bd023868d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 07:26:26 - jobtracker - CustomerClass -  - (57e4bd0237ad5) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:26:27 - jobtracker - AdminClass -  - (57e4bd03576e6) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:26:27 - jobtracker - CustomerClass -  - (57e4bd035635d) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:28:00 - jobtracker - AdminClass -  - (57e4bd6027039) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 07:28:00 - jobtracker - CustomerClass -  - (57e4bd6026099) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:28:01 - jobtracker - AdminClass -  - (57e4bd61677c1) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:28:01 - jobtracker - CustomerClass -  - (57e4bd6166821) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:28:08 - jobtracker - AdminClass -  - (57e4bd67ea9da) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 07:28:08 - jobtracker - CustomerClass -  - (57e4bd67e9e22) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:28:10 - jobtracker - AdminClass -  - (57e4bd698457d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:28:10 - jobtracker - CustomerClass -  - (57e4bd69835dc) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:30:13 - jobtracker - AdminClass -  - (57e4bde57e50d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 07:30:13 - jobtracker - CustomerClass -  - (57e4bde57dd3d) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:30:15 - jobtracker - AdminClass -  - (57e4bde6bcd55) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:30:15 - jobtracker - CustomerClass -  - (57e4bde6bbdb4) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:31:00 - jobtracker - AdminClass -  - (57e4be145c310) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 07:31:00 - jobtracker - CustomerClass -  - (57e4be145b758) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:31:02 - jobtracker - AdminClass -  - (57e4be158a984) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:31:02 - jobtracker - CustomerClass -  - (57e4be15899e4) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:31:48 - jobtracker - AdminClass -  - (57e4be4446c66) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 07:31:48 - jobtracker - CustomerClass -  - (57e4be44460ae) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:31:49 - jobtracker - AdminClass -  - (57e4be457bc53) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:31:49 - jobtracker - CustomerClass -  - (57e4be457acb3) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:32:00 - jobtracker - AdminClass -  - (57e4be4fa2a46) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:32:00 - jobtracker - CustomerClass -  - (57e4be4fa1e8e) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:32:50 - jobtracker - AdminClass -  - (57e4be81b2324) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:32:50 - jobtracker - CustomerClass -  - (57e4be81b1384) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:32:57 - jobtracker - AdminClass -  - (57e4be893303d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:32:57 - jobtracker - CustomerClass -  - (57e4be8932485) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:33:01 - jobtracker - AdminClass -  - (57e4be8cc44a2) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:33:01 - jobtracker - CustomerClass -  - (57e4be8cc3502) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:35:09 - jobtracker - AdminClass -  - (57e4bf0ca72ad) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 07:35:09 - jobtracker - CustomerClass -  - (57e4bf0ca5f25) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:35:10 - jobtracker - AdminClass -  - (57e4bf0dc8dfe) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:35:10 - jobtracker - CustomerClass -  - (57e4bf0dc8246) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:36:17 - jobtracker - AdminClass -  - (57e4bf50e1787) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 07:36:17 - jobtracker - CustomerClass -  - (57e4bf50e0fb7) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:36:18 - jobtracker - AdminClass -  - (57e4bf5231768) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:36:18 - jobtracker - CustomerClass -  - (57e4bf52307c8) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:37:06 - jobtracker - AdminClass -  - (57e4bf8231c7d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 07:37:06 - jobtracker - CustomerClass -  - (57e4bf82310c5) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:37:07 - jobtracker - AdminClass -  - (57e4bf837d3d0) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:37:07 - jobtracker - CustomerClass -  - (57e4bf837c818) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:37:33 - jobtracker - AdminClass -  - (57e4bf9d75b2c) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 07:37:33 - jobtracker - CustomerClass -  - (57e4bf9d74b8c) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:37:35 - jobtracker - AdminClass -  - (57e4bf9ebfb0e) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:37:35 - jobtracker - CustomerClass -  - (57e4bf9ebeb6e) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:37:37 - jobtracker - AdminClass -  - (57e4bfa1a1eda) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:37:38 - jobtracker - CustomerClass -  - (57e4bfa1a170a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:37:41 - jobtracker - AdminClass -  - (57e4bfa55065e) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:37:41 - jobtracker - CustomerClass -  - (57e4bfa54faa6) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:38:08 - jobtracker - AdminClass -  - (57e4bfc020189) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 07:38:08 - jobtracker - CustomerClass -  - (57e4bfc01f1e9) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:38:09 - jobtracker - AdminClass -  - (57e4bfc16728b) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:38:09 - jobtracker - CustomerClass -  - (57e4bfc1662eb) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:38:11 - jobtracker - AdminClass -  - (57e4bfc31d712) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:38:11 - jobtracker - CustomerClass -  - (57e4bfc31cf42) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:39:01 - jobtracker - AdminClass -  - (57e4bff53766e) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 07:39:01 - jobtracker - CustomerClass -  - (57e4bff536ab6) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:39:03 - jobtracker - AdminClass -  - (57e4bff6cb9e2) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:39:03 - jobtracker - CustomerClass -  - (57e4bff6cae2a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:50:18 - jobtracker - AdminClass -  - (57e4c29a02d3c) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 07:50:18 - jobtracker - CustomerClass -  - (57e4c29a01d9c) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 07:50:19 - jobtracker - AdminClass -  - (57e4c29b4f817) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 07:50:19 - jobtracker - CustomerClass -  - (57e4c29b4e877) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 08:50:15 - jobtracker - AdminClass -  - (57e4d0a6ef944) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 08:50:15 - jobtracker - CustomerClass -  - (57e4d0a6eed8c) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 08:50:16 - jobtracker - AdminClass -  - (57e4d0a820906) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 08:50:16 - jobtracker - CustomerClass -  - (57e4d0a81f966) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 08:54:43 - jobtracker - AdminClass -  - (57e4d1b352c99) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 08:54:43 - jobtracker - CustomerClass -  - (57e4d1b3524c8) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 08:54:44 - jobtracker - AdminClass -  - (57e4d1b459263) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 08:54:44 - jobtracker - CustomerClass -  - (57e4d1b4582c3) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 08:54:57 - jobtracker - AdminClass -  - (57e4d1c1433d7) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 08:54:57 - jobtracker - CustomerClass -  - (57e4d1c14281f) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 08:54:59 - jobtracker - AdminClass -  - (57e4d1c39b259) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 08:54:59 - jobtracker - CustomerClass -  - (57e4d1c39aa89) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 08:55:01 - jobtracker - AdminClass -  - (57e4d1c521162) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 08:55:01 - jobtracker - CustomerClass -  - (57e4d1c5205aa) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:19:27 - jobtracker - AdminClass -  - (57e4d77eeb4c3) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 09:19:27 - jobtracker - CustomerClass -  - (57e4d77eea522) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:19:28 - jobtracker - AdminClass -  - (57e4d78047027) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 09:19:28 - jobtracker - CustomerClass -  - (57e4d7804646e) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:19:36 - jobtracker - AdminClass -  - (57e4d7880e087) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 09:19:36 - jobtracker - CustomerClass -  - (57e4d7880e087) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:19:40 - jobtracker - AdminClass -  - (57e4d78be7549) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 09:19:40 - jobtracker - CustomerClass -  - (57e4d78be7549) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:19:43 - jobtracker - AdminClass -  - (57e4d78f9f127) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 09:19:43 - jobtracker - CustomerClass -  - (57e4d78f9f127) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:19:46 - jobtracker - AdminClass -  - (57e4d79278822) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 09:19:46 - jobtracker - CustomerClass -  - (57e4d7927843a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:20:14 - jobtracker - AdminClass -  - (57e4d7ae5b8e0) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 09:20:14 - jobtracker - CustomerClass -  - (57e4d7ae5a93f) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:20:16 - jobtracker - AdminClass -  - (57e4d7af94b36) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 09:20:16 - jobtracker - CustomerClass -  - (57e4d7af93b96) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:20:50 - jobtracker - AdminClass -  - (57e4d7d2168e8) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 09:20:50 - jobtracker - CustomerClass -  - (57e4d7d215d30) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:20:51 - jobtracker - AdminClass -  - (57e4d7d355900) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 09:20:51 - jobtracker - CustomerClass -  - (57e4d7d354578) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:21:30 - jobtracker - AdminClass -  - (57e4d7f9c33f0) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 09:21:30 - jobtracker - CustomerClass -  - (57e4d7f9c2838) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:21:31 - jobtracker - AdminClass -  - (57e4d7fb12819) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 09:21:31 - jobtracker - CustomerClass -  - (57e4d7fb11879) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:22:11 - jobtracker - AdminClass -  - (57e4d82384135) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 09:22:11 - jobtracker - CustomerClass -  - (57e4d82383965) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:22:13 - jobtracker - AdminClass -  - (57e4d824a6c26) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 09:22:13 - jobtracker - CustomerClass -  - (57e4d824a5c86) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:22:16 - jobtracker - AdminClass -  - (57e4d82897e24) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 09:22:16 - jobtracker - CustomerClass -  - (57e4d8289726c) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:22:18 - jobtracker - AdminClass -  - (57e4d829a39e0) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 09:22:18 - jobtracker - CustomerClass -  - (57e4d829a2a40) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:30:33 - jobtracker - AdminClass -  - (57e4da18c6a62) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 09:30:33 - jobtracker - CustomerClass -  - (57e4da18c5ac2) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:30:34 - jobtracker - AdminClass -  - (57e4da19dddb9) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 09:30:34 - jobtracker - CustomerClass -  - (57e4da19dce19) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:30:48 - jobtracker - AdminClass -  - (57e4da289d726) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 09:30:48 - jobtracker - CustomerClass -  - (57e4da289cb6e) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:30:50 - jobtracker - AdminClass -  - (57e4da2a04a25) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 09:30:50 - jobtracker - CustomerClass -  - (57e4da2a03a84) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:30:54 - jobtracker - AdminClass -  - (57e4da2dd9ca4) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 09:30:54 - jobtracker - CustomerClass -  - (57e4da2dd9ca4) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:31:02 - jobtracker - AdminClass -  - (57e4da3628546) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 09:31:02 - jobtracker - CustomerClass -  - (57e4da3628546) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:31:59 - jobtracker - AdminClass -  - (57e4da6ec0f9b) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 09:31:59 - jobtracker - CustomerClass -  - (57e4da6ec0f9b) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:32:04 - jobtracker - AdminClass -  - (57e4da74875ef) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 09:32:04 - jobtracker - CustomerClass -  - (57e4da74875ef) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:32:16 - jobtracker - AdminClass -  - (57e4da802d11c) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 09:32:16 - jobtracker - CustomerClass -  - (57e4da802d11c) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:32:23 - jobtracker - AdminClass -  - (57e4da871cf66) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 09:32:23 - jobtracker - CustomerClass -  - (57e4da871c3ae) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:32:24 - jobtracker - AdminClass -  - (57e4da8847371) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 09:32:24 - jobtracker - CustomerClass -  - (57e4da88467b9) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:32:30 - jobtracker - AdminClass -  - (57e4da8dbda5f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 09:32:30 - jobtracker - CustomerClass -  - (57e4da8dbda5f) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:32:30 - jobtracker - AdminClass -  - (57e4da8e1d7e2) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 09:32:30 - jobtracker - CustomerClass -  - (57e4da8e1d7e2) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:32:30 - jobtracker - AdminClass -  - (57e4da8e62d43) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 09:32:30 - jobtracker - CustomerClass -  - (57e4da8e6218b) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:34:55 - jobtracker - AdminClass -  - (57e4db1ebe341) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 09:34:55 - jobtracker - CustomerClass -  - (57e4db1ebd789) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:34:56 - jobtracker - AdminClass -  - (57e4db2009119) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 09:34:56 - jobtracker - CustomerClass -  - (57e4db2008561) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:34:59 - jobtracker - AdminClass -  - (57e4db236deb4) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 09:34:59 - jobtracker - CustomerClass -  - (57e4db236b7a4) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 09:36:32 - jobtracker - AdminClass -  - (57e4db7fe8f42) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 09:36:32 - jobtracker - CustomerClass -  - (57e4db7fe7fa1) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 10:33:33 - jobtracker - AdminClass -  - (57e4e8dc8de45) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 10:33:33 - jobtracker - CustomerClass -  - (57e4e8dc8cea5) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 10:33:34 - jobtracker - AdminClass -  - (57e4e8de3f0ed) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 10:33:34 - jobtracker - CustomerClass -  - (57e4e8de3e535) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 10:41:28 - jobtracker - AdminClass -  - (57e4eab8763b2) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 10:41:28 - jobtracker - CustomerClass -  - (57e4eab8757fa) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 10:41:30 - jobtracker - AdminClass -  - (57e4eab990dba) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 10:41:30 - jobtracker - CustomerClass -  - (57e4eab98fe1a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 10:46:10 - jobtracker - AdminClass -  - (57e4ebd1aac1a) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 10:46:10 - jobtracker - CustomerClass -  - (57e4ebd1aa44a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 10:46:12 - jobtracker - AdminClass -  - (57e4ebd40e846) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 10:46:12 - jobtracker - CustomerClass -  - (57e4ebd40dc8e) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 10:46:13 - jobtracker - AdminClass -  - (57e4ebd55ca6d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 10:46:13 - jobtracker - CustomerClass -  - (57e4ebd55beb5) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 10:46:15 - jobtracker - AdminClass -  - (57e4ebd7499e9) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 10:46:15 - jobtracker - CustomerClass -  - (57e4ebd749218) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 10:46:17 - jobtracker - AdminClass -  - (57e4ebd9169aa) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 10:46:17 - jobtracker - CustomerClass -  - (57e4ebd915df1) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:39:00 - jobtracker - AdminClass -  - (57e4f8349db59) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'suppliers/edit'
+AND `isactive` = 1
+
+2016-09-23 11:39:00 - jobtracker - CustomerClass -  - (57e4f8349c7d1) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:39:01 - jobtracker - CustomerClass -  - (57e4f8349c7d1) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '11011'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:39:03 - jobtracker - AdminClass -  - (57e4f8369957b) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'suppliers/loadsuppliercontacts'
+AND `isactive` = 1
+
+2016-09-23 11:39:03 - jobtracker - CustomerClass -  - (57e4f836989c2) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:39:03 - jobtracker - CustomerClass -  - (57e4f836989c2) 
+ - Get Contact Data Query : SELECT c.*, TRIM(CONCAT(c.firstname,' ',c.surname)) as contactname, TRIM(CONCAT(c2.firstname,' ',c2.surname)) AS reportsto, IF(c.active=1,'Active',IF(c.cp_invitesendtime IS NULL, 'Inactive','Invited')) AS status, t.se_trade_name AS trade
+FROM `contact` `c`
+LEFT JOIN `contact` `c2` ON `c`.`bossid`=`c2`.`contactid`
+LEFT JOIN `se_trade` `t` ON `c`.`tradeid`=`t`.`id`
+WHERE `c`.`customerid` = '11011'
+ORDER BY `contactname` ASC
+ LIMIT 25
+
+2016-09-23 11:39:03 - jobtracker - AdminClass -  - (57e4f8373158b) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'suppliers/loadsites'
+AND `isactive` = 1
+
+2016-09-23 11:39:03 - jobtracker - CustomerClass -  - (57e4f837305eb) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:39:03 - jobtracker - CustomerClass -  - (57e4f837305eb) 
+ - Get Supplier Sites Data Query : SELECT sa.*, a.labelid, a.siteref, a.siteline2 ,a.sitesuburb, a.sitestate, a.sitepostcode, TRIM(CONCAT(cfm.firstname,' ',cfm.surname)) AS sitefm, TRIM(CONCAT(csite.firstname,' ',csite.surname)) AS sitecontact, a.latitude_decimal, a.longitude_decimal, CONCAT(IFNULL(a.siteline1,''),'<br>', IFNULL(a.siteline2,''),'<br>',IFNULL(a.sitesuburb,''),' ',IFNULL(a.sitestate,''),' ',IFNULL(a.sitepostcode,'')) as site
+FROM `cp_supplier_address` `sa`
+INNER JOIN `addresslabel` `a` ON `sa`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `cfm` ON `a`.`contactid` = `cfm`.`contactid`
+LEFT JOIN `contact` `csite` ON `a`.`contactid` = `csite`.`contactid`
+WHERE `a`.`customerid` = '7781'
+AND `sa`.`supplierid` = '11011'
+ORDER BY `sitesuburb` DESC
+ LIMIT 25
+
+2016-09-23 11:39:04 - jobtracker - AdminClass -  - (57e4f837c02d5) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 11:39:04 - jobtracker - CustomerClass -  - (57e4f837bf335) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:39:05 - jobtracker - AdminClass -  - (57e4f838bb8d5) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 11:39:05 - jobtracker - CustomerClass -  - (57e4f838ba935) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:39:13 - jobtracker - AdminClass -  - (57e4f840cf9cb) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:39:13 - jobtracker - CustomerClass -  - (57e4f840cf9cb) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:39:40 - jobtracker - AdminClass -  - (57e4f85c45004) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 11:39:40 - jobtracker - CustomerClass -  - (57e4f85c4444c) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:39:42 - jobtracker - AdminClass -  - (57e4f85d8b166) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 11:39:42 - jobtracker - CustomerClass -  - (57e4f85d8a5ae) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:41:34 - jobtracker - AdminClass -  - (57e4f8ce041dc) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:41:34 - jobtracker - CustomerClass -  - (57e4f8ce0323b) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:42:06 - jobtracker - AdminClass -  - (57e4f8ee34a66) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:42:06 - jobtracker - CustomerClass -  - (57e4f8ee33eae) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:42:42 - jobtracker - AdminClass -  - (57e4f912a11f2) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:42:42 - jobtracker - CustomerClass -  - (57e4f912a11f2) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:49:14 - jobtracker - AdminClass -  - (57e4fa9a32896) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 11:49:14 - jobtracker - CustomerClass -  - (57e4fa9a318f5) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:49:15 - jobtracker - AdminClass -  - (57e4fa9b7013d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 11:49:15 - jobtracker - CustomerClass -  - (57e4fa9b6f19d) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:49:20 - jobtracker - AdminClass -  - (57e4faa035a11) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:49:20 - jobtracker - CustomerClass -  - (57e4faa035241) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:49:31 - jobtracker - AdminClass -  - (57e4faab90bb3) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 11:49:31 - jobtracker - CustomerClass -  - (57e4faab8fc12) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:49:33 - jobtracker - AdminClass -  - (57e4faacc4fe8) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 11:49:33 - jobtracker - CustomerClass -  - (57e4faacc4048) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:49:37 - jobtracker - AdminClass -  - (57e4fab160aff) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:49:37 - jobtracker - CustomerClass -  - (57e4fab15fb5e) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:50:11 - jobtracker - AdminClass -  - (57e4fad36fa32) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 11:50:11 - jobtracker - CustomerClass -  - (57e4fad36ea92) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:50:13 - jobtracker - AdminClass -  - (57e4fad4df3ad) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 11:50:13 - jobtracker - CustomerClass -  - (57e4fad4de7f5) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:50:17 - jobtracker - AdminClass -  - (57e4fad8e22ed) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:50:17 - jobtracker - CustomerClass -  - (57e4fad8dfbdd) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:50:26 - jobtracker - AdminClass -  - (57e4fae276122) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:50:26 - jobtracker - CustomerClass -  - (57e4fae273a12) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:50:49 - jobtracker - AdminClass -  - (57e4faf973ee1) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:50:49 - jobtracker - CustomerClass -  - (57e4faf973329) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:50:50 - jobtracker - AdminClass -  - (57e4fafa02e68) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 11:50:50 - jobtracker - CustomerClass -  - (57e4fafa01ec8) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:51:02 - jobtracker - AdminClass -  - (57e4fb0676722) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:51:02 - jobtracker - CustomerClass -  - (57e4fb067539a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:51:15 - jobtracker - AdminClass -  - (57e4fb133e18e) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:51:15 - jobtracker - CustomerClass -  - (57e4fb133e18e) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:51:20 - jobtracker - AdminClass -  - (57e4fb1825f21) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:51:20 - jobtracker - CustomerClass -  - (57e4fb1825751) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:51:33 - jobtracker - AdminClass -  - (57e4fb24c492c) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:51:33 - jobtracker - CustomerClass -  - (57e4fb24c492c) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:52:14 - jobtracker - AdminClass -  - (57e4fb4dd4823) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 11:52:14 - jobtracker - CustomerClass -  - (57e4fb4dd3c6a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:52:15 - jobtracker - AdminClass -  - (57e4fb4f3de4a) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 11:52:15 - jobtracker - CustomerClass -  - (57e4fb4f3cea9) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:52:22 - jobtracker - AdminClass -  - (57e4fb5654a0b) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:52:22 - jobtracker - CustomerClass -  - (57e4fb5653e53) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:52:33 - jobtracker - AdminClass -  - (57e4fb612649c) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:52:33 - jobtracker - CustomerClass -  - (57e4fb6123d8c) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:53:06 - jobtracker - AdminClass -  - (57e4fb827244d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 11:53:06 - jobtracker - CustomerClass -  - (57e4fb82710c5) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:53:08 - jobtracker - AdminClass -  - (57e4fb83c0a81) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 11:53:08 - jobtracker - CustomerClass -  - (57e4fb83bfae1) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:53:16 - jobtracker - AdminClass -  - (57e4fb8bda946) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:53:16 - jobtracker - CustomerClass -  - (57e4fb8bd9d8d) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:53:54 - jobtracker - AdminClass -  - (57e4fbb1ad7dc) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 11:53:54 - jobtracker - CustomerClass -  - (57e4fbb1acc24) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:53:55 - jobtracker - AdminClass -  - (57e4fbb2de179) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 11:53:55 - jobtracker - CustomerClass -  - (57e4fbb2dd1d8) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:53:58 - jobtracker - AdminClass -  - (57e4fbb61667b) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:53:58 - jobtracker - CustomerClass -  - (57e4fbb61667b) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:54:15 - jobtracker - AdminClass -  - (57e4fbc7696d2) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 11:54:15 - jobtracker - CustomerClass -  - (57e4fbc768732) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:54:17 - jobtracker - AdminClass -  - (57e4fbc895e05) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 11:54:17 - jobtracker - CustomerClass -  - (57e4fbc894e65) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:54:19 - jobtracker - AdminClass -  - (57e4fbcb0d2d4) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:54:19 - jobtracker - CustomerClass -  - (57e4fbcb0ceec) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:54:45 - jobtracker - AdminClass -  - (57e4fbe512d38) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 11:54:45 - jobtracker - CustomerClass -  - (57e4fbe512180) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:54:46 - jobtracker - AdminClass -  - (57e4fbe658ab2) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 11:54:46 - jobtracker - CustomerClass -  - (57e4fbe657b11) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:54:53 - jobtracker - AdminClass -  - (57e4fbed53561) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:54:53 - jobtracker - CustomerClass -  - (57e4fbed53561) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:55:15 - jobtracker - AdminClass -  - (57e4fc038dd7f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 11:55:15 - jobtracker - CustomerClass -  - (57e4fc038d1c7) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:55:17 - jobtracker - AdminClass -  - (57e4fc0515425) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 11:55:17 - jobtracker - CustomerClass -  - (57e4fc051409d) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:56:03 - jobtracker - AdminClass -  - (57e4fc33748c3) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 11:56:03 - jobtracker - CustomerClass -  - (57e4fc3373923) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:56:06 - jobtracker - AdminClass -  - (57e4fc359068c) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:56:06 - jobtracker - CustomerClass -  - (57e4fc358f304) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:56:06 - jobtracker - AdminClass -  - (57e4fc364b155) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 11:56:06 - jobtracker - CustomerClass -  - (57e4fc364a1b5) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:56:25 - jobtracker - AdminClass -  - (57e4fc49b6552) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:56:25 - jobtracker - CustomerClass -  - (57e4fc49b55b2) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 11:56:37 - jobtracker - AdminClass -  - (57e4fc558e50f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 11:56:37 - jobtracker - CustomerClass -  - (57e4fc558e50f) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 12:03:18 - jobtracker - AdminClass -  - (57e4fde686716) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 12:03:18 - jobtracker - CustomerClass -  - (57e4fde685b5e) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 12:03:20 - jobtracker - AdminClass -  - (57e4fde7cdfe8) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 12:03:20 - jobtracker - CustomerClass -  - (57e4fde7cd048) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 12:03:20 - jobtracker - AdminClass -  - (57e4fde8838a8) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 12:03:20 - jobtracker - CustomerClass -  - (57e4fde882cf0) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 12:03:25 - jobtracker - AdminClass -  - (57e4fdedb4a41) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 12:03:25 - jobtracker - CustomerClass -  - (57e4fdedb4a41) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 12:03:39 - jobtracker - AdminClass -  - (57e4fdfb9eb34) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 12:03:39 - jobtracker - CustomerClass -  - (57e4fdfb9db94) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 12:03:47 - jobtracker - AdminClass -  - (57e4fe02c6063) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 12:03:47 - jobtracker - CustomerClass -  - (57e4fe02c54ab) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 12:03:51 - jobtracker - AdminClass -  - (57e4fe076f217) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 12:03:51 - jobtracker - CustomerClass -  - (57e4fe076e65f) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 12:03:55 - jobtracker - AdminClass -  - (57e4fe0b1b298) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 12:03:55 - jobtracker - CustomerClass -  - (57e4fe0b1aac8) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 12:04:02 - jobtracker - AdminClass -  - (57e4fe11a78de) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 12:04:02 - jobtracker - CustomerClass -  - (57e4fe11a6d26) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 12:47:09 - jobtracker - AdminClass -  - (57e5082d3e5b7) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 12:47:09 - jobtracker - CustomerClass -  - (57e5082d3d9ff) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 12:47:10 - jobtracker - AdminClass -  - (57e5082e38fff) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 12:47:10 - jobtracker - CustomerClass -  - (57e5082e38447) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 12:47:11 - jobtracker - AdminClass -  - (57e5082ed92a5) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 12:47:11 - jobtracker - CustomerClass -  - (57e5082ed8305) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 13:42:04 - jobtracker - AdminClass -  - (57e5150c41aeb) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 13:42:04 - jobtracker - CustomerClass -  - (57e5150c40b4b) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 13:42:06 - jobtracker - AdminClass -  - (57e5150dad9cd) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 13:42:06 - jobtracker - CustomerClass -  - (57e5150daca2d) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 13:42:06 - jobtracker - AdminClass -  - (57e5150e5a5eb) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 13:42:06 - jobtracker - CustomerClass -  - (57e5150e59a33) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 13:45:37 - jobtracker - AdminClass -  - (57e515e140c02) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-09-23 13:45:37 - jobtracker - CustomerClass -  - (57e515e13fc61) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 13:45:38 - jobtracker - AdminClass -  - (57e515e269c85) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-09-23 13:45:38 - jobtracker - CustomerClass -  - (57e515e268ce4) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-09-23 13:45:39 - jobtracker - AdminClass -  - (57e515e3354d9) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-09-23 13:45:39 - jobtracker - CustomerClass -  - (57e515e334539) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`

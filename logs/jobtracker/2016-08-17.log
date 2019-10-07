@@ -1,0 +1,3935 @@
+2016-08-17 05:00:42 - Log File Created.
+
+2016-08-17 05:00:42 - jobtracker - AdminClass -  - (57b3d358421dc) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'settings/changepassword'
+AND `isactive` = 1
+
+2016-08-17 05:00:42 - jobtracker - SharedClass -  - (57b3d3583f6e3) 
+ - Get Announcement : SELECT * FROM cp_message WHERE isactive=1 AND browser='' AND activationdate <= NOW() AND id NOT IN (SELECT messageid FROM cp_messagecontact WHERE contactid = 26564)
+
+2016-08-17 05:00:42 - jobtracker - SharedClass -  - (57b3d3583f6e3) 
+ - Get Announcement : SELECT * FROM cp_message WHERE isactive=1 AND browser='Chrome' AND activationdate <= NOW() AND id NOT IN (SELECT messageid FROM cp_messagecontact WHERE contactid = 26564) ORDER BY browser_version
+
+2016-08-17 05:00:42 - jobtracker - CustomerClass -  - (57b3d3584123c) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 05:01:04 - jobtracker - AdminClass -  - (57b3d36fd5cba) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs'
+AND `isactive` = 1
+
+2016-08-17 05:01:04 - jobtracker - CustomerClass -  - (57b3d36fd5102) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 05:01:04 - jobtracker - JobClass -  - (57b3d3704f864) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND (`j`.`quoterqd` is null or `j`.`quoterqd` != 'on')
+AND `j`.`jobstage` IN('portal_await_approval', 'Waiting_Client_Instructions')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 05:01:04 - jobtracker - JobClass -  - (57b3d3704f864) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `j`.`jobstage` IN('portal', 'next_allocate', 'info_pending', 'approved_from_portal')
+AND IFNULL(variationstage,'') != 'variation_request_sent'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 05:01:04 - jobtracker - JobClass -  - (57b3d3704f864) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `js`.`portaldesc` = 'Job In Progress'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 05:01:04 - jobtracker - JobClass -  - (57b3d3704f864) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 05:01:04 - jobtracker - JobClass -  - (57b3d3704f864) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `js`.`portaldesc` = 'Job Completed'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 05:01:04 - jobtracker - JobClass -  - (57b3d3704f864) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` = 'hold'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 05:01:04 - jobtracker - JobClass -  - (57b3d3704f864) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitefm`
+
+2016-08-17 05:01:08 - jobtracker - AdminClass -  - (57b3d3737f6bb) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs/loadwaitingapprovaljobs'
+AND `isactive` = 1
+
+2016-08-17 05:01:08 - jobtracker - CustomerClass -  - (57b3d3737e71a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 05:01:08 - jobtracker - JobClass -  - (57b3d3742bb08) 
+ - Get Waiting Approval Jobs Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+INNER JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND (`j`.`quoterqd` is null or `j`.`quoterqd` != 'on')
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` IN('portal_await_approval', 'Waiting_Client_Instructions')
+ORDER BY `jobid` DESC
+ LIMIT 25
+
+2016-08-17 05:05:04 - jobtracker - AdminClass -  - (57b3d460582ee) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'asset'
+AND `isactive` = 1
+
+2016-08-17 05:05:04 - jobtracker - CustomerClass -  - (57b3d46057736) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 05:05:05 - jobtracker - AdminClass -  - (57b3d4618f21c) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'asset/loadassets'
+AND `isactive` = 1
+
+2016-08-17 05:05:06 - jobtracker - CustomerClass -  - (57b3d4618e664) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 05:05:06 - jobtracker - AssetClass -  - (57b3d46204f45) 
+ - Get Asset Data Query : SELECT `a`.`assetid`, `ad`.`siteline2`, `ad`.`sitesuburb`, `ad`.`sitestate`, `al`.`location`, `a`.`category_name`, `a`.`manufacturer`, `a`.`model`, `a`.`service_tag`, `a`.`purchase_date`
+FROM `asset` `a`
+LEFT JOIN `asset_location` `al` ON `al`.`asset_location_id` = `a`.`location_id`
+LEFT JOIN `addresslabel` `ad` ON `al`.`labelid` = `ad`.`labelid`
+LEFT JOIN `asset_contract` `ac` ON `a`.`assetid` = `ac`.`assetid`
+WHERE `a`.`customerid` = '7781'
+GROUP BY `a`.`assetid`
+ORDER BY `assetid` DESC
+ LIMIT 25
+
+2016-08-17 05:14:41 - jobtracker - AdminClass -  - (57b3d6a0f18cc) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'asset'
+AND `isactive` = 1
+
+2016-08-17 05:14:41 - jobtracker - CustomerClass -  - (57b3d6a0f0d14) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 05:14:42 - jobtracker - AdminClass -  - (57b3d6a209a18) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'asset/loadassets'
+AND `isactive` = 1
+
+2016-08-17 05:14:42 - jobtracker - CustomerClass -  - (57b3d6a208e60) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 05:14:42 - jobtracker - AssetClass -  - (57b3d6a271659) 
+ - Get Asset Data Query : SELECT `a`.`assetid`, `ad`.`siteline2`, `ad`.`sitesuburb`, `ad`.`sitestate`, `al`.`location`, `a`.`category_name`, `a`.`manufacturer`, `a`.`model`, `a`.`service_tag`, `a`.`purchase_date`
+FROM `asset` `a`
+LEFT JOIN `asset_location` `al` ON `al`.`asset_location_id` = `a`.`location_id`
+LEFT JOIN `addresslabel` `ad` ON `al`.`labelid` = `ad`.`labelid`
+LEFT JOIN `asset_contract` `ac` ON `a`.`assetid` = `ac`.`assetid`
+WHERE `a`.`customerid` = '7781'
+GROUP BY `a`.`assetid`
+ORDER BY `assetid` DESC
+ LIMIT 25
+
+2016-08-17 05:39:38 - jobtracker - AdminClass -  - (57b3dc7a6d4e2) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'asset'
+AND `isactive` = 1
+
+2016-08-17 05:39:38 - jobtracker - CustomerClass -  - (57b3dc7a6c92a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 05:39:40 - jobtracker - AdminClass -  - (57b3dc7b922fc) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'asset/loadassets'
+AND `isactive` = 1
+
+2016-08-17 05:39:40 - jobtracker - CustomerClass -  - (57b3dc7b9135c) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 05:39:40 - jobtracker - AssetClass -  - (57b3dc7c08fc5) 
+ - Get Asset Data Query : SELECT `a`.`assetid`, `ad`.`siteline2`, `ad`.`sitesuburb`, `ad`.`sitestate`, `al`.`location`, `a`.`category_name`, `a`.`manufacturer`, `a`.`model`, `a`.`service_tag`, `a`.`purchase_date`
+FROM `asset` `a`
+LEFT JOIN `asset_location` `al` ON `al`.`asset_location_id` = `a`.`location_id`
+LEFT JOIN `addresslabel` `ad` ON `al`.`labelid` = `ad`.`labelid`
+LEFT JOIN `asset_contract` `ac` ON `a`.`assetid` = `ac`.`assetid`
+WHERE `a`.`customerid` = '7781'
+GROUP BY `a`.`assetid`
+ORDER BY `assetid` DESC
+ LIMIT 25
+
+2016-08-17 05:46:02 - jobtracker - AdminClass -  - (57b3ddfa3a0c8) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'asset/loadassets'
+AND `isactive` = 1
+
+2016-08-17 05:46:02 - jobtracker - CustomerClass -  - (57b3ddfa39510) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 05:46:02 - jobtracker - AssetClass -  - (57b3ddfa95d9d) 
+ - Get Asset Data Query : SELECT `a`.`assetid`, `ad`.`siteline2`, `ad`.`sitesuburb`, `ad`.`sitestate`, `al`.`location`, `a`.`category_name`, `a`.`manufacturer`, `a`.`model`, `a`.`service_tag`, `a`.`purchase_date`
+FROM `asset` `a`
+LEFT JOIN `asset_location` `al` ON `al`.`asset_location_id` = `a`.`location_id`
+LEFT JOIN `addresslabel` `ad` ON `al`.`labelid` = `ad`.`labelid`
+LEFT JOIN `asset_contract` `ac` ON `a`.`assetid` = `ac`.`assetid`
+WHERE `a`.`customerid` = '7781'
+GROUP BY `a`.`assetid`
+ORDER BY `assetid` DESC
+ LIMIT 25
+
+2016-08-17 06:12:11 - jobtracker - AdminClass -  - (57b3e41b8f887) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'asset'
+AND `isactive` = 1
+
+2016-08-17 06:12:11 - jobtracker - CustomerClass -  - (57b3e41b8eccf) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:12:13 - jobtracker - AdminClass -  - (57b3e41cacd87) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'asset/loadassets'
+AND `isactive` = 1
+
+2016-08-17 06:12:13 - jobtracker - CustomerClass -  - (57b3e41cabde7) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:12:13 - jobtracker - AssetClass -  - (57b3e41d27cb9) 
+ - Get Asset Data Query : SELECT `a`.`assetid`, `ad`.`siteline2`, `ad`.`sitesuburb`, `ad`.`sitestate`, `al`.`location`, `a`.`category_name`, `a`.`manufacturer`, `a`.`model`, `a`.`service_tag`, `a`.`purchase_date`
+FROM `asset` `a`
+LEFT JOIN `asset_location` `al` ON `al`.`asset_location_id` = `a`.`location_id`
+LEFT JOIN `addresslabel` `ad` ON `al`.`labelid` = `ad`.`labelid`
+LEFT JOIN `asset_contract` `ac` ON `a`.`assetid` = `ac`.`assetid`
+WHERE `a`.`customerid` = '7781'
+GROUP BY `a`.`assetid`
+ORDER BY `assetid` DESC
+ LIMIT 25
+
+2016-08-17 06:35:09 - jobtracker - AdminClass -  - (57b3e97d26833) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs'
+AND `isactive` = 1
+
+2016-08-17 06:35:09 - jobtracker - CustomerClass -  - (57b3e97d25c7b) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:35:09 - jobtracker - JobClass -  - (57b3e97d8d4d4) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND (`j`.`quoterqd` is null or `j`.`quoterqd` != 'on')
+AND `j`.`jobstage` IN('portal_await_approval', 'Waiting_Client_Instructions')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 06:35:09 - jobtracker - JobClass -  - (57b3e97d8d4d4) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `j`.`jobstage` IN('portal', 'next_allocate', 'info_pending', 'approved_from_portal')
+AND IFNULL(variationstage,'') != 'variation_request_sent'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 06:35:09 - jobtracker - JobClass -  - (57b3e97d8d4d4) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `js`.`portaldesc` = 'Job In Progress'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 06:35:09 - jobtracker - JobClass -  - (57b3e97d8d4d4) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 06:35:09 - jobtracker - JobClass -  - (57b3e97d8d4d4) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `js`.`portaldesc` = 'Job Completed'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 06:35:09 - jobtracker - JobClass -  - (57b3e97d8d4d4) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` = 'hold'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 06:35:09 - jobtracker - JobClass -  - (57b3e97d8d4d4) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitefm`
+
+2016-08-17 06:35:12 - jobtracker - AdminClass -  - (57b3e98042a1e) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs/loadwaitingapprovaljobs'
+AND `isactive` = 1
+
+2016-08-17 06:35:12 - jobtracker - CustomerClass -  - (57b3e98041e66) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:35:13 - jobtracker - JobClass -  - (57b3e980c197b) 
+ - Get Waiting Approval Jobs Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+INNER JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND (`j`.`quoterqd` is null or `j`.`quoterqd` != 'on')
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` IN('portal_await_approval', 'Waiting_Client_Instructions')
+ORDER BY `jobid` DESC
+ LIMIT 25
+
+2016-08-17 06:35:16 - jobtracker - AdminClass -  - (57b3e9839a506) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs/loadwaitingdcfmreviewjobs'
+AND `isactive` = 1
+
+2016-08-17 06:35:16 - jobtracker - CustomerClass -  - (57b3e9839994e) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:35:17 - jobtracker - JobClass -  - (57b3e9840db1e) 
+ - Get Waiting DCFM Review Jobs Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `j`.`jobstage` IN('portal', 'next_allocate', 'info_pending', 'approved_from_portal')
+AND `j`.`leaddate` > '2010-07-01'
+AND IFNULL(variationstage,'') != 'variation_request_sent'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+ORDER BY `jobid` DESC
+ LIMIT 25
+
+2016-08-17 06:38:17 - jobtracker - AdminClass -  - (57b3ea38a9230) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs'
+AND `isactive` = 1
+
+2016-08-17 06:38:17 - jobtracker - CustomerClass -  - (57b3ea38a8290) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:38:17 - jobtracker - JobClass -  - (57b3ea391d019) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND (`j`.`quoterqd` is null or `j`.`quoterqd` != 'on')
+AND `j`.`jobstage` IN('portal_await_approval', 'Waiting_Client_Instructions')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 06:38:17 - jobtracker - JobClass -  - (57b3ea391d019) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `j`.`jobstage` IN('portal', 'next_allocate', 'info_pending', 'approved_from_portal')
+AND IFNULL(variationstage,'') != 'variation_request_sent'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 06:38:17 - jobtracker - JobClass -  - (57b3ea391d019) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `js`.`portaldesc` = 'Job In Progress'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 06:38:17 - jobtracker - JobClass -  - (57b3ea391d019) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 06:38:17 - jobtracker - JobClass -  - (57b3ea391d019) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `js`.`portaldesc` = 'Job Completed'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 06:38:17 - jobtracker - JobClass -  - (57b3ea391d019) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` = 'hold'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 06:38:17 - jobtracker - JobClass -  - (57b3ea391d019) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitefm`
+
+2016-08-17 06:38:20 - jobtracker - AdminClass -  - (57b3ea3bda027) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs/loadwaitingdcfmreviewjobs'
+AND `isactive` = 1
+
+2016-08-17 06:38:20 - jobtracker - CustomerClass -  - (57b3ea3bd946f) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:38:21 - jobtracker - JobClass -  - (57b3ea3c6689e) 
+ - Get Waiting DCFM Review Jobs Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `j`.`jobstage` IN('portal', 'next_allocate', 'info_pending', 'approved_from_portal')
+AND `j`.`leaddate` > '2010-07-01'
+AND IFNULL(variationstage,'') != 'variation_request_sent'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+ORDER BY `jobid` DESC
+ LIMIT 25
+
+2016-08-17 06:42:32 - jobtracker - AdminClass -  - (57b3eb37ed5c1) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs/loadwaitingapprovaljobs'
+AND `isactive` = 1
+
+2016-08-17 06:42:32 - jobtracker - CustomerClass -  - (57b3eb37eca09) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:42:32 - jobtracker - JobClass -  - (57b3eb38632ea) 
+ - Get Waiting Approval Jobs Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+INNER JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND (`j`.`quoterqd` is null or `j`.`quoterqd` != 'on')
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` IN('portal_await_approval', 'Waiting_Client_Instructions')
+ORDER BY `jobid` DESC
+ LIMIT 25
+
+2016-08-17 06:42:37 - jobtracker - AdminClass -  - (57b3eb3d016fc) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs/loadinprogressjobs'
+AND `isactive` = 1
+
+2016-08-17 06:42:37 - jobtracker - CustomerClass -  - (57b3eb3d00b44) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:42:38 - jobtracker - JobClass -  - (57b3eb3d6b665) 
+ - Get In Progress Jobs Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site, if(j.cpallocated= 'O', 'DCFM', cus.companyname) as supplier
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`jobid` = `po`.`jobid`
+LEFT JOIN `customer` `cus` ON `po`.`supplierid` = `cus`.`customerid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `js`.`portaldesc` = 'Job In Progress'
+AND `j`.`leaddate` > '2010-07-01'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`jobid`
+ORDER BY `qduedate` DESC
+ LIMIT 25
+
+2016-08-17 06:42:43 - jobtracker - AdminClass -  - (57b3eb429be7f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs/loadwaitingvariationapprovaljobs'
+AND `isactive` = 1
+
+2016-08-17 06:42:43 - jobtracker - CustomerClass -  - (57b3eb429aaf6) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:42:43 - jobtracker - JobClass -  - (57b3eb430f0af) 
+ - Get In Waiting Variation Approval Jobs Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `j`.`leaddate` > '2010-07-01'
+AND `variationstage` = 'variation_request_sent'
+ORDER BY `jobid` DESC
+ LIMIT 25
+
+2016-08-17 06:42:44 - jobtracker - AdminClass -  - (57b3eb43d123e) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs/loadcompletedjobs'
+AND `isactive` = 1
+
+2016-08-17 06:42:44 - jobtracker - CustomerClass -  - (57b3eb43d0686) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:42:45 - jobtracker - JobClass -  - (57b3eb444a230) 
+ - Get In Completed Jobs Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site, if(j.cpallocated= 'O', 'DCFM', cus.companyname) as supplier
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`jobid` = `po`.`jobid`
+LEFT JOIN `customer` `cus` ON `po`.`supplierid` = `cus`.`customerid`
+WHERE `j`.`customerid` = '7781'
+AND `js`.`portaldesc` = 'Job Completed'
+AND `j`.`leaddate` > '2010-07-01'
+GROUP BY `j`.`jobid`
+ORDER BY `jobid` DESC
+ LIMIT 25
+
+2016-08-17 06:49:20 - jobtracker - AdminClass -  - (57b3eccfa133e) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techmap'
+AND `isactive` = 1
+
+2016-08-17 06:49:20 - jobtracker - CustomerClass -  - (57b3eccfa0786) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:49:34 - jobtracker - AdminClass -  - (57b3ecde6633c) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techmap'
+AND `isactive` = 1
+
+2016-08-17 06:49:34 - jobtracker - CustomerClass -  - (57b3ecde6539c) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:49:47 - jobtracker - AdminClass -  - (57b3eceb81991) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techmap'
+AND `isactive` = 1
+
+2016-08-17 06:49:47 - jobtracker - CustomerClass -  - (57b3eceb811c1) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:50:40 - jobtracker - AdminClass -  - (57b3ed1fa85e8) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'contracts/scheduled'
+AND `isactive` = 1
+
+2016-08-17 06:50:40 - jobtracker - CustomerClass -  - (57b3ed1fa7648) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:50:41 - jobtracker - AdminClass -  - (57b3ed20df12e) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'contracts/loadscheduledservices'
+AND `isactive` = 1
+
+2016-08-17 06:50:41 - jobtracker - CustomerClass -  - (57b3ed20de18e) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:50:53 - jobtracker - AdminClass -  - (57b3ed2c9df90) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'contracts/loadscheduledservices'
+AND `isactive` = 1
+
+2016-08-17 06:50:53 - jobtracker - CustomerClass -  - (57b3ed2c9d7c0) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:51:00 - jobtracker - AdminClass -  - (57b3ed33ab384) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'contracts/loadscheduledservices'
+AND `isactive` = 1
+
+2016-08-17 06:51:00 - jobtracker - CustomerClass -  - (57b3ed33aa7cc) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:51:16 - jobtracker - AdminClass -  - (57b3ed43d3c78) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'contracts/loadscheduledservices'
+AND `isactive` = 1
+
+2016-08-17 06:51:16 - jobtracker - CustomerClass -  - (57b3ed43d30c0) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:51:18 - jobtracker - AdminClass -  - (57b3ed461abf5) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'contracts/loadscheduledservices'
+AND `isactive` = 1
+
+2016-08-17 06:51:18 - jobtracker - CustomerClass -  - (57b3ed4619c55) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:51:20 - jobtracker - AdminClass -  - (57b3ed485f9f2) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'contracts/loadscheduledservices'
+AND `isactive` = 1
+
+2016-08-17 06:51:20 - jobtracker - CustomerClass -  - (57b3ed485f221) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:51:30 - jobtracker - AdminClass -  - (57b3ed520324a) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'contracts/loadscheduledservices'
+AND `isactive` = 1
+
+2016-08-17 06:51:30 - jobtracker - CustomerClass -  - (57b3ed5202a7a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:51:38 - jobtracker - AdminClass -  - (57b3ed59cecd7) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'contracts/loadscheduledservices'
+AND `isactive` = 1
+
+2016-08-17 06:51:38 - jobtracker - CustomerClass -  - (57b3ed59cdd37) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:52:05 - jobtracker - AdminClass -  - (57b3ed7587870) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs'
+AND `isactive` = 1
+
+2016-08-17 06:52:05 - jobtracker - CustomerClass -  - (57b3ed7586cb8) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:52:05 - jobtracker - JobClass -  - (57b3ed75e603f) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND (`j`.`quoterqd` is null or `j`.`quoterqd` != 'on')
+AND `j`.`jobstage` IN('portal_await_approval', 'Waiting_Client_Instructions')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 06:52:06 - jobtracker - JobClass -  - (57b3ed75e603f) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `j`.`jobstage` IN('portal', 'next_allocate', 'info_pending', 'approved_from_portal')
+AND IFNULL(variationstage,'') != 'variation_request_sent'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 06:52:06 - jobtracker - JobClass -  - (57b3ed75e603f) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `js`.`portaldesc` = 'Job In Progress'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 06:52:06 - jobtracker - JobClass -  - (57b3ed75e603f) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 06:52:06 - jobtracker - JobClass -  - (57b3ed75e603f) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `js`.`portaldesc` = 'Job Completed'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 06:52:06 - jobtracker - JobClass -  - (57b3ed75e603f) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` = 'hold'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 06:52:06 - jobtracker - JobClass -  - (57b3ed75e603f) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitefm`
+
+2016-08-17 06:52:08 - jobtracker - AdminClass -  - (57b3ed785c5aa) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs/loadwaitingapprovaljobs'
+AND `isactive` = 1
+
+2016-08-17 06:52:08 - jobtracker - CustomerClass -  - (57b3ed785b9f2) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 06:52:09 - jobtracker - JobClass -  - (57b3ed78d10f5) 
+ - Get Waiting Approval Jobs Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+INNER JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND (`j`.`quoterqd` is null or `j`.`quoterqd` != 'on')
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` IN('portal_await_approval', 'Waiting_Client_Instructions')
+ORDER BY `jobid` DESC
+ LIMIT 25
+
+2016-08-17 07:20:30 - jobtracker - AdminClass -  - (57b3f41e1a869) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs/loadwaitingdcfmreviewjobs'
+AND `isactive` = 1
+
+2016-08-17 07:20:30 - jobtracker - CustomerClass -  - (57b3f41e194e0) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 07:20:31 - jobtracker - JobClass -  - (57b3f41e84bb9) 
+ - Get Waiting DCFM Review Jobs Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `j`.`jobstage` IN('portal', 'next_allocate', 'info_pending', 'approved_from_portal')
+AND `j`.`leaddate` > '2010-07-01'
+AND IFNULL(variationstage,'') != 'variation_request_sent'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+ORDER BY `jobid` DESC
+ LIMIT 25
+
+2016-08-17 08:52:17 - jobtracker - AdminClass -  - (57b409a12fa0f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs'
+AND `isactive` = 1
+
+2016-08-17 08:52:17 - jobtracker - CustomerClass -  - (57b409a12ee57) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:52:17 - jobtracker - JobClass -  - (57b409a18c29d) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND (`j`.`quoterqd` is null or `j`.`quoterqd` != 'on')
+AND `j`.`jobstage` IN('portal_await_approval', 'Waiting_Client_Instructions')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:17 - jobtracker - JobClass -  - (57b409a18c29d) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `j`.`jobstage` IN('portal', 'next_allocate', 'info_pending', 'approved_from_portal')
+AND IFNULL(variationstage,'') != 'variation_request_sent'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:17 - jobtracker - JobClass -  - (57b409a18c29d) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `js`.`portaldesc` = 'Job In Progress'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:17 - jobtracker - JobClass -  - (57b409a18c29d) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:17 - jobtracker - JobClass -  - (57b409a18c29d) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `js`.`portaldesc` = 'Job Completed'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:17 - jobtracker - JobClass -  - (57b409a18c29d) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` = 'hold'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:17 - jobtracker - JobClass -  - (57b409a18c29d) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitefm`
+
+2016-08-17 08:52:25 - jobtracker - AdminClass -  - (57b409a8bbc9a) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs'
+AND `isactive` = 1
+
+2016-08-17 08:52:25 - jobtracker - CustomerClass -  - (57b409a8bb0e2) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:52:25 - jobtracker - JobClass -  - (57b409a927d80) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND (`j`.`quoterqd` is null or `j`.`quoterqd` != 'on')
+AND `j`.`jobstage` IN('portal_await_approval', 'Waiting_Client_Instructions')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:25 - jobtracker - JobClass -  - (57b409a927d80) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `j`.`jobstage` IN('portal', 'next_allocate', 'info_pending', 'approved_from_portal')
+AND IFNULL(variationstage,'') != 'variation_request_sent'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:25 - jobtracker - JobClass -  - (57b409a927d80) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `js`.`portaldesc` = 'Job In Progress'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:25 - jobtracker - JobClass -  - (57b409a927d80) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:25 - jobtracker - JobClass -  - (57b409a927d80) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `js`.`portaldesc` = 'Job Completed'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:25 - jobtracker - JobClass -  - (57b409a927d80) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` = 'hold'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:25 - jobtracker - JobClass -  - (57b409a927d80) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitefm`
+
+2016-08-17 08:52:33 - jobtracker - AdminClass -  - (57b409b1519c6) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs'
+AND `isactive` = 1
+
+2016-08-17 08:52:33 - jobtracker - CustomerClass -  - (57b409b150a26) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:52:33 - jobtracker - JobClass -  - (57b409b1b3c2d) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND (`j`.`quoterqd` is null or `j`.`quoterqd` != 'on')
+AND `j`.`jobstage` IN('portal_await_approval', 'Waiting_Client_Instructions')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:33 - jobtracker - JobClass -  - (57b409b1b3c2d) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `j`.`jobstage` IN('portal', 'next_allocate', 'info_pending', 'approved_from_portal')
+AND IFNULL(variationstage,'') != 'variation_request_sent'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:33 - jobtracker - JobClass -  - (57b409b1b3c2d) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `js`.`portaldesc` = 'Job In Progress'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:34 - jobtracker - JobClass -  - (57b409b1b3c2d) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:34 - jobtracker - JobClass -  - (57b409b1b3c2d) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `js`.`portaldesc` = 'Job Completed'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:34 - jobtracker - JobClass -  - (57b409b1b3c2d) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` = 'hold'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:34 - jobtracker - JobClass -  - (57b409b1b3c2d) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitefm`
+
+2016-08-17 08:52:58 - jobtracker - AdminClass -  - (57b409c9c80be) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs'
+AND `isactive` = 1
+
+2016-08-17 08:52:58 - jobtracker - CustomerClass -  - (57b409c9c7506) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:52:58 - jobtracker - JobClass -  - (57b409ca30edb) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND (`j`.`quoterqd` is null or `j`.`quoterqd` != 'on')
+AND `j`.`jobstage` IN('portal_await_approval', 'Waiting_Client_Instructions')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:58 - jobtracker - JobClass -  - (57b409ca30edb) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `j`.`jobstage` IN('portal', 'next_allocate', 'info_pending', 'approved_from_portal')
+AND IFNULL(variationstage,'') != 'variation_request_sent'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:58 - jobtracker - JobClass -  - (57b409ca30edb) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `js`.`portaldesc` = 'Job In Progress'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:58 - jobtracker - JobClass -  - (57b409ca30edb) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:58 - jobtracker - JobClass -  - (57b409ca30edb) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `js`.`portaldesc` = 'Job Completed'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:58 - jobtracker - JobClass -  - (57b409ca30edb) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` = 'hold'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:52:58 - jobtracker - JobClass -  - (57b409ca30edb) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitefm`
+
+2016-08-17 08:53:16 - jobtracker - AdminClass -  - (57b409dc43043) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs'
+AND `isactive` = 1
+
+2016-08-17 08:53:16 - jobtracker - CustomerClass -  - (57b409dc4248b) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:53:16 - jobtracker - JobClass -  - (57b409dca336a) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND (`j`.`quoterqd` is null or `j`.`quoterqd` != 'on')
+AND `j`.`jobstage` IN('portal_await_approval', 'Waiting_Client_Instructions')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:53:16 - jobtracker - JobClass -  - (57b409dca336a) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `j`.`jobstage` IN('portal', 'next_allocate', 'info_pending', 'approved_from_portal')
+AND IFNULL(variationstage,'') != 'variation_request_sent'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:53:16 - jobtracker - JobClass -  - (57b409dca336a) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `js`.`portaldesc` = 'Job In Progress'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:53:16 - jobtracker - JobClass -  - (57b409dca336a) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:53:17 - jobtracker - JobClass -  - (57b409dca336a) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `js`.`portaldesc` = 'Job Completed'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:53:17 - jobtracker - JobClass -  - (57b409dca336a) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` = 'hold'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:53:17 - jobtracker - JobClass -  - (57b409dca336a) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitefm`
+
+2016-08-17 08:53:40 - jobtracker - AdminClass -  - (57b409f42215f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs'
+AND `isactive` = 1
+
+2016-08-17 08:53:40 - jobtracker - CustomerClass -  - (57b409f4215a6) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:53:40 - jobtracker - JobClass -  - (57b409f47de34) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND (`j`.`quoterqd` is null or `j`.`quoterqd` != 'on')
+AND `j`.`jobstage` IN('portal_await_approval', 'Waiting_Client_Instructions')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:53:40 - jobtracker - JobClass -  - (57b409f47de34) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `j`.`jobstage` IN('portal', 'next_allocate', 'info_pending', 'approved_from_portal')
+AND IFNULL(variationstage,'') != 'variation_request_sent'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:53:40 - jobtracker - JobClass -  - (57b409f47de34) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `js`.`portaldesc` = 'Job In Progress'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:53:40 - jobtracker - JobClass -  - (57b409f47de34) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:53:40 - jobtracker - JobClass -  - (57b409f47de34) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `js`.`portaldesc` = 'Job Completed'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:53:40 - jobtracker - JobClass -  - (57b409f47de34) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` = 'hold'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:53:40 - jobtracker - JobClass -  - (57b409f47de34) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitefm`
+
+2016-08-17 08:53:44 - jobtracker - AdminClass -  - (57b409f7a3fd2) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs'
+AND `isactive` = 1
+
+2016-08-17 08:53:44 - jobtracker - CustomerClass -  - (57b409f7a341a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:53:44 - jobtracker - JobClass -  - (57b409f807fce) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND (`j`.`quoterqd` is null or `j`.`quoterqd` != 'on')
+AND `j`.`jobstage` IN('portal_await_approval', 'Waiting_Client_Instructions')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:53:44 - jobtracker - JobClass -  - (57b409f807fce) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `j`.`jobstage` IN('portal', 'next_allocate', 'info_pending', 'approved_from_portal')
+AND IFNULL(variationstage,'') != 'variation_request_sent'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:53:44 - jobtracker - JobClass -  - (57b409f807fce) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `js`.`portaldesc` = 'Job In Progress'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:53:44 - jobtracker - JobClass -  - (57b409f807fce) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:53:44 - jobtracker - JobClass -  - (57b409f807fce) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `js`.`portaldesc` = 'Job Completed'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:53:44 - jobtracker - JobClass -  - (57b409f807fce) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` = 'hold'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:53:44 - jobtracker - JobClass -  - (57b409f807fce) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitefm`
+
+2016-08-17 08:54:09 - jobtracker - AdminClass -  - (57b40a10c5b4f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs'
+AND `isactive` = 1
+
+2016-08-17 08:54:09 - jobtracker - CustomerClass -  - (57b40a10c4baf) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:54:09 - jobtracker - JobClass -  - (57b40a112ca2c) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND (`j`.`quoterqd` is null or `j`.`quoterqd` != 'on')
+AND `j`.`jobstage` IN('portal_await_approval', 'Waiting_Client_Instructions')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:54:09 - jobtracker - JobClass -  - (57b40a112ca2c) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `j`.`jobstage` IN('portal', 'next_allocate', 'info_pending', 'approved_from_portal')
+AND IFNULL(variationstage,'') != 'variation_request_sent'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:54:09 - jobtracker - JobClass -  - (57b40a112ca2c) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` != 'Waiting_Client_Instructions'
+AND `js`.`portaldesc` = 'Job In Progress'
+AND IFNULL(j.quotestatus,'') != 'pending_submission'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:54:09 - jobtracker - JobClass -  - (57b40a112ca2c) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:54:09 - jobtracker - JobClass -  - (57b40a112ca2c) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `js`.`portaldesc` = 'Job Completed'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:54:09 - jobtracker - JobClass -  - (57b40a112ca2c) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` = 'hold'
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:54:09 - jobtracker - JobClass -  - (57b40a112ca2c) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` NOT IN('cancelled', 'hold', 'declined')
+AND `variationstage` = 'variation_request_sent'
+GROUP BY `j`.`sitefm`
+
+2016-08-17 08:54:12 - jobtracker - AdminClass -  - (57b40a13b1ba6) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'jobs/loadwaitingapprovaljobs'
+AND `isactive` = 1
+
+2016-08-17 08:54:12 - jobtracker - CustomerClass -  - (57b40a13b0fee) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:54:12 - jobtracker - JobClass -  - (57b40a1433452) 
+ - Get Waiting Approval Jobs Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+INNER JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND (`j`.`quoterqd` is null or `j`.`quoterqd` != 'on')
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`jobstage` IN('portal_await_approval', 'Waiting_Client_Instructions')
+ORDER BY `jobid` DESC
+ LIMIT 25
+
+2016-08-17 08:54:14 - jobtracker - AdminClass -  - (57b40a15c77ad) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 08:54:14 - jobtracker - CustomerClass -  - (57b40a15c6bf5) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:54:14 - jobtracker - JobClass -  - (57b40a163156b) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:54:14 - jobtracker - JobClass -  - (57b40a163156b) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:54:14 - jobtracker - JobClass -  - (57b40a163156b) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:54:14 - jobtracker - JobClass -  - (57b40a163156b) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 08:54:25 - jobtracker - AdminClass -  - (57b40a218bedb) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 08:54:25 - jobtracker - CustomerClass -  - (57b40a218b323) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:54:25 - jobtracker - JobClass -  - (57b40a21ebe1a) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:54:26 - jobtracker - JobClass -  - (57b40a21ebe1a) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:54:26 - jobtracker - JobClass -  - (57b40a21ebe1a) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:54:26 - jobtracker - JobClass -  - (57b40a21ebe1a) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 08:54:27 - jobtracker - AdminClass -  - (57b40a22a749b) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadpendingapprovalquotes'
+AND `isactive` = 1
+
+2016-08-17 08:54:27 - jobtracker - CustomerClass -  - (57b40a22a64fb) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:54:27 - jobtracker - JobClass -  - (57b40a232048c) 
+ - Get Pending Approval Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `duedate` DESC
+ LIMIT 25
+
+2016-08-17 08:54:27 - jobtracker - AdminClass -  - (57b40a236c75e) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadwaitingdcfmreviewquotes'
+AND `isactive` = 1
+
+2016-08-17 08:54:27 - jobtracker - CustomerClass -  - (57b40a236b7be) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:54:28 - jobtracker - JobClass -  - (57b40a23eca44) 
+ - Get Waiting DCFM Review Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site, INSTR(j.jobdescription,'SCOPE OF WORK'),
+                            IF(INSTR(j.jobdescription,'EXCLUSIONS')>0, CONCAT(LEFT(j.jobdescription,INSTR(j.jobdescription,'EXCLUSIONS')-1), 'QUOTATION NOT FINALISED'), j.jobdescription) AS jobdescription
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response', 'portal', 'waiting_jrq_response', 'internal_incomplete')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `qduedate` DESC
+ LIMIT 25
+
+2016-08-17 08:54:43 - jobtracker - AdminClass -  - (57b40a3310583) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 08:54:43 - jobtracker - CustomerClass -  - (57b40a330f5e3) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:54:43 - jobtracker - JobClass -  - (57b40a3370c91) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:54:43 - jobtracker - JobClass -  - (57b40a3370c91) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:54:43 - jobtracker - JobClass -  - (57b40a3370c91) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:54:43 - jobtracker - JobClass -  - (57b40a3370c91) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 08:54:44 - jobtracker - AdminClass -  - (57b40a340c73b) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadpendingapprovalquotes'
+AND `isactive` = 1
+
+2016-08-17 08:54:44 - jobtracker - CustomerClass -  - (57b40a340b79b) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:54:44 - jobtracker - JobClass -  - (57b40a347919d) 
+ - Get Pending Approval Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `duedate` DESC
+ LIMIT 25
+
+2016-08-17 08:54:45 - jobtracker - AdminClass -  - (57b40a34c2976) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadwaitingdcfmreviewquotes'
+AND `isactive` = 1
+
+2016-08-17 08:54:45 - jobtracker - CustomerClass -  - (57b40a34c1dbe) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:54:45 - jobtracker - JobClass -  - (57b40a353f018) 
+ - Get Waiting DCFM Review Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site, INSTR(j.jobdescription,'SCOPE OF WORK'),
+                            IF(INSTR(j.jobdescription,'EXCLUSIONS')>0, CONCAT(LEFT(j.jobdescription,INSTR(j.jobdescription,'EXCLUSIONS')-1), 'QUOTATION NOT FINALISED'), j.jobdescription) AS jobdescription
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response', 'portal', 'waiting_jrq_response', 'internal_incomplete')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `qduedate` DESC
+ LIMIT 25
+
+2016-08-17 08:54:55 - jobtracker - AdminClass -  - (57b40a3f18f3c) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 08:54:55 - jobtracker - CustomerClass -  - (57b40a3f18384) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:54:55 - jobtracker - JobClass -  - (57b40a3f75bb2) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:54:55 - jobtracker - JobClass -  - (57b40a3f75bb2) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:54:55 - jobtracker - JobClass -  - (57b40a3f75bb2) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:54:55 - jobtracker - JobClass -  - (57b40a3f75bb2) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 08:55:03 - jobtracker - AdminClass -  - (57b40a479482f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 08:55:03 - jobtracker - CustomerClass -  - (57b40a4793c76) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:55:04 - jobtracker - JobClass -  - (57b40a480246e) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:55:04 - jobtracker - JobClass -  - (57b40a480246e) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:55:04 - jobtracker - JobClass -  - (57b40a480246e) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:55:04 - jobtracker - JobClass -  - (57b40a480246e) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 08:55:22 - jobtracker - AdminClass -  - (57b40a5a6a4f5) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 08:55:22 - jobtracker - CustomerClass -  - (57b40a5a6993d) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:55:22 - jobtracker - JobClass -  - (57b40a5acdecc) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:55:22 - jobtracker - JobClass -  - (57b40a5acdecc) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:55:22 - jobtracker - JobClass -  - (57b40a5acdecc) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:55:22 - jobtracker - JobClass -  - (57b40a5acdecc) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 08:55:23 - jobtracker - AdminClass -  - (57b40a5b75111) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadwaitingdcfmreviewquotes'
+AND `isactive` = 1
+
+2016-08-17 08:55:23 - jobtracker - CustomerClass -  - (57b40a5b74170) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:55:24 - jobtracker - JobClass -  - (57b40a5be3ab3) 
+ - Get Waiting DCFM Review Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site, INSTR(j.jobdescription,'SCOPE OF WORK'),
+                            IF(INSTR(j.jobdescription,'EXCLUSIONS')>0, CONCAT(LEFT(j.jobdescription,INSTR(j.jobdescription,'EXCLUSIONS')-1), 'QUOTATION NOT FINALISED'), j.jobdescription) AS jobdescription
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response', 'portal', 'waiting_jrq_response', 'internal_incomplete')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `qduedate` DESC
+ LIMIT 25
+
+2016-08-17 08:55:25 - jobtracker - AdminClass -  - (57b40a5c99f2a) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadpendingapprovalquotes'
+AND `isactive` = 1
+
+2016-08-17 08:55:25 - jobtracker - CustomerClass -  - (57b40a5c98f8a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:55:25 - jobtracker - JobClass -  - (57b40a5d10423) 
+ - Get Pending Approval Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `duedate` DESC
+ LIMIT 25
+
+2016-08-17 08:56:37 - jobtracker - AdminClass -  - (57b40aa4d6b90) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 08:56:37 - jobtracker - CustomerClass -  - (57b40aa4d5bf0) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 08:56:37 - jobtracker - JobClass -  - (57b40aa539804) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:56:37 - jobtracker - JobClass -  - (57b40aa539804) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:56:37 - jobtracker - JobClass -  - (57b40aa539804) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 08:56:37 - jobtracker - JobClass -  - (57b40aa539804) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 09:02:48 - jobtracker - AdminClass -  - (57b40c1801f32) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 09:02:48 - jobtracker - CustomerClass -  - (57b40c180137a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:02:48 - jobtracker - JobClass -  - (57b40c185c0af) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:02:48 - jobtracker - JobClass -  - (57b40c185c0af) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:02:48 - jobtracker - JobClass -  - (57b40c185c0af) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:02:48 - jobtracker - JobClass -  - (57b40c185c0af) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 09:03:16 - jobtracker - AdminClass -  - (57b40c34955fe) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 09:03:16 - jobtracker - CustomerClass -  - (57b40c3494a45) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:03:17 - jobtracker - JobClass -  - (57b40c34f41b4) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:03:17 - jobtracker - JobClass -  - (57b40c34f41b4) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:03:17 - jobtracker - JobClass -  - (57b40c34f41b4) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:03:17 - jobtracker - JobClass -  - (57b40c34f41b4) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 09:03:55 - jobtracker - AdminClass -  - (57b40c5abd891) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 09:03:55 - jobtracker - CustomerClass -  - (57b40c5abd0c1) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:03:55 - jobtracker - JobClass -  - (57b40c5b289d7) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:03:55 - jobtracker - JobClass -  - (57b40c5b289d7) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:03:55 - jobtracker - JobClass -  - (57b40c5b289d7) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:03:55 - jobtracker - JobClass -  - (57b40c5b289d7) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 09:05:44 - jobtracker - AdminClass -  - (57b40cc883c99) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 09:05:44 - jobtracker - CustomerClass -  - (57b40cc8830e0) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:05:45 - jobtracker - JobClass -  - (57b40cc8f0312) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:05:45 - jobtracker - JobClass -  - (57b40cc8f0312) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:05:45 - jobtracker - JobClass -  - (57b40cc8f0312) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:05:45 - jobtracker - JobClass -  - (57b40cc8f0312) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 09:05:46 - jobtracker - AdminClass -  - (57b40cc9d97fe) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadwaitingdcfmreviewquotes'
+AND `isactive` = 1
+
+2016-08-17 09:05:46 - jobtracker - CustomerClass -  - (57b40cc9d8476) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:05:47 - jobtracker - JobClass -  - (57b40cca56e40) 
+ - Get Waiting DCFM Review Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site, INSTR(j.jobdescription,'SCOPE OF WORK'),
+                            IF(INSTR(j.jobdescription,'EXCLUSIONS')>0, CONCAT(LEFT(j.jobdescription,INSTR(j.jobdescription,'EXCLUSIONS')-1), 'QUOTATION NOT FINALISED'), j.jobdescription) AS jobdescription
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response', 'portal', 'waiting_jrq_response', 'internal_incomplete')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `qduedate` DESC
+ LIMIT 25
+
+2016-08-17 09:05:47 - jobtracker - AdminClass -  - (57b40ccb15f5a) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadpendingapprovalquotes'
+AND `isactive` = 1
+
+2016-08-17 09:05:47 - jobtracker - CustomerClass -  - (57b40ccb153a2) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:05:47 - jobtracker - JobClass -  - (57b40ccb81a1c) 
+ - Get Pending Approval Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `duedate` DESC
+ LIMIT 25
+
+2016-08-17 09:10:52 - jobtracker - AdminClass -  - (57b40dfc8a18d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 09:10:52 - jobtracker - CustomerClass -  - (57b40dfc895d5) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:10:52 - jobtracker - JobClass -  - (57b40dfce9ce3) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:10:53 - jobtracker - JobClass -  - (57b40dfce9ce3) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:10:53 - jobtracker - JobClass -  - (57b40dfce9ce3) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:10:53 - jobtracker - JobClass -  - (57b40dfce9ce3) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 09:10:54 - jobtracker - AdminClass -  - (57b40dfdcc46e) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadpendingapprovalquotes'
+AND `isactive` = 1
+
+2016-08-17 09:10:54 - jobtracker - CustomerClass -  - (57b40dfdcb8b5) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:10:54 - jobtracker - JobClass -  - (57b40dfe45c2f) 
+ - Get Pending Approval Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `duedate` DESC
+ LIMIT 25
+
+2016-08-17 09:10:55 - jobtracker - AdminClass -  - (57b40dfe8f020) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadwaitingdcfmreviewquotes'
+AND `isactive` = 1
+
+2016-08-17 09:10:55 - jobtracker - CustomerClass -  - (57b40dfe8e080) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:10:55 - jobtracker - JobClass -  - (57b40dff0e1bb) 
+ - Get Waiting DCFM Review Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site, INSTR(j.jobdescription,'SCOPE OF WORK'),
+                            IF(INSTR(j.jobdescription,'EXCLUSIONS')>0, CONCAT(LEFT(j.jobdescription,INSTR(j.jobdescription,'EXCLUSIONS')-1), 'QUOTATION NOT FINALISED'), j.jobdescription) AS jobdescription
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response', 'portal', 'waiting_jrq_response', 'internal_incomplete')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `qduedate` DESC
+ LIMIT 25
+
+2016-08-17 09:12:33 - jobtracker - AdminClass -  - (57b40e616fa97) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 09:12:33 - jobtracker - CustomerClass -  - (57b40e616eedf) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:12:33 - jobtracker - JobClass -  - (57b40e61cea35) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:12:33 - jobtracker - JobClass -  - (57b40e61cea35) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:12:33 - jobtracker - JobClass -  - (57b40e61cea35) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:12:33 - jobtracker - JobClass -  - (57b40e61cea35) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 09:12:35 - jobtracker - AdminClass -  - (57b40e629a672) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadpendingapprovalquotes'
+AND `isactive` = 1
+
+2016-08-17 09:12:35 - jobtracker - CustomerClass -  - (57b40e62996d2) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:12:35 - jobtracker - JobClass -  - (57b40e632c0f1) 
+ - Get Pending Approval Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `duedate` DESC
+ LIMIT 25
+
+2016-08-17 09:12:35 - jobtracker - AdminClass -  - (57b40e637492a) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadwaitingdcfmreviewquotes'
+AND `isactive` = 1
+
+2016-08-17 09:12:35 - jobtracker - CustomerClass -  - (57b40e6373d72) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:12:36 - jobtracker - JobClass -  - (57b40e63f3c70) 
+ - Get Waiting DCFM Review Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site, INSTR(j.jobdescription,'SCOPE OF WORK'),
+                            IF(INSTR(j.jobdescription,'EXCLUSIONS')>0, CONCAT(LEFT(j.jobdescription,INSTR(j.jobdescription,'EXCLUSIONS')-1), 'QUOTATION NOT FINALISED'), j.jobdescription) AS jobdescription
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response', 'portal', 'waiting_jrq_response', 'internal_incomplete')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `qduedate` DESC
+ LIMIT 25
+
+2016-08-17 09:14:10 - jobtracker - AdminClass -  - (57b40ec2870ea) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 09:14:10 - jobtracker - CustomerClass -  - (57b40ec28691a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:14:10 - jobtracker - JobClass -  - (57b40ec2e4d00) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:14:11 - jobtracker - JobClass -  - (57b40ec2e4d00) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:14:11 - jobtracker - JobClass -  - (57b40ec2e4d00) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:14:11 - jobtracker - JobClass -  - (57b40ec2e4d00) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 09:14:11 - jobtracker - AdminClass -  - (57b40ec3567c0) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 09:14:11 - jobtracker - CustomerClass -  - (57b40ec355c08) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:14:11 - jobtracker - JobClass -  - (57b40ec3b43d6) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:14:11 - jobtracker - JobClass -  - (57b40ec3b43d6) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:14:11 - jobtracker - JobClass -  - (57b40ec3b43d6) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:14:11 - jobtracker - JobClass -  - (57b40ec3b43d6) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 09:14:12 - jobtracker - AdminClass -  - (57b40ec475049) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadwaitingdcfmreviewquotes'
+AND `isactive` = 1
+
+2016-08-17 09:14:12 - jobtracker - CustomerClass -  - (57b40ec474490) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:14:13 - jobtracker - JobClass -  - (57b40ec4dff52) 
+ - Get Waiting DCFM Review Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site, INSTR(j.jobdescription,'SCOPE OF WORK'),
+                            IF(INSTR(j.jobdescription,'EXCLUSIONS')>0, CONCAT(LEFT(j.jobdescription,INSTR(j.jobdescription,'EXCLUSIONS')-1), 'QUOTATION NOT FINALISED'), j.jobdescription) AS jobdescription
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response', 'portal', 'waiting_jrq_response', 'internal_incomplete')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `qduedate` DESC
+ LIMIT 25
+
+2016-08-17 09:14:14 - jobtracker - AdminClass -  - (57b40ec594871) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadpendingapprovalquotes'
+AND `isactive` = 1
+
+2016-08-17 09:14:14 - jobtracker - CustomerClass -  - (57b40ec5934e9) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:14:14 - jobtracker - JobClass -  - (57b40ec60dc4b) 
+ - Get Pending Approval Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `duedate` DESC
+ LIMIT 25
+
+2016-08-17 09:14:43 - jobtracker - AdminClass -  - (57b40ee3728ac) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 09:14:43 - jobtracker - CustomerClass -  - (57b40ee3720dc) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:14:43 - jobtracker - JobClass -  - (57b40ee3d04c2) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:14:43 - jobtracker - JobClass -  - (57b40ee3d04c2) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:14:43 - jobtracker - JobClass -  - (57b40ee3d04c2) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:14:43 - jobtracker - JobClass -  - (57b40ee3d04c2) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 09:15:40 - jobtracker - AdminClass -  - (57b40f1bc0f2a) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 09:15:40 - jobtracker - CustomerClass -  - (57b40f1bc0372) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:15:40 - jobtracker - JobClass -  - (57b40f1c2a900) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:15:40 - jobtracker - JobClass -  - (57b40f1c2a900) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:15:40 - jobtracker - JobClass -  - (57b40f1c2a900) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:15:40 - jobtracker - JobClass -  - (57b40f1c2a900) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 09:15:41 - jobtracker - AdminClass -  - (57b40f1d0c8ba) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadpendingapprovalquotes'
+AND `isactive` = 1
+
+2016-08-17 09:15:41 - jobtracker - CustomerClass -  - (57b40f1d0b91a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:15:41 - jobtracker - JobClass -  - (57b40f1d7c9cc) 
+ - Get Pending Approval Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `duedate` DESC
+ LIMIT 25
+
+2016-08-17 09:15:42 - jobtracker - AdminClass -  - (57b40f1dc464d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadwaitingdcfmreviewquotes'
+AND `isactive` = 1
+
+2016-08-17 09:15:42 - jobtracker - CustomerClass -  - (57b40f1dc3a95) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:15:42 - jobtracker - JobClass -  - (57b40f1e491c1) 
+ - Get Waiting DCFM Review Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site, INSTR(j.jobdescription,'SCOPE OF WORK'),
+                            IF(INSTR(j.jobdescription,'EXCLUSIONS')>0, CONCAT(LEFT(j.jobdescription,INSTR(j.jobdescription,'EXCLUSIONS')-1), 'QUOTATION NOT FINALISED'), j.jobdescription) AS jobdescription
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response', 'portal', 'waiting_jrq_response', 'internal_incomplete')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `qduedate` DESC
+ LIMIT 25
+
+2016-08-17 09:15:57 - jobtracker - AdminClass -  - (57b40f2cc33a0) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 09:15:57 - jobtracker - CustomerClass -  - (57b40f2cc27e8) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:15:57 - jobtracker - JobClass -  - (57b40f2d3080f) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:15:57 - jobtracker - JobClass -  - (57b40f2d3080f) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:15:57 - jobtracker - JobClass -  - (57b40f2d3080f) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:15:57 - jobtracker - JobClass -  - (57b40f2d3080f) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 09:17:04 - jobtracker - AdminClass -  - (57b40f703a8be) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 09:17:04 - jobtracker - CustomerClass -  - (57b40f7039d06) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:17:04 - jobtracker - JobClass -  - (57b40f709a7fc) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:17:04 - jobtracker - JobClass -  - (57b40f709a7fc) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:17:04 - jobtracker - JobClass -  - (57b40f709a7fc) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:17:04 - jobtracker - JobClass -  - (57b40f709a7fc) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 09:17:15 - jobtracker - AdminClass -  - (57b40f7b1b125) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 09:17:15 - jobtracker - CustomerClass -  - (57b40f7b1a955) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:17:15 - jobtracker - JobClass -  - (57b40f7b7a0c3) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:17:15 - jobtracker - JobClass -  - (57b40f7b7a0c3) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:17:15 - jobtracker - JobClass -  - (57b40f7b7a0c3) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:17:15 - jobtracker - JobClass -  - (57b40f7b7a0c3) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 09:17:16 - jobtracker - AdminClass -  - (57b40f7c4c679) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadpendingapprovalquotes'
+AND `isactive` = 1
+
+2016-08-17 09:17:16 - jobtracker - CustomerClass -  - (57b40f7c4bac1) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:17:16 - jobtracker - JobClass -  - (57b40f7cb69ca) 
+ - Get Pending Approval Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `duedate` DESC
+ LIMIT 25
+
+2016-08-17 09:17:17 - jobtracker - AdminClass -  - (57b40f7d084cb) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadwaitingdcfmreviewquotes'
+AND `isactive` = 1
+
+2016-08-17 09:17:17 - jobtracker - CustomerClass -  - (57b40f7d0752a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:17:18 - jobtracker - JobClass -  - (57b40f7d7bc8e) 
+ - Get Waiting DCFM Review Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site, INSTR(j.jobdescription,'SCOPE OF WORK'),
+                            IF(INSTR(j.jobdescription,'EXCLUSIONS')>0, CONCAT(LEFT(j.jobdescription,INSTR(j.jobdescription,'EXCLUSIONS')-1), 'QUOTATION NOT FINALISED'), j.jobdescription) AS jobdescription
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response', 'portal', 'waiting_jrq_response', 'internal_incomplete')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `qduedate` DESC
+ LIMIT 25
+
+2016-08-17 09:17:43 - jobtracker - AdminClass -  - (57b40f9704d87) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes'
+AND `isactive` = 1
+
+2016-08-17 09:17:43 - jobtracker - CustomerClass -  - (57b40f97045b7) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:17:43 - jobtracker - JobClass -  - (57b40f975eb1d) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) IN('accepted', 'approved_from_portal')
+AND `j`.`jobstage` NOT IN('client_notified')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:17:43 - jobtracker - JobClass -  - (57b40f975eb1d) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:17:43 - jobtracker - JobClass -  - (57b40f975eb1d) 
+ - Get Jobs Count With Suburb Data Query : SELECT j.sitesuburb as suburb, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response')
+GROUP BY `j`.`sitesuburb`
+
+2016-08-17 09:17:43 - jobtracker - JobClass -  - (57b40f975eb1d) 
+ - Get Jobs Count With sitefm Data Query : SELECT j.sitefm, a.contactid, COUNT(jobid) AS count
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`leaddate` > '2010-07-01'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+GROUP BY `j`.`sitefm`
+
+2016-08-17 09:17:44 - jobtracker - AdminClass -  - (57b40f97eb53d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadpendingapprovalquotes'
+AND `isactive` = 1
+
+2016-08-17 09:17:44 - jobtracker - CustomerClass -  - (57b40f97ea59d) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:17:44 - jobtracker - JobClass -  - (57b40f986164e) 
+ - Get Pending Approval Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_approval'
+AND `j`.`jobstage` IN('wait_client_quote_resp', 'wait_client_qte_resp')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `duedate` DESC
+ LIMIT 25
+
+2016-08-17 09:17:45 - jobtracker - AdminClass -  - (57b40f98a5c1e) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'quotes/loadwaitingdcfmreviewquotes'
+AND `isactive` = 1
+
+2016-08-17 09:17:45 - jobtracker - CustomerClass -  - (57b40f98a5066) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-08-17 09:17:45 - jobtracker - JobClass -  - (57b40f991ec10) 
+ - Get Waiting DCFM Review Quotes Data Query : SELECT j.*, if(portaldesc!='', portaldesc, jobstage) as portaldesc, concat(j.siteline1,'<br>',j.siteline2,'<br>',j.sitesuburb,' ',j.sitestate,' ',j.sitepostcode) as site, INSTR(j.jobdescription,'SCOPE OF WORK'),
+                            IF(INSTR(j.jobdescription,'EXCLUSIONS')>0, CONCAT(LEFT(j.jobdescription,INSTR(j.jobdescription,'EXCLUSIONS')-1), 'QUOTATION NOT FINALISED'), j.jobdescription) AS jobdescription
+FROM `jobs` `j`
+LEFT JOIN `jobstage` `js` ON `j`.`jobstage` = `js`.`jobstagedesc`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `a`.`contactid`=`c`.`contactid`
+LEFT JOIN `contact` `jc` ON `j`.`contactid`=`jc`.`contactid`
+WHERE `j`.`customerid` = '7781'
+AND `j`.`quoterqd` = 'on'
+AND lcase(j.quotestatus) = 'pending_submission'
+AND `jobstage` IN('next_sendquote', 'waiting_rfq_response', 'portal', 'waiting_jrq_response', 'internal_incomplete')
+AND `j`.`leaddate` > '2010-07-01'
+ORDER BY `qduedate` DESC
+ LIMIT 25

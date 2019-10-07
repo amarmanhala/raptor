@@ -1,0 +1,3994 @@
+2016-10-03 11:32:35 - Log File Created.
+
+2016-10-03 11:32:35 - jobtracker - AdminClass -  - (57f225b28a754) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'settings/changepassword'
+AND `isactive` = 1
+
+2016-10-03 11:32:35 - jobtracker - SharedClass -  - (57f225b288044) 
+ - Get Announcement : SELECT * FROM cp_message WHERE isactive=1 AND browser='' AND activationdate <= NOW() AND id NOT IN (SELECT messageid FROM cp_messagecontact WHERE contactid = 26564)
+
+2016-10-03 11:32:35 - jobtracker - SharedClass -  - (57f225b288044) 
+ - Get Announcement : SELECT * FROM cp_message WHERE isactive=1 AND browser='Firefox' AND activationdate <= NOW() AND id NOT IN (SELECT messageid FROM cp_messagecontact WHERE contactid = 26564) ORDER BY browser_version
+
+2016-10-03 11:32:35 - jobtracker - CustomerClass -  - (57f225b28a754) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:50:20 - jobtracker - AdminClass -  - (57f229dc9f88f) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'settings/changepassword'
+AND `isactive` = 1
+
+2016-10-03 11:50:20 - jobtracker - SharedClass -  - (57f229dc9f88f) 
+ - Get Announcement : SELECT * FROM cp_message WHERE isactive=1 AND browser='' AND activationdate <= NOW() AND id NOT IN (SELECT messageid FROM cp_messagecontact WHERE contactid = 26564)
+
+2016-10-03 11:50:20 - jobtracker - SharedClass -  - (57f229dc9f88f) 
+ - Get Announcement : SELECT * FROM cp_message WHERE isactive=1 AND browser='Firefox' AND activationdate <= NOW() AND id NOT IN (SELECT messageid FROM cp_messagecontact WHERE contactid = 26564) ORDER BY browser_version
+
+2016-10-03 11:50:20 - jobtracker - CustomerClass -  - (57f229dc9f88f) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:50:29 - jobtracker - AdminClass -  - (57f229e55eaa7) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techmap'
+AND `isactive` = 1
+
+2016-10-03 11:50:29 - jobtracker - CustomerClass -  - (57f229e55eaa7) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:50:29 - jobtracker - JobClass -  - (57f229e5a0957) 
+ - Get Tech Map Jobs Query : SELECT `j`.`jobid`, `j`.`jobstage`, CASE
+                    WHEN LCASE(j.jobstage) = 'client_notified' AND jcompletedate>0 THEN jcompletedate
+                    WHEN LCASE(j.jobstage) = 'client_notified' AND jcompletedate=0 AND d.dte IS NOT NULL THEN d.dte
+                    WHEN LCASE(j.jobstage) IN ('external_incomplete', 'waiting_jrq_response') THEN IFNULL(jrespdate, internalduedate)
+                    WHEN LCASE(j.jobstage) = 'internal_incomplete' THEN d.dte 
+                    WHEN LCASE(j.jobstage) = 'next_allocate' AND d.apptid IS NULL THEN leaddate
+                    WHEN  d.apptid IS NOT NULL THEN d.dte
+                    END AS attenddate, `jcompletedate` AS `completiondate`, `duedate`, `duetime`, `d`.`dte`, `j`.`internalduedate`, CASE 
+                    WHEN LCASE(j.jobstage) = 'cancelled' THEN 'Cancelled' 
+                    WHEN LCASE(j.jobstage) = 'client_notified' THEN 'Completed'
+                    WHEN LCASE(j.jobstage) NOT IN ('cancelled', 'declined', 'hold', 'client_notified') AND duedate < NOW() THEN 'Overdue' 
+                    WHEN LCASE(j.jobstage) IN ('internal_incomplete', 'external_incomplete') THEN 'In Progress' 
+                    WHEN LCASE(j.jobstage) = 'next_allocate' AND d.apptid IS NULL THEN 'Unsheduled'
+                    WHEN LCASE(j.jobstage) = 'next_allocate' AND d.apptid IS NOT NULL THEN 'Scheduled'  
+                    END AS STATUS, `j`.`siteline2` AS `address`, `j`.`siteline1`, `j`.`sitesuburb` AS `suburb`, `j`.`sitestate` AS `state`, `j`.`sitepostcode` AS `postcode`, `a`.`latitude_decimal`, `a`.`longitude_decimal`, `j`.`userid`, `j`.`custordref`, `j`.`jobdescription`
+FROM `jobs` `j`
+INNER JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `diary` `d` ON `j`.`jobid`=`d`.`jobid`
+WHERE `j`.`customerid` = '7781'
+AND a.latitude_decimal is NOT NULL
+AND `a`.`latitude_decimal` !=0
+GROUP BY `j`.`jobid`
+
+2016-10-03 11:50:33 - jobtracker - AdminClass -  - (57f229e8d9b6d) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule'
+AND `isactive` = 1
+
+2016-10-03 11:50:33 - jobtracker - CustomerClass -  - (57f229e8d745d) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:50:33 - falcon - ScheduleClass -  - (57f229e9229be) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-10-03 11:50:34 - jobtracker - AdminClass -  - (57f229ea7e299) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'techschedule/getschedules'
+AND `isactive` = 1
+
+2016-10-03 11:50:34 - jobtracker - CustomerClass -  - (57f229ea7e299) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:50:34 - falcon - ScheduleClass -  - (57f229eacc499) 
+ - Get Schedules Data Query : SELECT *
+FROM `etp_schedulecolour`
+WHERE `supplierid` =0
+AND `isactive` = 1
+
+2016-10-03 11:50:34 - falcon - ScheduleClass -  - (57f229eacc499) 
+ - Get Schedules Data Query : SELECT `d`.`apptid`, `d`.`dte`, `d`.`contactid`, `d`.`activity_id`, `d`.`start`, `d`.`end`, `d`.`duration`, `j`.`ownerjobid`, `d`.`jobid`, `j`.`jobnumber`, `d`.`status`, `d`.`islocked`, `j`.`jobdescription`, `po`.`poref`, `j`.`siteline1`, `j`.`isinternal`, `j`.`supplierid`, `j`.`siteline2`, `j`.`sitesuburb`, `j`.`sitestate`, `j`.`sitepostcode`, `j`.`sitecontact`, `j`.`sitephone`, `j`.`statusid`, `po`.`completebydate`, `po`.`completebytime`, `con`.`firstname`, `c`.`companyname`
+FROM `etp_diary` `d`
+INNER JOIN `etp_job` `j` ON `d`.`jobid` = `j`.`jobid`
+INNER JOIN `customer` `c` ON `j`.`customerid` =`c`.`customerid`
+LEFT JOIN `purchaseorders` `po` ON `j`.`ownerporef` = `po`.`poref`
+INNER JOIN `contact` `con` ON `d`.`contactid` =`con`.`contactid`
+WHERE `d`.`dte` >= '2016-09-25'
+AND `d`.`dte` < '2016-11-06'
+AND `con`.`customerid` = '7781'
+AND `d`.`isdeleted` = '0'
+
+2016-10-03 11:50:53 - jobtracker - AdminClass -  - (57f229fd58154) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'EditableReport'
+AND `isactive` = 1
+
+2016-10-03 11:50:53 - jobtracker - CustomerClass -  - (57f229fd55a44) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:50:53 - jobtracker - EditableReportClass -  - (57f229fd9a005) 
+ - GET REPORT AREA
+
+2016-10-03 11:50:53 - jobtracker - EditableReportClass -  - (57f229fd9a005) 
+ - SELECT `a`.`ins_sitereport_id`, `b`.`id`, `b`.`areatype_id`, `b`.`guid`, `b`.`area_description`
+FROM `ins_sitereport` `a`
+LEFT JOIN `rep_area_value` `b` ON `a`.`ins_sitereport_id`=`b`.`report_id`
+WHERE `a`.`ins_sitereport_id` = '225'
+ - Params
+
+2016-10-03 11:50:53 - jobtracker - EditableReport -  - samplemaster@sample.com.au - (57f229fd58154) 
+ - Array
+(
+    [loggeduser] => stdClass Object
+        (
+            [contactid] => 26564
+            [etp_email] => 
+            [etp_password] => $2y$08$ABIVc7t.M56H7rGIivgmce9zJLyzeWcjChW8e7AbxuSahlKpqVf1e
+            [etp_nbjobid] => 0
+            [customerid] => 7781
+            [firstname] => Angelo Milanese
+            [surname] => 
+            [phone] => 02 9999 9999
+            [homephone] => 
+            [fax] => 
+            [mobile] => 
+            [newphone] => 
+            [email] => samplemaster@sample.com.au
+            [email_personal] => amilanese@hotmail.com
+            [phone_personal] => 
+            [origin] => Linked In
+            [sourcedby] => crm2
+            [notes] => 
+            [birthday] => 
+            [position] => Facility Manager (Industrial & Office portfolio)
+            [role] => Choose an option
+            [gender] => 
+            [olpassword] => 
+            [activeuser] => 
+            [primarycontact] => 
+            [maillabel] => 
+            [street1] => 
+            [street2] => 
+            [suburb] => Melbourne
+            [postcode] => 3000
+            [state] => VIC
+            [territory] => Melbourne CBD East
+            [homestreet] => 
+            [homestreet2] => 
+            [homesuburb] => 
+            [homestate] => 
+            [homepostcode] => 
+            [latitude_decimal] => 
+            [longitude_decimal] => 
+            [bossid] => 0
+            [dateadded] => 
+            [editdate] => 
+            [addedby] => 0
+            [editedby] => 0
+            [password] => dcfm
+            [raptorpassword] => $2y$08$T6I4OOfF1mWTL6C2pvrUvOb.khL5XOFBvM96ykLxnYttMrWJoq1Qm
+            [altUser] => Choose an option
+            [profile_name] => 
+            [siblinglink] => 0
+            [not_duplicate] => 
+            [impersonate] => 
+            [ip_address] => 
+            [salt] => 
+            [activation_code] => 
+            [forgotten_password_code] => KDDS8c9ydbCzjZPO1TJLuOfbc98854fd8cc10abc
+            [forgotten_password_time] => 1472620154
+            [remember_code] => 9th4LiJ2OOKrjGhQedwKj.
+            [created_on] => 
+            [last_login] => 1475488220
+            [tradeid] => 0
+            [profileimg] => 
+            [etp_accesslevel] => 00000000000
+            [etp_onschedule] => 0
+            [cp_onschedule] => 0
+            [active] => 1
+            [etp_invitesendtime] => 
+            [photodocid] => 26564
+            [iscpmaster] => 1
+            [isaboriginal] => 0
+            [last_updated] => 2016-10-03 15:20:20
+            [device_type] => 
+            [device_id] => 
+            [israptoradmin] => 0
+            [cp_invitesendtime] => 
+            [show_on_orgchart] => 1
+            [orgchart_color] => #AFEEEE
+            [isdeleted] => 0
+            [id] => 26564
+            [user_id] => 26564
+        )
+
+    [navigation] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 32
+                    [parentid] => 4
+                    [name] => Budget By Site
+                    [url1] => budgets
+                    [url2] => bysite
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => 
+                    [counter_color] => 
+                    [bar_color] => yellow
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 1
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 1
+                    [sitecontactaccess] => 1
+                )
+
+            [1] => Array
+                (
+                    [id] => 34
+                    [parentid] => 13
+                    [name] => Asset Documents
+                    [url1] => documents
+                    [url2] => assetdocs
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => assetdocuments
+                    [counter_bgcolor] => #3c8dbc
+                    [counter_color] => #ffffff
+                    [bar_color] => green
+                    [text_color] => red
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 1
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [2] => Array
+                (
+                    [id] => 36
+                    [parentid] => 0
+                    [name] => Dashboard - Labour
+                    [url1] => dashboard3
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-dashboard
+                    [sortorder] => 1
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [3] => Array
+                (
+                    [id] => 21
+                    [parentid] => 13
+                    [name] => Job Documents
+                    [url1] => documents
+                    [url2] => jobdocs
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => jobdocuments
+                    [counter_bgcolor] => #3c8dbc
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 1
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [4] => Array
+                (
+                    [id] => 1
+                    [parentid] => 0
+                    [name] => DASHBOARD JOB
+                    [url1] => dashboard
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-dashboard
+                    [sortorder] => 1
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [5] => Array
+                (
+                    [id] => 20
+                    [parentid] => 16
+                    [name] => Contacts
+                    [url1] => customers
+                    [url2] => contacts
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => contactcounts
+                    [counter_bgcolor] => #3c8dbc
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 1
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [6] => Array
+                (
+                    [id] => 17
+                    [parentid] => 16
+                    [name] => Site Addresses
+                    [url1] => customers
+                    [url2] => addresses
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => siteaddresscount
+                    [counter_bgcolor] => #3c8dbc
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 2
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [7] => Array
+                (
+                    [id] => 2
+                    [parentid] => 0
+                    [name] => DASHBOARD - BUDGET
+                    [url1] => dashboard2
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-dashboard
+                    [sortorder] => 2
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [8] => Array
+                (
+                    [id] => 33
+                    [parentid] => 4
+                    [name] => Budget By GL Code
+                    [url1] => budgets
+                    [url2] => byglcode
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => 
+                    [counter_color] => 
+                    [bar_color] => yellow
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 2
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 1
+                    [sitecontactaccess] => 1
+                )
+
+            [9] => Array
+                (
+                    [id] => 22
+                    [parentid] => 13
+                    [name] => Customer Documents
+                    [url1] => documents
+                    [url2] => customerdocs
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => customerdocuments
+                    [counter_bgcolor] => #3c8dbc
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 2
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [10] => Array
+                (
+                    [id] => 24
+                    [parentid] => 16
+                    [name] => GL Codes
+                    [url1] => customers
+                    [url2] => glcodes
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => glcodecounts
+                    [counter_bgcolor] => #3c8dbc
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 3
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [11] => Array
+                (
+                    [id] => 38
+                    [parentid] => 37
+                    [name] => Tech Schedule
+                    [url1] => techschedule
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-file-text-o
+                    [sortorder] => 3
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [12] => Array
+                (
+                    [id] => 28
+                    [parentid] => 37
+                    [name] => Tech Map
+                    [url1] => techmap
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-file-text-o
+                    [sortorder] => 3
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [13] => Array
+                (
+                    [id] => 3
+                    [parentid] => 0
+                    [name] => MY REPORTS
+                    [url1] => reports
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => green
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-file-text-o
+                    [sortorder] => 3
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [14] => Array
+                (
+                    [id] => 4
+                    [parentid] => 0
+                    [name] => MY BUDGETS
+                    [url1] => 
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => yellow
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-pie-chart
+                    [sortorder] => 4
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 1
+                    [sitecontactaccess] => 1
+                )
+
+            [15] => Array
+                (
+                    [id] => 37
+                    [parentid] => 0
+                    [name] => Technicians
+                    [url1] => 
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => green
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-pie-chart
+                    [sortorder] => 4
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 1
+                    [sitecontactaccess] => 1
+                )
+
+            [16] => Array
+                (
+                    [id] => 15
+                    [parentid] => 0
+                    [name] => MY POTENTIAL JOBS
+                    [url1] => potentialjobs
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => potentialjobs
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-tasks
+                    [sortorder] => 5
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [17] => Array
+                (
+                    [id] => 5
+                    [parentid] => 0
+                    [name] => MY JOBS
+                    [url1] => jobs
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => unapprovejobs
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-tasks
+                    [sortorder] => 5
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [18] => Array
+                (
+                    [id] => 30
+                    [parentid] => 0
+                    [name] => My Suppliers
+                    [url1] => suppliers
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => suppliercounts
+                    [counter_bgcolor] => #3c8dbc
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-cart-plus
+                    [sortorder] => 6
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [19] => Array
+                (
+                    [id] => 6
+                    [parentid] => 0
+                    [name] => MY QUOTES
+                    [url1] => quotes
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => unapprovequotes
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 6
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [20] => Array
+                (
+                    [id] => 23
+                    [parentid] => 16
+                    [name] => Contact Security
+                    [url1] => settings
+                    [url2] => usersecurity
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 6
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [21] => Array
+                (
+                    [id] => 7
+                    [parentid] => 0
+                    [name] => MY COMPLIANCE
+                    [url1] => compliance
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 7
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [22] => Array
+                (
+                    [id] => 27
+                    [parentid] => 16
+                    [name] => Portal Setup
+                    [url1] => settings
+                    [url2] => portalsetup
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 7
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [23] => Array
+                (
+                    [id] => 26
+                    [parentid] => 0
+                    [name] => MY CONTRACTS
+                    [url1] => contracts
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 7
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [24] => Array
+                (
+                    [id] => 31
+                    [parentid] => 0
+                    [name] => Scheduled Works
+                    [url1] => contracts
+                    [url2] => scheduled
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 7
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [25] => Array
+                (
+                    [id] => 35
+                    [parentid] => 0
+                    [name] => MY INSPECTIONS
+                    [url1] => EditableReport
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 7
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [26] => Array
+                (
+                    [id] => 8
+                    [parentid] => 0
+                    [name] => MY ASSETS
+                    [url1] => asset
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-tags
+                    [sortorder] => 8
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [27] => Array
+                (
+                    [id] => 9
+                    [parentid] => 0
+                    [name] => MY STATEMENTS
+                    [url1] => statements
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => unapproveinvoices
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-money
+                    [sortorder] => 9
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [28] => Array
+                (
+                    [id] => 10
+                    [parentid] => 0
+                    [name] => JOB STAGE GRID
+                    [url1] => grids
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 10
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [29] => Array
+                (
+                    [id] => 11
+                    [parentid] => 0
+                    [name] => JOBS AWAITING WO
+                    [url1] => jobawaitingwo
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => unapprovewojobs
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 11
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [30] => Array
+                (
+                    [id] => 18
+                    [parentid] => 16
+                    [name] => Profile
+                    [url1] => settings
+                    [url2] => profile
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 11
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [31] => Array
+                (
+                    [id] => 19
+                    [parentid] => 16
+                    [name] => Change Password
+                    [url1] => settings
+                    [url2] => changepassword
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 12
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [32] => Array
+                (
+                    [id] => 12
+                    [parentid] => 0
+                    [name] => LOG JOB/QUOTE
+                    [url1] => logjobquote
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 12
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [33] => Array
+                (
+                    [id] => 13
+                    [parentid] => 0
+                    [name] => DOC LIBRARY
+                    [url1] => 
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 13
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [34] => Array
+                (
+                    [id] => 14
+                    [parentid] => 0
+                    [name] => FULL SEARCH
+                    [url1] => search
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-search
+                    [sortorder] => 14
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [35] => Array
+                (
+                    [id] => 16
+                    [parentid] => 0
+                    [name] => SETTINGS
+                    [url1] => settings
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-gears
+                    [sortorder] => 16
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+        )
+
+    [menucounter] => Array
+        (
+            [potentialjobs] => 3
+            [unapproveinvoices] => 1
+            [unapprovejobs] => 0
+            [wiatingvariationjobs] => 0
+            [unapprovequotes] => 1
+            [unapprovewojobs] => 0
+            [jobdocuments] => 0
+            [customerdocuments] => 0
+            [contactcounts] => 6
+            [siteaddresscount] => 5
+            [addressattrcounts] => 2
+            [suppliercounts] => 2
+            [glcodecounts] => 4
+            [costcentrecounts] => 0
+        )
+
+    [help] => 
+    [announcement] => Array
+        (
+        )
+
+    [banner_array] => Array
+        (
+            [customerid] => 7781
+            [ownercustomerid] => 0
+            [owner] => S
+            [typeid] => 0
+            [companyname] => Sample Client
+            [tradingname] => Sample Client
+            [firstname] => 
+            [surname] => 
+            [position] => 
+            [phone] => 
+            [fax] => 
+            [mobile] => 
+            [email] => itglobal1@dcfm.com.au
+            [password] => 
+            [shipping1] => 
+            [shipping2] => 
+            [shipsuburb] => Artarmon
+            [shippostcode] => 2064
+            [shipstate] => NSW
+            [mail1] => 
+            [mail2] => 
+            [mailsuburb] => Artarmon
+            [postcode] => 
+            [state] => 
+            [country] => 0
+            [custtype] => client
+            [custstatus] => non-preferred
+            [distance] => 0
+            [costcentre] => 
+            [paymethod] => 
+            [priceband] => 0
+            [costplus] => 0
+            [mapref] => 0
+            [centralcustomerid] => 0
+            [uploaded] => 
+            [accountmanager] => 
+            [url] => 
+            [territory] => 
+            [technician] => 
+            [currency] => 
+            [origin] => internal
+            [prospectid] => 
+            [rating] => 0
+            [primarytrade] => 
+            [tradeid] => 
+            [industrysector] => 
+            [depositname] => 
+            [depositbank] => 
+            [depositbranch] => 
+            [depositbsb] => 
+            [depositaccount] => 
+            [invdelivery] => 
+            [dateadded] => 
+            [datemodified] => 
+            [addedby] => 
+            [modifiedby] => 0
+            [abn] => 55 777 888 999
+            [oldcode] => 
+            [supplyaccountno] => 
+            [creditlimit] => 
+            [arhold] => 
+            [early_discount] => 
+            [early_days] => 
+            [payterms] => 30 Days
+            [supplier_threshold] => 0
+            [reportsetup] => 
+            [corpgroup] => 
+            [customtext1] => 
+            [customtext2] => 
+            [customtext3] => 
+            [settings] => a:5:{s:17:"clientPortalSetup";a:5:{s:4:"vopt";s:8:"orgchart";s:3:"fma";s:4:"user";s:5:"tpnjn";s:5:"immed";s:3:"cps";s:0:"";s:5:"tpsjn";s:4:"none";}s:10:"pdfInvPref";s:9:"singlePDF";s:11:"statinvsinc";s:7:"emailed";s:12:"docsrequired";a:3:{s:21:"JCD - Customer Survey";s:21:"JCD - Customer Survey";s:24:"JCD 0004.1 - DCFM Safety";s:24:"JCD 0004.1 - DCFM Safety";s:36:"JCD 0004.2 - DTZ Hazard Prompt Sheet";s:36:"JCD 0004.2 - DTZ Hazard Prompt Sheet";}s:8:"statDocs";s:3:"pdf";}
+            [customtext4] => 
+            [customerdoctyperules] => 
+            [donotemail] => 
+            [remindersent] => 
+            [newjobnotify] => 
+            [myob_emp_id] => 
+            [tech_portal_dcfm] => 
+            [induction] => 
+            [plinsurance] => 
+            [workerscomp] => 
+            [latitude_decimal] => 
+            [longitude_decimal] => 
+            [isdirty] => 2
+            [useTechPortalReview] => 
+            [is24hour] => 
+            [onschedule] => 
+            [oldorigin] => internal
+            [jobsband] => 99
+            [paymentdays] => 30
+            [costlimit] => 0
+            [costbuffer] => 0
+            [abcrating] => 
+            [penetration] => 0
+            [attitude] => 
+            [contractstrikerate] => 0
+            [expandable] => 0
+            [sitecount] => 0
+            [contract_empcount] => 0
+            [current_contract_value] => 0
+            [current_GP] => 0
+            [potential_contract_value] => 0
+            [potential_GP] => 0
+            [hascontract] => 0
+            [structure] => 
+            [isgstregistered] => 0
+            [invbatchid] => 1
+            [lastcplogin] => 2016-10-03 11:50:20
+            [cpstatus] => 1
+            [cpstatusnote] => 
+            [isactive] => 0
+            [hasetpaccess] => 0
+            [currentbalance] => 0.00
+            [wo_by_email] => 0
+            [wo_by_fax] => 0
+            [wo_by_portal] => 0
+            [wo_other] => 
+            [has_indigenous_employees] => 0
+            [indigenous_employees] => 0
+            [typename] => 
+            [typecode] => 
+            [se_trade_name] => 
+            [primarycontact] => 
+            [active] => 0
+            [logo] => 
+            [header] => 
+            [footer] => 
+        )
+
+    [ContactRules] => Array
+        (
+            [show_invoicefinalize_tab_in_clientportal] => 1
+            [custordref_not_mandatory] => 1
+            [show_invoice_by_fm_in_clientportal] => 1
+            [auto_send_invemail_from_clientportal] => 1
+            [show_final_approval_tab_in_clientportal] => 1
+            [custordref1_label] => PO Number
+            [custordref2_label] => PO
+            [custordref3_label] => WO
+            [default_custordref2] => 278748375
+            [client_portal_master_view_all_invoices] => 1
+            [add_custom_job_description] => All contractors must notify the DCFM Helpdesk on 02-9460-7676 on arriving at site and on completion of works.
+            [show_job_approval_tab_in_client_portal] => 1
+            [auto_create_custordref_in_client_portal] => 0
+            [show_invoice_history_tab_in_clientportal] => 1
+            [auto_send_finalised_invoice_from_clientportal] => 1
+            [auto_send_approved_invoice_from_clientportal] => 1
+            [batch_invoicing] => 1
+            [use_site_ref_as_custordref2_in_client_portal] => 1
+            [auto_create_custlimit_in_client_portal] => 0
+            [show_custom_allocation] => 1
+            [hide_job_limit_in_client_portal] => 0
+            [hide_job_priority_in_client_portal] => 0
+            [direct_allocate] => 1
+            [GL_CODE_MANDATORY] => 1
+            [EDIT_JOB_GLCODE] => 1
+            [internal_allocate] => 1
+            [internal_allocate_auto_accept] => 1
+            [show_jobs_on_hold] => 0
+        )
+
+    [cssToLoad] => Array
+        (
+            [0] => http://localhost/raptor/plugins/datepicker/datepicker3.css
+            [1] => http://localhost/raptor/plugins/bootstrap-select/css/bootstrap-select.min.css
+            [2] => http://localhost/raptor/plugins/uigrid/ui-grid-stable.min.css
+            [3] => http://localhost/raptor/plugins/bootstrap-editable/css/bootstrap-editable.css
+            [4] => http://localhost/raptor/plugins/jQuery-File-Upload/css/jquery.fileupload.css
+        )
+
+    [jsToLoad] => Array
+        (
+            [0] => http://localhost/raptor/plugins/datepicker/bootstrap-datepicker.js
+            [1] => http://localhost/raptor/plugins/bootstrap-select/js/bootstrap-select.min.js
+            [2] => http://localhost/raptor/plugins/jquery-validator/jquery.validate.min.js
+            [3] => http://localhost/raptor/assets/js/jquery.form.js
+            [4] => http://localhost/raptor/plugins/uigrid/angular.min.js
+            [5] => http://localhost/raptor/plugins/uigrid/ui-grid-stable.min.js
+            [6] => http://localhost/raptor/plugins/bootstrap-editable/js/bootstrap-editable.js
+            [7] => http://localhost/raptor/plugins/jQuery-File-Upload/js/vendor/jquery.ui.widget.js
+            [8] => http://localhost/raptor/plugins/jQuery-File-Upload/js/jquery.iframe-transport.js.js
+            [9] => http://localhost/raptor/plugins/jQuery-File-Upload/js/jquery.fileupload.js
+            [10] => http://localhost/raptor/plugins/jQuery-File-Upload/js/jquery.fileupload-audio.js
+            [11] => http://localhost/raptor/plugins/jQuery-File-Upload/js/jquery.fileupload-image.js
+            [12] => http://localhost/raptor/plugins/jQuery-File-Upload/js/jquery.fileupload-process.js
+            [13] => http://localhost/raptor/plugins/jQuery-File-Upload/js/jquery.fileupload-validate.js
+            [14] => http://localhost/raptor/plugins/jQuery-File-Upload/js/jquery.fileupload-video.js
+            [15] => http://localhost/raptor/assets/js/editablereport/init_x-editable.js
+            [16] => http://localhost/raptor/assets/js/editablereport/editablereport.index.js
+        )
+
+    [job_id] => 0
+    [job_id_readonly] => 
+    [report_id_readonly] => 
+    [jobids] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 417127
+                    [name] => 417127
+                    [address] => 216 View Street Annandale NSW 2038
+                )
+
+        )
+
+    [reports] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 225
+                    [report_type] => Air Services
+                )
+
+            [1] => Array
+                (
+                    [id] => 226
+                    [report_type] => Air Services
+                )
+
+        )
+
+    [shareUrl] => 
+    [report_id] => 225
+    [areas] => Array
+        (
+            [0] => Array
+                (
+                    [guid] => all
+                    [name] => All Areas
+                )
+
+            [1] => Array
+                (
+                    [areatype_id] => 
+                    [guid] => 
+                    [name] => 
+                )
+
+        )
+
+    [areavalue_guid] => all
+    [title] => Admin - Edit Report
+    [filter] => Array
+        (
+            [url] => admin/areatypeareatopic/
+            [exportfilename] => ExportedFileName/
+        )
+
+    [rows] => Array
+        (
+        )
+
+)
+
+
+2016-10-03 11:51:03 - jobtracker - AdminClass -  - (57f22a07910a9) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'EditableReport/index'
+AND `isactive` = 1
+
+2016-10-03 11:51:03 - jobtracker - CustomerClass -  - (57f22a078e999) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:51:03 - jobtracker - EditableReportClass -  - (57f22a07d0849) 
+ - GET REPORT AREA
+
+2016-10-03 11:51:03 - jobtracker - EditableReportClass -  - (57f22a07d0849) 
+ - SELECT `a`.`ins_sitereport_id`, `b`.`id`, `b`.`areatype_id`, `b`.`guid`, `b`.`area_description`
+FROM `ins_sitereport` `a`
+LEFT JOIN `rep_area_value` `b` ON `a`.`ins_sitereport_id`=`b`.`report_id`
+WHERE `a`.`ins_sitereport_id` = '2'
+ - Params
+
+ - 0Params
+		ins_sitereport_id => 2
+		id => 1
+		areatype_id => 9
+		guid => 1009133843-7cdf-ab32-02bc-5cf802bbffc7
+		area_description => Bedroom 1 Test
+
+
+2016-10-03 11:51:04 - jobtracker - EditableReport - index - samplemaster@sample.com.au - (57f22a07910a9) 
+ - Array
+(
+    [loggeduser] => stdClass Object
+        (
+            [contactid] => 26564
+            [etp_email] => 
+            [etp_password] => $2y$08$ABIVc7t.M56H7rGIivgmce9zJLyzeWcjChW8e7AbxuSahlKpqVf1e
+            [etp_nbjobid] => 0
+            [customerid] => 7781
+            [firstname] => Angelo Milanese
+            [surname] => 
+            [phone] => 02 9999 9999
+            [homephone] => 
+            [fax] => 
+            [mobile] => 
+            [newphone] => 
+            [email] => samplemaster@sample.com.au
+            [email_personal] => amilanese@hotmail.com
+            [phone_personal] => 
+            [origin] => Linked In
+            [sourcedby] => crm2
+            [notes] => 
+            [birthday] => 
+            [position] => Facility Manager (Industrial & Office portfolio)
+            [role] => Choose an option
+            [gender] => 
+            [olpassword] => 
+            [activeuser] => 
+            [primarycontact] => 
+            [maillabel] => 
+            [street1] => 
+            [street2] => 
+            [suburb] => Melbourne
+            [postcode] => 3000
+            [state] => VIC
+            [territory] => Melbourne CBD East
+            [homestreet] => 
+            [homestreet2] => 
+            [homesuburb] => 
+            [homestate] => 
+            [homepostcode] => 
+            [latitude_decimal] => 
+            [longitude_decimal] => 
+            [bossid] => 0
+            [dateadded] => 
+            [editdate] => 
+            [addedby] => 0
+            [editedby] => 0
+            [password] => dcfm
+            [raptorpassword] => $2y$08$T6I4OOfF1mWTL6C2pvrUvOb.khL5XOFBvM96ykLxnYttMrWJoq1Qm
+            [altUser] => Choose an option
+            [profile_name] => 
+            [siblinglink] => 0
+            [not_duplicate] => 
+            [impersonate] => 
+            [ip_address] => 
+            [salt] => 
+            [activation_code] => 
+            [forgotten_password_code] => KDDS8c9ydbCzjZPO1TJLuOfbc98854fd8cc10abc
+            [forgotten_password_time] => 1472620154
+            [remember_code] => 9th4LiJ2OOKrjGhQedwKj.
+            [created_on] => 
+            [last_login] => 1475488220
+            [tradeid] => 0
+            [profileimg] => 
+            [etp_accesslevel] => 00000000000
+            [etp_onschedule] => 0
+            [cp_onschedule] => 0
+            [active] => 1
+            [etp_invitesendtime] => 
+            [photodocid] => 26564
+            [iscpmaster] => 1
+            [isaboriginal] => 0
+            [last_updated] => 2016-10-03 15:20:20
+            [device_type] => 
+            [device_id] => 
+            [israptoradmin] => 0
+            [cp_invitesendtime] => 
+            [show_on_orgchart] => 1
+            [orgchart_color] => #AFEEEE
+            [isdeleted] => 0
+            [id] => 26564
+            [user_id] => 26564
+        )
+
+    [navigation] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 32
+                    [parentid] => 4
+                    [name] => Budget By Site
+                    [url1] => budgets
+                    [url2] => bysite
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => 
+                    [counter_color] => 
+                    [bar_color] => yellow
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 1
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 1
+                    [sitecontactaccess] => 1
+                )
+
+            [1] => Array
+                (
+                    [id] => 34
+                    [parentid] => 13
+                    [name] => Asset Documents
+                    [url1] => documents
+                    [url2] => assetdocs
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => assetdocuments
+                    [counter_bgcolor] => #3c8dbc
+                    [counter_color] => #ffffff
+                    [bar_color] => green
+                    [text_color] => red
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 1
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [2] => Array
+                (
+                    [id] => 36
+                    [parentid] => 0
+                    [name] => Dashboard - Labour
+                    [url1] => dashboard3
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-dashboard
+                    [sortorder] => 1
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [3] => Array
+                (
+                    [id] => 21
+                    [parentid] => 13
+                    [name] => Job Documents
+                    [url1] => documents
+                    [url2] => jobdocs
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => jobdocuments
+                    [counter_bgcolor] => #3c8dbc
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 1
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [4] => Array
+                (
+                    [id] => 1
+                    [parentid] => 0
+                    [name] => DASHBOARD JOB
+                    [url1] => dashboard
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-dashboard
+                    [sortorder] => 1
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [5] => Array
+                (
+                    [id] => 20
+                    [parentid] => 16
+                    [name] => Contacts
+                    [url1] => customers
+                    [url2] => contacts
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => contactcounts
+                    [counter_bgcolor] => #3c8dbc
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 1
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [6] => Array
+                (
+                    [id] => 17
+                    [parentid] => 16
+                    [name] => Site Addresses
+                    [url1] => customers
+                    [url2] => addresses
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => siteaddresscount
+                    [counter_bgcolor] => #3c8dbc
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 2
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [7] => Array
+                (
+                    [id] => 2
+                    [parentid] => 0
+                    [name] => DASHBOARD - BUDGET
+                    [url1] => dashboard2
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-dashboard
+                    [sortorder] => 2
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [8] => Array
+                (
+                    [id] => 33
+                    [parentid] => 4
+                    [name] => Budget By GL Code
+                    [url1] => budgets
+                    [url2] => byglcode
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => 
+                    [counter_color] => 
+                    [bar_color] => yellow
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 2
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 1
+                    [sitecontactaccess] => 1
+                )
+
+            [9] => Array
+                (
+                    [id] => 22
+                    [parentid] => 13
+                    [name] => Customer Documents
+                    [url1] => documents
+                    [url2] => customerdocs
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => customerdocuments
+                    [counter_bgcolor] => #3c8dbc
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 2
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [10] => Array
+                (
+                    [id] => 38
+                    [parentid] => 37
+                    [name] => Tech Schedule
+                    [url1] => techschedule
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-file-text-o
+                    [sortorder] => 3
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [11] => Array
+                (
+                    [id] => 28
+                    [parentid] => 37
+                    [name] => Tech Map
+                    [url1] => techmap
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-file-text-o
+                    [sortorder] => 3
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [12] => Array
+                (
+                    [id] => 3
+                    [parentid] => 0
+                    [name] => MY REPORTS
+                    [url1] => reports
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => green
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-file-text-o
+                    [sortorder] => 3
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [13] => Array
+                (
+                    [id] => 24
+                    [parentid] => 16
+                    [name] => GL Codes
+                    [url1] => customers
+                    [url2] => glcodes
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => glcodecounts
+                    [counter_bgcolor] => #3c8dbc
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 3
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [14] => Array
+                (
+                    [id] => 4
+                    [parentid] => 0
+                    [name] => MY BUDGETS
+                    [url1] => 
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => yellow
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-pie-chart
+                    [sortorder] => 4
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 1
+                    [sitecontactaccess] => 1
+                )
+
+            [15] => Array
+                (
+                    [id] => 37
+                    [parentid] => 0
+                    [name] => Technicians
+                    [url1] => 
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => green
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-pie-chart
+                    [sortorder] => 4
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 1
+                    [sitecontactaccess] => 1
+                )
+
+            [16] => Array
+                (
+                    [id] => 15
+                    [parentid] => 0
+                    [name] => MY POTENTIAL JOBS
+                    [url1] => potentialjobs
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => potentialjobs
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-tasks
+                    [sortorder] => 5
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [17] => Array
+                (
+                    [id] => 5
+                    [parentid] => 0
+                    [name] => MY JOBS
+                    [url1] => jobs
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => unapprovejobs
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-tasks
+                    [sortorder] => 5
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [18] => Array
+                (
+                    [id] => 6
+                    [parentid] => 0
+                    [name] => MY QUOTES
+                    [url1] => quotes
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => unapprovequotes
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 6
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [19] => Array
+                (
+                    [id] => 23
+                    [parentid] => 16
+                    [name] => Contact Security
+                    [url1] => settings
+                    [url2] => usersecurity
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 6
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [20] => Array
+                (
+                    [id] => 30
+                    [parentid] => 0
+                    [name] => My Suppliers
+                    [url1] => suppliers
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => suppliercounts
+                    [counter_bgcolor] => #3c8dbc
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-cart-plus
+                    [sortorder] => 6
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [21] => Array
+                (
+                    [id] => 26
+                    [parentid] => 0
+                    [name] => MY CONTRACTS
+                    [url1] => contracts
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 7
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [22] => Array
+                (
+                    [id] => 31
+                    [parentid] => 0
+                    [name] => Scheduled Works
+                    [url1] => contracts
+                    [url2] => scheduled
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 7
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [23] => Array
+                (
+                    [id] => 35
+                    [parentid] => 0
+                    [name] => MY INSPECTIONS
+                    [url1] => EditableReport
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 7
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [24] => Array
+                (
+                    [id] => 7
+                    [parentid] => 0
+                    [name] => MY COMPLIANCE
+                    [url1] => compliance
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 7
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [25] => Array
+                (
+                    [id] => 27
+                    [parentid] => 16
+                    [name] => Portal Setup
+                    [url1] => settings
+                    [url2] => portalsetup
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 7
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [26] => Array
+                (
+                    [id] => 8
+                    [parentid] => 0
+                    [name] => MY ASSETS
+                    [url1] => asset
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-tags
+                    [sortorder] => 8
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [27] => Array
+                (
+                    [id] => 9
+                    [parentid] => 0
+                    [name] => MY STATEMENTS
+                    [url1] => statements
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => unapproveinvoices
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-money
+                    [sortorder] => 9
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [28] => Array
+                (
+                    [id] => 10
+                    [parentid] => 0
+                    [name] => JOB STAGE GRID
+                    [url1] => grids
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 10
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [29] => Array
+                (
+                    [id] => 18
+                    [parentid] => 16
+                    [name] => Profile
+                    [url1] => settings
+                    [url2] => profile
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 11
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [30] => Array
+                (
+                    [id] => 11
+                    [parentid] => 0
+                    [name] => JOBS AWAITING WO
+                    [url1] => jobawaitingwo
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 1
+                    [counter_keyword] => unapprovewojobs
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 11
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [31] => Array
+                (
+                    [id] => 19
+                    [parentid] => 16
+                    [name] => Change Password
+                    [url1] => settings
+                    [url2] => changepassword
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 12
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [32] => Array
+                (
+                    [id] => 12
+                    [parentid] => 0
+                    [name] => LOG JOB/QUOTE
+                    [url1] => logjobquote
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 12
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [33] => Array
+                (
+                    [id] => 13
+                    [parentid] => 0
+                    [name] => DOC LIBRARY
+                    [url1] => 
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-th
+                    [sortorder] => 13
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [34] => Array
+                (
+                    [id] => 14
+                    [parentid] => 0
+                    [name] => FULL SEARCH
+                    [url1] => search
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-search
+                    [sortorder] => 14
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+            [35] => Array
+                (
+                    [id] => 16
+                    [parentid] => 0
+                    [name] => SETTINGS
+                    [url1] => settings
+                    [url2] => 
+                    [url3] => 
+                    [showcounter] => 0
+                    [counter_keyword] => 
+                    [counter_bgcolor] => #dd4b39
+                    [counter_color] => #ffffff
+                    [bar_color] => 
+                    [text_color] => 
+                    [menu_icontype] => ICON
+                    [menu_image] => 
+                    [menu_icon] => fa fa-gears
+                    [sortorder] => 16
+                    [isactive] => 1
+                    [target] => 
+                    [masteraccess] => 1
+                    [fmaccess] => 0
+                    [sitecontactaccess] => 0
+                )
+
+        )
+
+    [menucounter] => Array
+        (
+            [potentialjobs] => 3
+            [unapproveinvoices] => 1
+            [unapprovejobs] => 0
+            [wiatingvariationjobs] => 0
+            [unapprovequotes] => 1
+            [unapprovewojobs] => 0
+            [jobdocuments] => 0
+            [customerdocuments] => 0
+            [contactcounts] => 6
+            [siteaddresscount] => 5
+            [addressattrcounts] => 2
+            [suppliercounts] => 2
+            [glcodecounts] => 4
+            [costcentrecounts] => 0
+        )
+
+    [help] => 
+    [announcement] => Array
+        (
+        )
+
+    [banner_array] => Array
+        (
+            [customerid] => 7781
+            [ownercustomerid] => 0
+            [owner] => S
+            [typeid] => 0
+            [companyname] => Sample Client
+            [tradingname] => Sample Client
+            [firstname] => 
+            [surname] => 
+            [position] => 
+            [phone] => 
+            [fax] => 
+            [mobile] => 
+            [email] => itglobal1@dcfm.com.au
+            [password] => 
+            [shipping1] => 
+            [shipping2] => 
+            [shipsuburb] => Artarmon
+            [shippostcode] => 2064
+            [shipstate] => NSW
+            [mail1] => 
+            [mail2] => 
+            [mailsuburb] => Artarmon
+            [postcode] => 
+            [state] => 
+            [country] => 0
+            [custtype] => client
+            [custstatus] => non-preferred
+            [distance] => 0
+            [costcentre] => 
+            [paymethod] => 
+            [priceband] => 0
+            [costplus] => 0
+            [mapref] => 0
+            [centralcustomerid] => 0
+            [uploaded] => 
+            [accountmanager] => 
+            [url] => 
+            [territory] => 
+            [technician] => 
+            [currency] => 
+            [origin] => internal
+            [prospectid] => 
+            [rating] => 0
+            [primarytrade] => 
+            [tradeid] => 
+            [industrysector] => 
+            [depositname] => 
+            [depositbank] => 
+            [depositbranch] => 
+            [depositbsb] => 
+            [depositaccount] => 
+            [invdelivery] => 
+            [dateadded] => 
+            [datemodified] => 
+            [addedby] => 
+            [modifiedby] => 0
+            [abn] => 55 777 888 999
+            [oldcode] => 
+            [supplyaccountno] => 
+            [creditlimit] => 
+            [arhold] => 
+            [early_discount] => 
+            [early_days] => 
+            [payterms] => 30 Days
+            [supplier_threshold] => 0
+            [reportsetup] => 
+            [corpgroup] => 
+            [customtext1] => 
+            [customtext2] => 
+            [customtext3] => 
+            [settings] => a:5:{s:17:"clientPortalSetup";a:5:{s:4:"vopt";s:8:"orgchart";s:3:"fma";s:4:"user";s:5:"tpnjn";s:5:"immed";s:3:"cps";s:0:"";s:5:"tpsjn";s:4:"none";}s:10:"pdfInvPref";s:9:"singlePDF";s:11:"statinvsinc";s:7:"emailed";s:12:"docsrequired";a:3:{s:21:"JCD - Customer Survey";s:21:"JCD - Customer Survey";s:24:"JCD 0004.1 - DCFM Safety";s:24:"JCD 0004.1 - DCFM Safety";s:36:"JCD 0004.2 - DTZ Hazard Prompt Sheet";s:36:"JCD 0004.2 - DTZ Hazard Prompt Sheet";}s:8:"statDocs";s:3:"pdf";}
+            [customtext4] => 
+            [customerdoctyperules] => 
+            [donotemail] => 
+            [remindersent] => 
+            [newjobnotify] => 
+            [myob_emp_id] => 
+            [tech_portal_dcfm] => 
+            [induction] => 
+            [plinsurance] => 
+            [workerscomp] => 
+            [latitude_decimal] => 
+            [longitude_decimal] => 
+            [isdirty] => 2
+            [useTechPortalReview] => 
+            [is24hour] => 
+            [onschedule] => 
+            [oldorigin] => internal
+            [jobsband] => 99
+            [paymentdays] => 30
+            [costlimit] => 0
+            [costbuffer] => 0
+            [abcrating] => 
+            [penetration] => 0
+            [attitude] => 
+            [contractstrikerate] => 0
+            [expandable] => 0
+            [sitecount] => 0
+            [contract_empcount] => 0
+            [current_contract_value] => 0
+            [current_GP] => 0
+            [potential_contract_value] => 0
+            [potential_GP] => 0
+            [hascontract] => 0
+            [structure] => 
+            [isgstregistered] => 0
+            [invbatchid] => 1
+            [lastcplogin] => 2016-10-03 11:50:20
+            [cpstatus] => 1
+            [cpstatusnote] => 
+            [isactive] => 0
+            [hasetpaccess] => 0
+            [currentbalance] => 0.00
+            [wo_by_email] => 0
+            [wo_by_fax] => 0
+            [wo_by_portal] => 0
+            [wo_other] => 
+            [has_indigenous_employees] => 0
+            [indigenous_employees] => 0
+            [typename] => 
+            [typecode] => 
+            [se_trade_name] => 
+            [primarycontact] => 
+            [active] => 0
+            [logo] => 
+            [header] => 
+            [footer] => 
+        )
+
+    [ContactRules] => Array
+        (
+            [show_invoicefinalize_tab_in_clientportal] => 1
+            [custordref_not_mandatory] => 1
+            [show_invoice_by_fm_in_clientportal] => 1
+            [auto_send_invemail_from_clientportal] => 1
+            [show_final_approval_tab_in_clientportal] => 1
+            [custordref1_label] => PO Number
+            [custordref2_label] => PO
+            [custordref3_label] => WO
+            [default_custordref2] => 278748375
+            [client_portal_master_view_all_invoices] => 1
+            [add_custom_job_description] => All contractors must notify the DCFM Helpdesk on 02-9460-7676 on arriving at site and on completion of works.
+            [show_job_approval_tab_in_client_portal] => 1
+            [auto_create_custordref_in_client_portal] => 0
+            [show_invoice_history_tab_in_clientportal] => 1
+            [auto_send_finalised_invoice_from_clientportal] => 1
+            [auto_send_approved_invoice_from_clientportal] => 1
+            [batch_invoicing] => 1
+            [use_site_ref_as_custordref2_in_client_portal] => 1
+            [auto_create_custlimit_in_client_portal] => 0
+            [show_custom_allocation] => 1
+            [hide_job_limit_in_client_portal] => 0
+            [hide_job_priority_in_client_portal] => 0
+            [direct_allocate] => 1
+            [GL_CODE_MANDATORY] => 1
+            [EDIT_JOB_GLCODE] => 1
+            [internal_allocate] => 1
+            [internal_allocate_auto_accept] => 1
+            [show_jobs_on_hold] => 0
+        )
+
+    [cssToLoad] => Array
+        (
+            [0] => http://localhost/raptor/plugins/datepicker/datepicker3.css
+            [1] => http://localhost/raptor/plugins/bootstrap-select/css/bootstrap-select.min.css
+            [2] => http://localhost/raptor/plugins/uigrid/ui-grid-stable.min.css
+            [3] => http://localhost/raptor/plugins/bootstrap-editable/css/bootstrap-editable.css
+            [4] => http://localhost/raptor/plugins/jQuery-File-Upload/css/jquery.fileupload.css
+        )
+
+    [jsToLoad] => Array
+        (
+            [0] => http://localhost/raptor/plugins/datepicker/bootstrap-datepicker.js
+            [1] => http://localhost/raptor/plugins/bootstrap-select/js/bootstrap-select.min.js
+            [2] => http://localhost/raptor/plugins/jquery-validator/jquery.validate.min.js
+            [3] => http://localhost/raptor/assets/js/jquery.form.js
+            [4] => http://localhost/raptor/plugins/uigrid/angular.min.js
+            [5] => http://localhost/raptor/plugins/uigrid/ui-grid-stable.min.js
+            [6] => http://localhost/raptor/plugins/bootstrap-editable/js/bootstrap-editable.js
+            [7] => http://localhost/raptor/plugins/jQuery-File-Upload/js/vendor/jquery.ui.widget.js
+            [8] => http://localhost/raptor/plugins/jQuery-File-Upload/js/jquery.iframe-transport.js.js
+            [9] => http://localhost/raptor/plugins/jQuery-File-Upload/js/jquery.fileupload.js
+            [10] => http://localhost/raptor/plugins/jQuery-File-Upload/js/jquery.fileupload-audio.js
+            [11] => http://localhost/raptor/plugins/jQuery-File-Upload/js/jquery.fileupload-image.js
+            [12] => http://localhost/raptor/plugins/jQuery-File-Upload/js/jquery.fileupload-process.js
+            [13] => http://localhost/raptor/plugins/jQuery-File-Upload/js/jquery.fileupload-validate.js
+            [14] => http://localhost/raptor/plugins/jQuery-File-Upload/js/jquery.fileupload-video.js
+            [15] => http://localhost/raptor/assets/js/editablereport/init_x-editable.js
+            [16] => http://localhost/raptor/assets/js/editablereport/editablereport.index.js
+        )
+
+    [job_id] => 417127
+    [job_id_readonly] => 
+    [report_id_readonly] => 
+    [jobids] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 417127
+                    [name] => 417127
+                    [address] => 216 View Street Annandale NSW 2038
+                )
+
+        )
+
+    [reports] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 2
+                    [report_type] => Air Services
+                )
+
+            [1] => Array
+                (
+                    [id] => 3
+                    [report_type] => Pre-vacate Property Inspection
+                )
+
+            [2] => Array
+                (
+                    [id] => 4
+                    [report_type] => Asset Inspection
+                )
+
+        )
+
+    [shareUrl] => Report download link: http://localhost/raptor/document/downloadreport/M1M5bFdDNUN5WU9iWkV5bjN4ekxBdz09
+    [report_id] => 2
+    [areas] => Array
+        (
+            [0] => Array
+                (
+                    [guid] => all
+                    [name] => All Areas
+                )
+
+            [1] => Array
+                (
+                    [areatype_id] => 9
+                    [guid] => 1009133843-7cdf-ab32-02bc-5cf802bbffc7
+                    [name] => Bedroom 1 Test
+                )
+
+        )
+
+    [areavalue_guid] => all
+    [title] => Admin - Edit Report
+    [filter] => Array
+        (
+            [url] => admin/areatypeareatopic/
+            [exportfilename] => ExportedFileName/
+        )
+
+    [rows] => Array
+        (
+            [0] => Array
+                (
+                    [ins_sitereport_id] => 2
+                    [id] => 1
+                    [areatype_id] => 9
+                    [guid] => 1009133843-7cdf-ab32-02bc-5cf802bbffc7
+                    [area_description] => Bedroom 1 Test
+                    [rows] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [id] => 153
+                                    [area_type_id] => 9
+                                    [areatopic_name] => Doors/Architraves
+                                    [area_topic_id] => 1
+                                    [dirty] => 0
+                                    [dirty_rating] => 0
+                                    [minrating] => 0
+                                    [maxrating] => 10
+                                    [damaged] => 0
+                                    [damaged_rating] => 
+                                    [topic_description] => 
+                                    [remedial_action] => 
+                                    [ynna] => -2
+                                    [x_editable] => Array
+                                        (
+                                            [dirty] => Array
+                                                (
+                                                    [id] => 153
+                                                    [fieldnum] => 0
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => cleandirty
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [dirty_rating] => Array
+                                                (
+                                                    [id] => 153
+                                                    [fieldnum] => 1
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => intselect/0/10
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [damaged] => Array
+                                                (
+                                                    [id] => 153
+                                                    [fieldnum] => 2
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => undamageddamaged
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_mnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [topic_description] => Array
+                                                (
+                                                    [id] => 153
+                                                    [fieldnum] => 4
+                                                    [value] => 
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => textarea
+                                                    [source] => 
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target spellcheck
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_medium
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [remedial_action] => Array
+                                                (
+                                                    [id] => 153
+                                                    [fieldnum] => 5
+                                                    [value] => 
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => textarea
+                                                    [source] => 
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_medium
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [ynna] => Array
+                                                (
+                                                    [id] => 153
+                                                    [fieldnum] => 6
+                                                    [value] => -2
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => yesno
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xxnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                        )
+
+                                )
+
+                            [1] => Array
+                                (
+                                    [id] => 154
+                                    [area_type_id] => 9
+                                    [areatopic_name] => Walls/Ceiling
+                                    [area_topic_id] => 2
+                                    [dirty] => 0
+                                    [dirty_rating] => 0
+                                    [minrating] => 0
+                                    [maxrating] => 10
+                                    [damaged] => 0
+                                    [damaged_rating] => 
+                                    [topic_description] => 
+                                    [remedial_action] => 
+                                    [ynna] => -2
+                                    [x_editable] => Array
+                                        (
+                                            [dirty] => Array
+                                                (
+                                                    [id] => 154
+                                                    [fieldnum] => 0
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => cleandirty
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [dirty_rating] => Array
+                                                (
+                                                    [id] => 154
+                                                    [fieldnum] => 1
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => intselect/0/10
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [damaged] => Array
+                                                (
+                                                    [id] => 154
+                                                    [fieldnum] => 2
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => undamageddamaged
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_mnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [topic_description] => Array
+                                                (
+                                                    [id] => 154
+                                                    [fieldnum] => 4
+                                                    [value] => 
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => textarea
+                                                    [source] => 
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target spellcheck
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_medium
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [remedial_action] => Array
+                                                (
+                                                    [id] => 154
+                                                    [fieldnum] => 5
+                                                    [value] => 
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => textarea
+                                                    [source] => 
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_medium
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [ynna] => Array
+                                                (
+                                                    [id] => 154
+                                                    [fieldnum] => 6
+                                                    [value] => -2
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => yesno
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xxnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                        )
+
+                                )
+
+                            [2] => Array
+                                (
+                                    [id] => 155
+                                    [area_type_id] => 9
+                                    [areatopic_name] => Windows/Screens
+                                    [area_topic_id] => 6
+                                    [dirty] => 0
+                                    [dirty_rating] => 0
+                                    [minrating] => 0
+                                    [maxrating] => 10
+                                    [damaged] => 0
+                                    [damaged_rating] => 
+                                    [topic_description] => 
+                                    [remedial_action] => 
+                                    [ynna] => -2
+                                    [x_editable] => Array
+                                        (
+                                            [dirty] => Array
+                                                (
+                                                    [id] => 155
+                                                    [fieldnum] => 0
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => cleandirty
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [dirty_rating] => Array
+                                                (
+                                                    [id] => 155
+                                                    [fieldnum] => 1
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => intselect/0/10
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [damaged] => Array
+                                                (
+                                                    [id] => 155
+                                                    [fieldnum] => 2
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => undamageddamaged
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_mnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [topic_description] => Array
+                                                (
+                                                    [id] => 155
+                                                    [fieldnum] => 4
+                                                    [value] => 
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => textarea
+                                                    [source] => 
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target spellcheck
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_medium
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [remedial_action] => Array
+                                                (
+                                                    [id] => 155
+                                                    [fieldnum] => 5
+                                                    [value] => 
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => textarea
+                                                    [source] => 
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_medium
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [ynna] => Array
+                                                (
+                                                    [id] => 155
+                                                    [fieldnum] => 6
+                                                    [value] => -2
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => yesno
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xxnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                        )
+
+                                )
+
+                            [3] => Array
+                                (
+                                    [id] => 156
+                                    [area_type_id] => 9
+                                    [areatopic_name] => Blinds/Curtains
+                                    [area_topic_id] => 7
+                                    [dirty] => 0
+                                    [dirty_rating] => 0
+                                    [minrating] => 0
+                                    [maxrating] => 10
+                                    [damaged] => 0
+                                    [damaged_rating] => 
+                                    [topic_description] => 
+                                    [remedial_action] => 
+                                    [ynna] => -2
+                                    [x_editable] => Array
+                                        (
+                                            [dirty] => Array
+                                                (
+                                                    [id] => 156
+                                                    [fieldnum] => 0
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => cleandirty
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [dirty_rating] => Array
+                                                (
+                                                    [id] => 156
+                                                    [fieldnum] => 1
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => intselect/0/10
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [damaged] => Array
+                                                (
+                                                    [id] => 156
+                                                    [fieldnum] => 2
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => undamageddamaged
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_mnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [topic_description] => Array
+                                                (
+                                                    [id] => 156
+                                                    [fieldnum] => 4
+                                                    [value] => 
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => textarea
+                                                    [source] => 
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target spellcheck
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_medium
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [remedial_action] => Array
+                                                (
+                                                    [id] => 156
+                                                    [fieldnum] => 5
+                                                    [value] => 
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => textarea
+                                                    [source] => 
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_medium
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [ynna] => Array
+                                                (
+                                                    [id] => 156
+                                                    [fieldnum] => 6
+                                                    [value] => -2
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => yesno
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xxnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                        )
+
+                                )
+
+                            [4] => Array
+                                (
+                                    [id] => 157
+                                    [area_type_id] => 9
+                                    [areatopic_name] => Light Fittings
+                                    [area_topic_id] => 8
+                                    [dirty] => 0
+                                    [dirty_rating] => 0
+                                    [minrating] => 0
+                                    [maxrating] => 10
+                                    [damaged] => 0
+                                    [damaged_rating] => 
+                                    [topic_description] => 
+                                    [remedial_action] => 
+                                    [ynna] => -2
+                                    [x_editable] => Array
+                                        (
+                                            [dirty] => Array
+                                                (
+                                                    [id] => 157
+                                                    [fieldnum] => 0
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => cleandirty
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [dirty_rating] => Array
+                                                (
+                                                    [id] => 157
+                                                    [fieldnum] => 1
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => intselect/0/10
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [damaged] => Array
+                                                (
+                                                    [id] => 157
+                                                    [fieldnum] => 2
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => undamageddamaged
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_mnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [topic_description] => Array
+                                                (
+                                                    [id] => 157
+                                                    [fieldnum] => 4
+                                                    [value] => 
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => textarea
+                                                    [source] => 
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target spellcheck
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_medium
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [remedial_action] => Array
+                                                (
+                                                    [id] => 157
+                                                    [fieldnum] => 5
+                                                    [value] => 
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => textarea
+                                                    [source] => 
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_medium
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [ynna] => Array
+                                                (
+                                                    [id] => 157
+                                                    [fieldnum] => 6
+                                                    [value] => -2
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => yesno
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xxnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                        )
+
+                                )
+
+                            [5] => Array
+                                (
+                                    [id] => 158
+                                    [area_type_id] => 9
+                                    [areatopic_name] => Floor/Floor Coverings
+                                    [area_topic_id] => 9
+                                    [dirty] => 0
+                                    [dirty_rating] => 0
+                                    [minrating] => 0
+                                    [maxrating] => 10
+                                    [damaged] => 0
+                                    [damaged_rating] => 
+                                    [topic_description] => 
+                                    [remedial_action] => 
+                                    [ynna] => -2
+                                    [x_editable] => Array
+                                        (
+                                            [dirty] => Array
+                                                (
+                                                    [id] => 158
+                                                    [fieldnum] => 0
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => cleandirty
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [dirty_rating] => Array
+                                                (
+                                                    [id] => 158
+                                                    [fieldnum] => 1
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => intselect/0/10
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [damaged] => Array
+                                                (
+                                                    [id] => 158
+                                                    [fieldnum] => 2
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => undamageddamaged
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_mnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [topic_description] => Array
+                                                (
+                                                    [id] => 158
+                                                    [fieldnum] => 4
+                                                    [value] => 
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => textarea
+                                                    [source] => 
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target spellcheck
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_medium
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [remedial_action] => Array
+                                                (
+                                                    [id] => 158
+                                                    [fieldnum] => 5
+                                                    [value] => 
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => textarea
+                                                    [source] => 
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_medium
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [ynna] => Array
+                                                (
+                                                    [id] => 158
+                                                    [fieldnum] => 6
+                                                    [value] => -2
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => yesno
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xxnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                        )
+
+                                )
+
+                            [6] => Array
+                                (
+                                    [id] => 159
+                                    [area_type_id] => 9
+                                    [areatopic_name] => Power Points and No.
+                                    [area_topic_id] => 10
+                                    [dirty] => 0
+                                    [dirty_rating] => 0
+                                    [minrating] => 0
+                                    [maxrating] => 10
+                                    [damaged] => 0
+                                    [damaged_rating] => 
+                                    [topic_description] => 
+                                    [remedial_action] => 
+                                    [ynna] => -2
+                                    [x_editable] => Array
+                                        (
+                                            [dirty] => Array
+                                                (
+                                                    [id] => 159
+                                                    [fieldnum] => 0
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => cleandirty
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [dirty_rating] => Array
+                                                (
+                                                    [id] => 159
+                                                    [fieldnum] => 1
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => intselect/0/10
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [damaged] => Array
+                                                (
+                                                    [id] => 159
+                                                    [fieldnum] => 2
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => undamageddamaged
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_mnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [topic_description] => Array
+                                                (
+                                                    [id] => 159
+                                                    [fieldnum] => 4
+                                                    [value] => 
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => textarea
+                                                    [source] => 
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target spellcheck
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_medium
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [remedial_action] => Array
+                                                (
+                                                    [id] => 159
+                                                    [fieldnum] => 5
+                                                    [value] => 
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => textarea
+                                                    [source] => 
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_medium
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [ynna] => Array
+                                                (
+                                                    [id] => 159
+                                                    [fieldnum] => 6
+                                                    [value] => -2
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => yesno
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xxnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                        )
+
+                                )
+
+                            [7] => Array
+                                (
+                                    [id] => 160
+                                    [area_type_id] => 9
+                                    [areatopic_name] => Wardrobes/Drawers
+                                    [area_topic_id] => 49
+                                    [dirty] => 0
+                                    [dirty_rating] => 0
+                                    [minrating] => 0
+                                    [maxrating] => 10
+                                    [damaged] => 0
+                                    [damaged_rating] => 
+                                    [topic_description] => 
+                                    [remedial_action] => 
+                                    [ynna] => -2
+                                    [x_editable] => Array
+                                        (
+                                            [dirty] => Array
+                                                (
+                                                    [id] => 160
+                                                    [fieldnum] => 0
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => cleandirty
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [dirty_rating] => Array
+                                                (
+                                                    [id] => 160
+                                                    [fieldnum] => 1
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => intselect/0/10
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [damaged] => Array
+                                                (
+                                                    [id] => 160
+                                                    [fieldnum] => 2
+                                                    [value] => 0
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => undamageddamaged
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_mnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [topic_description] => Array
+                                                (
+                                                    [id] => 160
+                                                    [fieldnum] => 4
+                                                    [value] => 
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => textarea
+                                                    [source] => 
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target spellcheck
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_medium
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [remedial_action] => Array
+                                                (
+                                                    [id] => 160
+                                                    [fieldnum] => 5
+                                                    [value] => 
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => textarea
+                                                    [source] => 
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_medium
+                                                    [showbuttons] => bottom
+                                                )
+
+                                            [ynna] => Array
+                                                (
+                                                    [id] => 160
+                                                    [fieldnum] => 6
+                                                    [value] => -2
+                                                    [display] => 
+                                                    [tablenum] => 650
+                                                    [type] => select
+                                                    [source] => yesno
+                                                    [ajaxurl] => 
+                                                    [class] => editable_target
+                                                    [xetitle] => 
+                                                    [inputclass] => editable_xxnarrow
+                                                    [showbuttons] => bottom
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [photos] => Array
+                        (
+                        )
+
+                    [assets] => Array
+                        (
+                        )
+
+                    [x_editable] => Array
+                        (
+                            [area_description] => Array
+                                (
+                                    [id] => 1
+                                    [fieldnum] => 0
+                                    [value] => Bedroom 1 Test
+                                    [display] => Bedroom 1 Test
+                                    [tablenum] => 660
+                                    [type] => text
+                                    [source] => 
+                                    [ajaxurl] => 
+                                    [class] => editable_target
+                                    [xetitle] => 
+                                    [inputclass] => editable_medium
+                                    [showbuttons] => bottom
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+
+2016-10-03 11:51:06 - jobtracker - AdminClass -  - (57f22a0a54020) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'EditableReport/yesno'
+AND `isactive` = 1
+
+2016-10-03 11:51:06 - jobtracker - CustomerClass -  - (57f22a0a5384f) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:51:06 - jobtracker - AdminClass -  - (57f22a0aa2220) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'EditableReport/undamageddamaged'
+AND `isactive` = 1
+
+2016-10-03 11:51:06 - jobtracker - CustomerClass -  - (57f22a0aa2220) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:51:07 - jobtracker - AdminClass -  - (57f22a0b02771) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'EditableReport/intselect'
+AND `isactive` = 1
+
+2016-10-03 11:51:07 - jobtracker - CustomerClass -  - (57f22a0b01bb9) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:51:07 - jobtracker - AdminClass -  - (57f22a0b5e434) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'EditableReport/cleandirty'
+AND `isactive` = 1
+
+2016-10-03 11:51:07 - jobtracker - CustomerClass -  - (57f22a0b5e434) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:53:32 - jobtracker - AdminClass -  - (57f22a9c8fed9) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'settings/changepassword'
+AND `isactive` = 1
+
+2016-10-03 11:53:32 - jobtracker - SharedClass -  - (57f22a9c8dbb1) 
+ - Get Announcement : SELECT * FROM cp_message WHERE isactive=1 AND browser='' AND activationdate <= NOW() AND id NOT IN (SELECT messageid FROM cp_messagecontact WHERE contactid = 26564)
+
+2016-10-03 11:53:32 - jobtracker - SharedClass -  - (57f22a9c8dbb1) 
+ - Get Announcement : SELECT * FROM cp_message WHERE isactive=1 AND browser='Firefox' AND activationdate <= NOW() AND id NOT IN (SELECT messageid FROM cp_messagecontact WHERE contactid = 26564) ORDER BY browser_version
+
+2016-10-03 11:53:32 - jobtracker - CustomerClass -  - (57f22a9c8f709) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:53:38 - jobtracker - AdminClass -  - (57f22aa26ba20) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3'
+AND `isactive` = 1
+
+2016-10-03 11:53:38 - jobtracker - CustomerClass -  - (57f22aa26ae68) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:53:43 - jobtracker - AdminClass -  - (57f22aa692056) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-10-03 11:53:43 - jobtracker - CustomerClass -  - (57f22aa69149d) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:53:43 - jobtracker - AdminClass -  - (57f22aa73c17b) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-10-03 11:53:43 - jobtracker - CustomerClass -  - (57f22aa73b5c3) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:53:43 - jobtracker - ContractorClass -  - (57f22aa7a12c2) 
+ - Get Labour Dashboard Grid Data Query : SELECT d.apptid, j.contractid, j.iscontract, d.jobid, COUNT(d.jobid) AS jobs, a.labelid, a.siteline2, a.siteref, a.sitestate AS state, c.firstname AS fm, CONCAT(s.companyname,' (',d.userid,')') AS technician, d.duration AS hours, te.lm_te_bill_rate AS rate, d.duration*te.lm_te_bill_rate AS billamt, j.materialcosts
+FROM `diary` `d`
+INNER JOIN `jobs` `j` ON `d`.`jobid`=`j`.`jobid`
+INNER JOIN `lm_timeentry` `te` ON `d`.`apptid`=`te`.`lm_te_apptid`
+INNER JOIN `users` `u` ON `d`.`userid`=`u`.`userid`
+INNER JOIN `customer` `s` ON `u`.`email`=`s`.`customerid`
+LEFT JOIN `con_technician` `t` ON `d`.`userid`=`t`.`userid`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `j`.`contactid`=`c`.`contactid`
+WHERE `d`.`dte` >= '2016-10-01'
+AND `d`.`dte` <= '2016-10-03'
+GROUP BY `a`.`labelid`
+ LIMIT 25
+
+2016-10-03 11:53:54 - jobtracker - AdminClass -  - (57f22ab244454) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-10-03 11:53:54 - jobtracker - CustomerClass -  - (57f22ab244454) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:53:56 - jobtracker - AdminClass -  - (57f22ab4b2228) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-10-03 11:53:56 - jobtracker - CustomerClass -  - (57f22ab4b2228) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:54:09 - jobtracker - AdminClass -  - (57f22ac0cb87a) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-10-03 11:54:09 - jobtracker - CustomerClass -  - (57f22ac0c916a) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:54:10 - jobtracker - AdminClass -  - (57f22ac21bbfb) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadlabourdashboarddata'
+AND `isactive` = 1
+
+2016-10-03 11:54:10 - jobtracker - CustomerClass -  - (57f22ac21bbfb) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:54:10 - jobtracker - ContractorClass -  - (57f22ac258c8c) 
+ - Get Labour Dashboard Grid Data Query : SELECT d.apptid, j.contractid, j.iscontract, d.jobid, COUNT(d.jobid) AS jobs, a.labelid, a.siteline2, a.siteref, a.sitestate AS state, c.firstname AS fm, CONCAT(s.companyname,' (',d.userid,')') AS technician, d.duration AS hours, te.lm_te_bill_rate AS rate, d.duration*te.lm_te_bill_rate AS billamt, j.materialcosts
+FROM `diary` `d`
+INNER JOIN `jobs` `j` ON `d`.`jobid`=`j`.`jobid`
+INNER JOIN `lm_timeentry` `te` ON `d`.`apptid`=`te`.`lm_te_apptid`
+INNER JOIN `users` `u` ON `d`.`userid`=`u`.`userid`
+INNER JOIN `customer` `s` ON `u`.`email`=`s`.`customerid`
+LEFT JOIN `con_technician` `t` ON `d`.`userid`=`t`.`userid`
+LEFT JOIN `addresslabel` `a` ON `j`.`labelid`=`a`.`labelid`
+LEFT JOIN `contact` `c` ON `j`.`contactid`=`c`.`contactid`
+WHERE `d`.`dte` >= '2016-01-01'
+AND `d`.`dte` <= '2016-10-03'
+AND `a`.`sitestate` = 'NSW'
+GROUP BY `a`.`labelid`
+ LIMIT 25
+
+2016-10-03 11:54:14 - jobtracker - AdminClass -  - (57f22ac68e7f2) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-10-03 11:54:14 - jobtracker - CustomerClass -  - (57f22ac68e7f2) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:54:22 - jobtracker - AdminClass -  - (57f22acde1c05) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-10-03 11:54:22 - jobtracker - CustomerClass -  - (57f22acddf4f5) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:54:24 - jobtracker - AdminClass -  - (57f22ad05dea9) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-10-03 11:54:24 - jobtracker - CustomerClass -  - (57f22ad05dea9) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
+
+2016-10-03 11:54:27 - jobtracker - AdminClass -  - (57f22ad2d58bc) 
+ - Get Help : SELECT *
+FROM `cp_help`
+WHERE `route` = 'dashboard3/loadpagedata'
+AND `isactive` = 1
+
+2016-10-03 11:54:27 - jobtracker - CustomerClass -  - (57f22ad2d31ac) 
+ - Get Customer Data Query : SELECT s.*, st.name as typename, st.code as typecode, t.se_trade_name, GROUP_CONCAT(TRIM(CONCAT(c.firstname,' ',c.surname))) AS primarycontact
+FROM `customer` `s`
+LEFT JOIN `se_trade` `t` ON `s`.`tradeid`=`t`.`id`
+LEFT JOIN `cp_supplier_type` `st` ON `s`.`typeid`=`st`.`id`
+LEFT JOIN `contact` `c` ON `s`.`customerid`=`c`.`customerid` and `c`.`primarycontact`=1
+WHERE `s`.`customerid` = '7781'
+GROUP BY `s`.`customerid`
